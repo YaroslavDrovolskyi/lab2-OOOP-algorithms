@@ -9,12 +9,12 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    algorithms.cpp \
+    facade.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
-    algorithms.h \
+    facade.h \
     mainwindow.h
 
 FORMS += \
@@ -31,3 +31,15 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 
 
+
+
+
+
+
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../lib/ -lalgoslib
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../lib/ -lalgoslib
+
+INCLUDEPATH += $$PWD/../lib
+DEPENDPATH += $$PWD/../lib

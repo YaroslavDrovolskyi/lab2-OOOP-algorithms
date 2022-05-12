@@ -1,9 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "algorithms.h"
-#include "rawalgorithms.h"
+#include "algoslib.h"
 #include <vector>
-//#include <check.h>
 #include "QString"
 #include "QRegularExpression"
 
@@ -13,11 +11,20 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
- std::vector<float> floatnumbers{6,1,2};
+
+    //selector initialization
+    for(const auto &i: this->NamesOfAlgos)
+    {
+        ui->algoselector->addItem(i,0);
+    }
+
+    //add labels to table
+    QVector<QString> colnames = {"Name","Time","Memory"};
+    ui->resultTable->setColumnCount(3);
+    ui->resultTable->setHorizontalHeaderLabels(colnames);
 
 
-check(floatnumbers);
-qDebug()<<"success!";
+
 }
 
 MainWindow::~MainWindow()
@@ -27,4 +34,10 @@ MainWindow::~MainWindow()
 
 
 
+
+
+void MainWindow::on_btnrun_clicked()
+{
+    //const QRegularExpression regexp("[^0-9]");
+}
 

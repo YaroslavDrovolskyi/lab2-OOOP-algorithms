@@ -2,7 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <QVector>
+#include <QString>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -18,7 +19,21 @@ public:
 private slots:
 
 
+    void on_btnrun_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+    const QVector<QString> NamesOfAlgos = {
+            "mergesort",
+        "quicksort",
+        "heapsort",
+        "countingsort",
+        "radixsort",
+        "insertionsort",
+        "bucketsort",
+        "horspool",
+        "boyermoor"
+    };
 };
 #endif // MAINWINDOW_H

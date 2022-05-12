@@ -1,4 +1,4 @@
-#include "algorithms.h"
+#include "algoslib.h"
 #include <iostream>
 #include <vector>
 #include<map>
@@ -673,5 +673,3 @@ uint32_t boyermoor::getmemory()
      //return this->boyermoormatching(this->sample, this->line);
      return this->boyermoormatching(this->sample,this->line);
  };
-
-

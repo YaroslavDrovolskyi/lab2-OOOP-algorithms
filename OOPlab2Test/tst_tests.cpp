@@ -1,5 +1,6 @@
 #include <QtTest>
-#include "algorithms.h"
+//#include "algorithms.h"
+#include "algoslib.h"
 #include <vector>
 class tests : public QObject
 {
@@ -28,7 +29,6 @@ private slots:
 
       void test_boyermoor();
 
-      void test_lib();
 
 private:
    const std::vector<float> floatnumbers{6,1,2,3,5,7,6,12,6,122,1,1,6};

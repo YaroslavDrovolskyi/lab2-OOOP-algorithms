@@ -1,6 +1,7 @@
-#ifndef ALGORITHMS_H
-#define ALGORITHMS_H
+#ifndef ALGOSLIB_H
+#define ALGOSLIB_H
 
+#include "algoslib_global.h"
 #include <string>
 #include <vector>
 
@@ -284,4 +285,11 @@ private:
       std::vector<int> suffixes(std::string str);
       int boyermoormatching(std::string sample, std::string line);
 };
-#endif
+
+
+
+
+
+
+
+#endif // ALGOSLIB_H
