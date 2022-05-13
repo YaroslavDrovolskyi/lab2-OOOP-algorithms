@@ -1,3 +1,6 @@
+#ifndef ALGOSLIB_INL
+#define ALGOSLIB_INL
+
 #include "algoslib.h"
 #include <iostream>
 #include <vector>
@@ -9,10 +12,12 @@
 algorithm::algorithm() = default;
 algorithm::~algorithm() =default ;
 
-sortingalgo::sortingalgo() { this->type = "sorting"; };
-sortingalgo::~sortingalgo() = default;
-
-std::string sortingalgo::gettype()
+template< typename Comparator>
+sortingalgo<Comparator>::sortingalgo() { this->type = "sorting"; };
+template< typename Comparator>
+sortingalgo<Comparator>::~sortingalgo() = default;
+template< typename Comparator>
+std::string sortingalgo<Comparator>::gettype()
 {
     return this->type;
 }
@@ -25,13 +30,13 @@ std::string substringmatching::gettype()
     return this->type;
 }
 
-
-void mergesorting::merge(std::vector<float>& arr, int p, int mid, int r)
+template<typename T,  typename Comparator>
+void mergesorting<T,Comparator>::merge(std::vector<T>& arr, int p, int mid, int r)
 {
 
 
-    std::vector<float>left(mid - p + 1);
-    std::vector<float>right(r - mid);
+    std::vector<T>left(mid - p + 1);
+    std::vector<T>right(r - mid);
     int leftsize = mid - p + 1;
     int rightsize = r - mid;
 
@@ -45,7 +50,7 @@ void mergesorting::merge(std::vector<float>& arr, int p, int mid, int r)
 
     while (leftindex < leftsize && rightindex < rightsize)
     {
-        if (left[leftindex] < right[rightindex])
+        if (/*left[leftindex] < right[rightindex]*/ !this->comparator(left[leftindex],right[rightindex]))
         {
             arr[arrindex] = left[leftindex];
             leftindex++;
@@ -74,8 +79,8 @@ void mergesorting::merge(std::vector<float>& arr, int p, int mid, int r)
 
 }
 
-
-void mergesorting::mergesort(std::vector<float>& arr, int p, int r)
+template<typename T,  typename Comparator>
+void mergesorting<T,Comparator>::mergesort(std::vector<T>& arr, int p, int r)
 {
     if (p < r)
     {
@@ -85,8 +90,8 @@ void mergesorting::mergesort(std::vector<float>& arr, int p, int r)
         merge(arr, p, mid, r);
     }
 }
-
-void mergesorting::sort()
+template<typename T,  typename Comparator>
+void mergesorting<T,Comparator>::sort()
 {
     int p = 0;
     int len = this->vec.size();
@@ -94,47 +99,46 @@ void mergesorting::sort()
 
 
 }
-
-std::string mergesorting::getname()
+template<typename T,  typename Comparator>
+std::string mergesorting<T,Comparator>::getname()
 {
     return this->name;
 }
 
-uint32_t mergesorting::gettime()
-{
-    return this->time;
-}
-
-uint32_t mergesorting::getmemory()
+template<typename T,  typename Comparator>
+uint32_t mergesorting<T,Comparator>::getmemory()
 {
     return this->memory;
 }
-
-mergesorting::mergesorting(std::vector<float> v) :vec(v)
+template<typename T,  typename Comparator>
+mergesorting<T,Comparator>::mergesorting(std::vector<T> v,Comparator c) :vec(v)
 {
     this->name = "mergesort";
+    this->comparator = c;
 }
-
-mergesorting::mergesorting()
+template<typename T,  typename Comparator>
+mergesorting<T,Comparator>::mergesorting(Comparator c)
 {
     this->name = "mergesort";
+    this->comparator = c;
 }
+template<typename T,  typename Comparator>
+mergesorting<T,Comparator>::~mergesorting() {};
 
-mergesorting::~mergesorting() {};
-
-
-std::vector<float> mergesorting::getvalues()
+template<typename T,  typename Comparator>
+std::vector<T> mergesorting<T,Comparator>::getvalues()
 {
     return this->vec;
 }
 
-int quicksorting::partition(std::vector<float>& arr, int p, int r)
+template<typename T,  typename Comparator>
+int quicksorting<T,Comparator>::partition(std::vector<T>& arr, int p, int r)
 {
 
     int i = p - 1;
     for (int j = p; j < r; j++)
     {
-        if (arr[j] <= arr[r])
+        if (/*arr[j] <= arr[r]*/ !this->comparator(arr[j],arr[r]) )
         {
             i++;
             float temp = arr[j];
@@ -142,13 +146,13 @@ int quicksorting::partition(std::vector<float>& arr, int p, int r)
             arr[i] = temp;
         }
     }
-    float temp = arr[r];
+    T temp = arr[r];
     arr[r] = arr[i + 1];
     arr[i + 1] = temp;
     return i + 1;
 }
-
-void quicksorting::quicksort(std::vector<float>& arr, int p, int r)
+template<typename T,  typename Comparator>
+void quicksorting<T,Comparator>::quicksort(std::vector<T>& arr, int p, int r)
 {
     if (p < r)
     {
@@ -158,24 +162,21 @@ void quicksorting::quicksort(std::vector<float>& arr, int p, int r)
     }
 }
 
-
-std::string quicksorting::getname()
+template<typename T,  typename Comparator>
+std::string quicksorting<T,Comparator>::getname()
 {
     return this->name;
 }
 
-uint32_t quicksorting::gettime()
-{
-    return this->time;
-}
 
-uint32_t quicksorting::getmemory()
+template<typename T,  typename Comparator>
+uint32_t quicksorting<T,Comparator>::getmemory()
 {
     return this->memory;
 }
 
-
-void quicksorting::sort()
+template<typename T,  typename Comparator>
+void quicksorting<T,Comparator>::sort()
 {
     int p = 0;
     int len = this->vec.size();
@@ -184,63 +185,60 @@ void quicksorting::sort()
 
 }
 
-std::vector<float> quicksorting::getvalues()
+template<typename T,  typename Comparator>
+std::vector<T> quicksorting<T,Comparator>::getvalues()
 {
     return this->vec;
 }
 
 
-
-std::string heapsorting::getname()
+template<typename T,  typename Comparator>
+std::string heapsorting<T,Comparator>::getname()
 {
     return this->name;
 }
 
-uint32_t heapsorting::gettime()
-{
-    return this->time;
-}
-
-uint32_t heapsorting::getmemory()
+template<typename T,  typename Comparator>
+uint32_t heapsorting<T,Comparator>::getmemory()
 {
     return this->memory;
 }
-
-void heapsorting::sort()
+template<typename T,  typename Comparator>
+void heapsorting<T,Comparator>::sort()
 {
 
    // this->heapsort(this->vec);
     this->heapsort(this->vec);
 
 }
-
-std::vector<float> heapsorting::getvalues()
+template<typename T,  typename Comparator>
+std::vector<T> heapsorting<T,Comparator>::getvalues()
 {
     return this->vec;
 }
-
-void heapsorting::maxheapify(std::vector<float>& arr, int i, int p)
+template<typename T,  typename Comparator>
+void heapsorting<T,Comparator>::maxheapify(std::vector<T>& arr, int i, int p)
 {
     int left = i * 2 + 1;
     int right = i * 2 + 2;
     int max = i;
-    if (left < p && arr[left] > arr[max])
+    if (left < p && /*arr[left] > arr[max]*/ this->comparator(arr[left],arr[max]) )
     {
         max = left;
     }
-    if (right < p && arr[right] > arr[max])
+    if (right < p && /*arr[right] > arr[max]*/ this->comparator(arr[right],arr[max]))
         max = right;
 
     if (max != i)
     {
-        float temp = arr[i];
+        T temp = arr[i];
         arr[i] = arr[max];
         arr[max] = temp;
         maxheapify(arr, max, p);
     }
 }
-
-void heapsorting::buildmaxheap(std::vector<float>& arr, int& p)
+template<typename T,  typename Comparator>
+void heapsorting<T,Comparator>::buildmaxheap(std::vector<T>& arr, int& p)
 {
     int size = arr.size();
     for (int i = size / 2; i >= 0; i--)
@@ -248,15 +246,15 @@ void heapsorting::buildmaxheap(std::vector<float>& arr, int& p)
         maxheapify(arr, i, p);
     }
 }
-
-void heapsorting::heapsort(std::vector<float>& arr)
+template<typename T,  typename Comparator>
+void heapsorting<T,Comparator>::heapsort(std::vector<T>& arr)
 {
     int size = arr.size();
     int p = arr.size();
     buildmaxheap(arr, p);
     for (int i = size - 1; i >= 1; i--)
     {
-        float temp = arr[0];
+        T temp = arr[0];
         arr[0] = arr[i];
         arr[i] = temp;
         p--;
@@ -275,7 +273,8 @@ int getMax(std::vector<uint32_t>arr)
     }
     return max;
 }
-void countingsorting::countingsort(std::vector<uint32_t>& arr, uint32_t exp, uint32_t b)
+template<typename T,  typename Comparator>
+void countingsorting<T,Comparator>::countingsort(std::vector<T>& arr, uint32_t exp, uint32_t b)
 {
     int size = arr.size();
     std::vector<int>count(b, 0);
@@ -291,40 +290,50 @@ void countingsorting::countingsort(std::vector<uint32_t>& arr, uint32_t exp, uin
         out[count[(arr[i] / exp) % b] - 1] = arr[i];
         count[(arr[i] / exp) % b]--;
     }
+
+
+//    for (int i = 0; i < size; i++)
+//    {
+//        arr[i] = out[i];
+//    }
+
+    if(!this->comparator(1,2))
     for (int i = 0; i < size; i++)
     {
         arr[i] = out[i];
     }
+    else
+        for (int i = 0; i < size; i++)
+        {
+            arr[i] = out[size - i -1];
+        }
 
 
 }
-std::string countingsorting::getname()
+template<typename T,  typename Comparator>
+std::string countingsorting<T,Comparator>::getname()
 {
     return this->name;
 }
-
-uint32_t countingsorting::gettime()
-{
-    return this->time;
-}
-
-uint32_t countingsorting::getmemory()
+template<typename T,  typename Comparator>
+uint32_t countingsorting<T,Comparator>::getmemory()
 {
     return this->memory;
 }
-
-void countingsorting::sort()
+template<typename T,  typename Comparator>
+void countingsorting<T,Comparator>::sort()
 {
    // this->countingsort(this->vec,this->expon, this->base);
 
    this->countingsort(this->vec,this->expon,this->base);
 }
-
-void countingsorting::setbase(uint32_t b)
+template<typename T,  typename Comparator>
+void countingsorting<T,Comparator>::setbase(uint32_t b)
 {
     this->base = b;
 }
-void countingsorting::setexp(uint32_t exp)
+template<typename T,  typename Comparator>
+void countingsorting<T,Comparator>::setexp(uint32_t exp)
 {
     this->expon = exp;
 }
@@ -332,8 +341,8 @@ void countingsorting::setexp(uint32_t exp)
 //{
 //    return this->vec;
 //}
-
- uint32_t countingsorting::findmax()
+template<typename T,  typename Comparator>
+ uint32_t countingsorting<T,Comparator>::findmax()
  {
 
          if(this->vec.size()==0)
@@ -347,16 +356,17 @@ void countingsorting::setexp(uint32_t exp)
 
 
  }
-
- std::vector<uint32_t> countingsorting::getvalues()
+template<typename T,  typename Comparator>
+ std::vector<T> countingsorting<T,Comparator>::getvalues()
  {
      return this->vec;
  }
-
- void radixsorting::radixsort(std::vector<uint32_t>& arr, uint32_t b)
+template<typename T,  typename Comparator>
+ void radixsorting<T,Comparator>::radixsort(std::vector<T>& arr, uint32_t b)
  {
      int max = getMax(arr);
-     countingsorting* cs = new countingsorting(arr);
+     countingsorting<T,Comparator>* cs = new countingsorting<T,Comparator>(arr,this->comparator);
+
      cs->setbase(b);
      for (int exp = 1; max / exp > 0; exp *= b)
      {
@@ -367,59 +377,54 @@ void countingsorting::setexp(uint32_t exp)
      this->vec = cs->getvalues();
      delete cs;
  }
-std::string radixsorting::getname()
+ template<typename T,  typename Comparator>
+std::string radixsorting<T,Comparator>::getname()
 {
     return this->name;
 }
 
-uint32_t radixsorting::gettime()
-{
-    return this->time;
-}
-
-uint32_t radixsorting::getmemory()
+template<typename T,  typename Comparator>
+uint32_t radixsorting<T,Comparator>::getmemory()
 {
     return this->memory;
 }
-
-void radixsorting::sort()
+template<typename T,  typename Comparator>
+void radixsorting<T,Comparator>::sort()
 {
    // this->radixsort(this->vec, this->base);
     this->radixsort(this->vec,this->base);
 }
-
-void radixsorting::setbase(uint32_t b)
+template<typename T,  typename Comparator>
+void radixsorting<T,Comparator>::setbase(uint32_t b)
 {
     this->base = b;
 }
-
-std::vector<uint32_t> radixsorting::getvalues()
+template<typename T,  typename Comparator>
+std::vector<T> radixsorting<T,Comparator>::getvalues()
 {
     return this->vec;
 }
-
-std::string insertionsorting::getname()
+template<typename T,  typename Comparator>
+std::string insertionsorting<T,Comparator>::getname()
 {
     return this->name;
 }
 
-uint32_t insertionsorting::gettime()
-{
-    return this->time;
-}
 
-uint32_t insertionsorting::getmemory()
+template<typename T,  typename Comparator>
+uint32_t insertionsorting<T,Comparator>::getmemory()
 {
     return this->memory;
 }
-
-void insertionsorting::sort()
+template<typename T,  typename Comparator>
+void insertionsorting<T,Comparator>::sort()
 {
    // this->insertionsort(this->vec);
     this->insertionsort(this->vec);
 
 }
-void insertionsorting::insertionsort(std::vector<float>&arr)
+template<typename T,  typename Comparator>
+void insertionsorting<T,Comparator>::insertionsort(std::vector<T>&arr)
 {
     if (!arr.size())
         return;
@@ -430,7 +435,7 @@ void insertionsorting::insertionsort(std::vector<float>&arr)
     {
         k = arr[i];
         j = i - 1;
-        while (j >= 0 && arr[j] > k)
+        while (j >= 0 && /*arr[j] > k*/ this->comparator(arr[j],k))
         {
             arr[j + 1] = arr[j];
             j = j - 1;
@@ -438,42 +443,40 @@ void insertionsorting::insertionsort(std::vector<float>&arr)
         arr[j + 1] = k;
     }
 }
-
-std::vector<float> insertionsorting::getvalues()
+template<typename T,  typename Comparator>
+std::vector<T> insertionsorting<T,Comparator>::getvalues()
 {
     return this->vec;
 }
-void insertionsorting::setvalues(std::vector<float> v)
+template<typename T,  typename Comparator>
+void insertionsorting<T,Comparator>::setvalues(std::vector<T> v)
 {
     this->vec = v;
 }
-
-std::string bucketsorting::getname()
+template<typename T,  typename Comparator>
+std::string bucketsorting<T,Comparator>::getname()
 {
     return this->name;
 }
 
-uint32_t bucketsorting::gettime()
-{
-    return this->time;
-}
-
-uint32_t bucketsorting::getmemory()
+template<typename T,  typename Comparator>
+uint32_t bucketsorting<T,Comparator>::getmemory()
 {
     return this->memory;
 }
-
-void bucketsorting::bucketsort(std::vector<float>& arr)
+template<typename T,  typename Comparator>
+void bucketsorting<T,Comparator>::bucketsort(std::vector<T>& arr)
 {
-    int len = arr.size();
-    std::vector<std::vector<float>> out(len, std::vector<float>());
+    int len = arr.size();         //add exception if len ==0
+
+    std::vector<std::vector<T>> out(len, std::vector<T>());
 
     for (int i = 0; i < len; i++) {
 
         out[len * arr[i]].push_back(arr[i]);
     }
 
-    insertionsorting* inss = new insertionsorting();
+    insertionsorting<T,Comparator>* inss = new insertionsorting<T,Comparator>(out[0],this->comparator);         //check
     for (int i = 0; i < len; i++)
     {
         inss->setvalues(out[i]);
@@ -482,6 +485,7 @@ void bucketsorting::bucketsort(std::vector<float>& arr)
     }
 delete inss;
     int k = 0;
+    if(!this->comparator(1,2)) //checking order of sorting
     for (int i = 0; i < len; i++)
     {
         int sublen = out[i].size();
@@ -491,14 +495,26 @@ delete inss;
             k++;
         }
     }
-}
+    else                   //check
+        for (int i = len-1; i >=0; i--)
+        {
+            int sublen = out[i].size();
+            for (int j = 0; j <sublen; j++)
+            {
+                arr[k] = out[i][j];
+                k++;
+            }
+        }
 
-std::vector<float> bucketsorting::getvalues()
+
+}
+template<typename T,  typename Comparator>
+std::vector<T> bucketsorting<T,Comparator>::getvalues()
 {
     return this->vec;
 }
-
-void bucketsorting::sort()
+template<typename T,  typename Comparator>
+void bucketsorting<T,Comparator>::sort()
 {
   //  this->bucketsort(this->vec);
     this->bucketsort(this->vec);
@@ -525,9 +541,7 @@ std::string horspool::getname()
 {
     return this->name;
 };
-uint32_t horspool::gettime() {
-    return this->time;
-};
+
 uint32_t horspool::getmemory()
 {
     return this->memory;
@@ -645,9 +659,7 @@ std::string boyermoor::getname()
 {
     return this->name;
 };
-uint32_t boyermoor::gettime() {
-    return this->time;
-};
+
 uint32_t boyermoor::getmemory()
 {
     return this->memory;
@@ -673,3 +685,5 @@ uint32_t boyermoor::getmemory()
      //return this->boyermoormatching(this->sample, this->line);
      return this->boyermoormatching(this->sample,this->line);
  };
+
+#endif

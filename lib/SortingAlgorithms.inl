@@ -42,7 +42,11 @@ void CombSort<T, Comparator>::sort(T* arr, std::size_t size, Comparator comparat
 
 
 template <typename T, typename Comparator>
-void ShellSort<T, Comparator>::sort(T* arr, std::size_t size, Comparator comparator) {
+void ShellSort<T, Comparator>::sort(std::vector<T>vec, Comparator comparator) {
+
+    const auto size = vec.size();
+    T*arr = &vec[0];
+
     const std::size_t gaps_number = 8;
     int gaps[] = {701, 301, 132, 57, 23, 10, 4, 1};
 

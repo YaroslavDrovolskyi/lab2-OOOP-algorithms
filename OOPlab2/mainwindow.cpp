@@ -4,7 +4,7 @@
 #include <vector>
 #include "QString"
 #include "QRegularExpression"
-
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -34,10 +34,34 @@ MainWindow::~MainWindow()
 
 
 
-
+ bool MainWindow::areValidNumbers(const QVector<QString>&listofnumbers, const QRegularExpression& expr)
+ {
+      size_t len = listofnumbers.size();
+      for(auto i=0; i<len; i++)
+      {
+          if(!listofnumbers[i].contains(expr))
+              return false;
+      }
+      return true;
+ };
 
 void MainWindow::on_btnrun_clicked()
 {
-    //const QRegularExpression regexp("[^0-9]");
+   const QRegularExpression regexp("[^0-9.]");
+   const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]+$");
+   const QString inputline = ui->inputline->text();
+  // inputline = inputline.
+   const QVector<QString> listofnumbers =  inputline.split(regexp,Qt::SkipEmptyParts);
+   ui->inputline->clear();
+   QString l;
+for(auto i =0; i< listofnumbers.size(); i++)
+{
+    l.push_back(listofnumbers[i]);
+}
+ui->inputline->setText(l);
+   if(!areValidNumbers(listofnumbers,validNumberRegex))
+       ui->inputline->clear();
+
+
 }
 

@@ -16,7 +16,7 @@ SOURCES += \
 
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../lib/ -lalgoslib
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../lib/ -lalgoslibd
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../lib/ -lalgoslib
 
 INCLUDEPATH += $$PWD/../lib
 DEPENDPATH += $$PWD/../lib

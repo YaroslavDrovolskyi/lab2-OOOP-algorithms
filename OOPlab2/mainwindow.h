@@ -25,7 +25,7 @@ private:
     Ui::MainWindow *ui;
 
     const QVector<QString> NamesOfAlgos = {
-            "mergesort",
+         "mergesort",
         "quicksort",
         "heapsort",
         "countingsort",
@@ -35,5 +35,10 @@ private:
         "horspool",
         "boyermoor"
     };
+
+    bool areValidNumbers(const QVector<QString>&listofnumbers, const QRegularExpression& expr);
+
+
+
 };
 #endif // MAINWINDOW_H

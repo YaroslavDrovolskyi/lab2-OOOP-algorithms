@@ -34,7 +34,7 @@ public:
 template <typename T, typename Comparator>
 class ShellSort : public SortingAlgorithm<T, Comparator> {
 public:
-    virtual void sort(T* arr, std::size_t size, Comparator comparator) override;
+    virtual void sort(std::vector<T>vec, Comparator comparator) override;
     virtual void getName() const override;
     void sortInsertion(T* arr, std::size_t size, Comparator comparator);
 };

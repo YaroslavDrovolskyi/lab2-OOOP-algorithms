@@ -11,7 +11,7 @@ CONFIG += c++11
 
 SOURCES += \
     SortingAlgorithms.inl \
-    algoslib.cpp
+    algoslib.inl
 
 HEADERS += \
     SortingAlgorithms.h \
