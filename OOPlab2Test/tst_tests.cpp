@@ -52,11 +52,13 @@ private:
 template <typename T>
   bool comparator(T a ,  T b)
   {
-      if(a >=b)
+      if(a <=b)
           return true;
 
       return false;
   }
+
+
 
 tests::tests()
 {
@@ -70,51 +72,60 @@ tests::~tests()
 
 void tests::test_mergesort()
 {
-    std::unique_ptr<mergesorting<float,bool(float a, float b)>>ms (new mergesorting<float,bool(float a, float b)>(this->floatnumbers,comparator));
+
+
+    //std::unique_ptr<mergesorting<float,bool(float a, float b)>>ms (new mergesorting<float,bool(float a, float b)>(this->floatnumbers,comparator<float>));
+     //mergesorting<float,bool(float a, float b)>*ms = mergesorting<float,bool(float a, float b)>::GetInstance(this->floatnumbers,comparator<float>);
+    std::unique_ptr<mergesorting<float,bool(float a, float b)>>ms ( mergesorting<float,bool(float a, float b)>::GetInstance(this->floatnumbers,comparator<float>));
     ms->sort();
     QCOMPARE(ms->getvalues(),this->expectedfloat);
-
+//delete ms;
 }
 
 void tests::test_quicksort()
 {
-std::unique_ptr<quicksorting<float,bool(float a, float b)>>ms (new quicksorting<float,bool(float a, float b)>(this->floatnumbers,comparator));
-
+//std::unique_ptr<quicksorting<float,bool(float a, float b)>>ms (new quicksorting<float,bool(float a, float b)>(this->floatnumbers,comparator));
+std::unique_ptr<quicksorting<float,bool(float a, float b)>>ms ( quicksorting<float,bool(float a, float b)>::GetInstance(this->floatnumbers,comparator<float>));
     ms->sort();
     QCOMPARE(ms->getvalues(),this->expectedfloat);
 }
 
 void tests::test_heapsort()
 {
-std::unique_ptr<heapsorting<float,bool(float a, float b)>>ms (new heapsorting<float,bool(float a, float b)>(this->floatnumbers,comparator));
+//std::unique_ptr<heapsorting<float,bool(float a, float b)>>ms (new heapsorting<float,bool(float a, float b)>(this->floatnumbers,comparator));
+std::unique_ptr<heapsorting<float,bool(float a, float b)>>ms ( heapsorting<float,bool(float a, float b)>::GetInstance(this->floatnumbers,comparator<float>));
     ms->sort();
     QCOMPARE(ms->getvalues(),this->expectedfloat);
 }
 
 void tests::test_countingsort()
 {
-std::unique_ptr<countingsorting<uint32_t,bool(uint32_t a, uint32_t b)>>ms (new countingsorting<uint32_t,bool(uint32_t a, uint32_t b)>(this->wholenumbers,comparator));
+//std::unique_ptr<countingsorting<uint32_t,bool(uint32_t a, uint32_t b)>>ms (new countingsorting<uint32_t,bool(uint32_t a, uint32_t b)>(this->wholenumbers,comparator));
+   std::unique_ptr<countingsorting<uint32_t,bool(uint32_t a, uint32_t b)>>ms ( countingsorting<uint32_t,bool(uint32_t a, uint32_t b)>::GetInstance(this->wholenumbers,comparator<uint32_t>));
     ms->sort();
     QCOMPARE(ms->getvalues(),this->expectedwhole);
 }
 
 void tests::test_radixsort()
 {
-std::unique_ptr<radixsorting<uint32_t,bool(uint32_t a, uint32_t b)>>ms (new radixsorting<uint32_t,bool(uint32_t a, uint32_t b)>(this->wholenumbers,comparator));
-    ms->sort();
+//std::unique_ptr<radixsorting<uint32_t,bool(uint32_t a, uint32_t b)>>ms (new radixsorting<uint32_t,bool(uint32_t a, uint32_t b)>(this->wholenumbers,comparator));
+std::unique_ptr<radixsorting<uint32_t,bool(uint32_t a, uint32_t b)>>ms ( radixsorting<uint32_t,bool(uint32_t a, uint32_t b)>::GetInstance(this->wholenumbers,comparator<uint32_t>));
+ms->sort();
     QCOMPARE(ms->getvalues(),this->expectedwhole);
 }
 
 void tests::test_insertionsort()
 {
-std::unique_ptr<insertionsorting<float,bool(float a, float b)>>ms (new insertionsorting<float,bool(float a, float b)>(this->floatnumbers,comparator));
-    ms->sort();
+//std::unique_ptr<insertionsorting<float,bool(float a, float b)>>ms (new insertionsorting<float,bool(float a, float b)>(this->floatnumbers,comparator));
+std::unique_ptr<insertionsorting<float,bool(float a, float b)>>ms ( insertionsorting<float,bool(float a, float b)>::GetInstance(this->floatnumbers,comparator<float>));
+ms->sort();
     QCOMPARE(ms->getvalues(),this->expectedfloat);
 }
 
 void tests::test_bucketsort()
 {
-std::unique_ptr<bucketsorting<float,bool(float a, float b)>>ms (new bucketsorting<float,bool(float a, float b)>(this->bucketnumbers,comparator));
+//std::unique_ptr<bucketsorting<float,bool(float a, float b)>>ms (new bucketsorting<float,bool(float a, float b)>(this->bucketnumbers,comparator));
+std::unique_ptr<bucketsorting<float,bool(float a, float b)>>ms ( bucketsorting<float,bool(float a, float b)>::GetInstance(this->bucketnumbers,comparator<float>));
     ms->sort();
     QCOMPARE(ms->getvalues(),this->expectedbucket);
 }
