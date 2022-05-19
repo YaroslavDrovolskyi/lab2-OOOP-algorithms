@@ -5,6 +5,8 @@
 #include "QString"
 #include "QRegularExpression"
 #include <QMessageBox>
+#include "facade.h"
+#include <memory>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,11 +21,11 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     //add labels to table
-    QVector<QString> colnames = {"Name","Time","Memory"};
-    ui->resultTable->setColumnCount(3);
+    QVector<QString> colnames = {"Name","Time","Memory","Result"};
+    ui->resultTable->setColumnCount(4);
     ui->resultTable->setHorizontalHeaderLabels(colnames);
 
-
+    this->facade = new abstrFacade();
 
 }
 
@@ -47,21 +49,53 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btnrun_clicked()
 {
-   const QRegularExpression regexp("[^0-9.]");
-   const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]+$");
-   const QString inputline = ui->inputline->text();
-  // inputline = inputline.
-   const QVector<QString> listofnumbers =  inputline.split(regexp,Qt::SkipEmptyParts);
-   ui->inputline->clear();
-   QString l;
-for(auto i =0; i< listofnumbers.size(); i++)
-{
-    l.push_back(listofnumbers[i]);
+//   const QRegularExpression regexp("[^0-9.]");
+//   const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]+$");
+//   const QString inputline = ui->inputline->text();
+//  // inputline = inputline.
+//   const QVector<QString> listofnumbers =  inputline.split(regexp,Qt::SkipEmptyParts);
+//   ui->inputline->clear();
+//   QString l;
+//for(auto i =0; i< listofnumbers.size(); i++)
+//{
+//    l.push_back(listofnumbers[i]);
+//}
+//ui->inputline->setText(l);
+//   if(!areValidNumbers(listofnumbers,validNumberRegex))
+//       ui->inputline->clear();
+
+
 }
-ui->inputline->setText(l);
-   if(!areValidNumbers(listofnumbers,validNumberRegex))
-       ui->inputline->clear();
 
 
+void MainWindow::on_algoselector_currentIndexChanged(int index)
+{
+    switch (index) {
+    case(0):
+       // this->algorithm_ =;
+        break;
+    case(1):
+
+        break;
+    case(2):
+
+        break;
+    case(3):
+
+        break;
+    case(4):
+
+        break;
+    case(5):
+
+        break;
+    case(6):
+
+        break;
+    case(7):
+
+        break;
+
+    }
 }
 

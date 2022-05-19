@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ALGOSLIB_H
 #define ALGOSLIB_H
 
@@ -13,6 +14,7 @@ public:
    virtual std::string getname() = 0;
    virtual std::string gettype() = 0;
    virtual uint32_t getmemory() = 0;
+    virtual void run()=0;
    virtual ~algorithm();
 };
 template<typename Comparator>
@@ -24,7 +26,7 @@ public:
 
    std::string gettype() override;
 
-   virtual void sort() = 0;                 //delete, add run() to algorithm
+  // virtual void sort() = 0;
 
    virtual ~sortingalgo();
 
@@ -37,13 +39,13 @@ private:
  class  substringmatching :public algorithm
 {
 public:
-    substringmatching() { this->type = "substringmatching"; };
+    substringmatching();
     std::string gettype() override;
     virtual std::string getline()=0;
     virtual std::string getsample()=0;
     virtual void setline(std::string l)=0;
     virtual void setsample(std::string s)=0;
-    virtual int findfirstsubstr()=0;               //delete, add run() to algorithm
+ //   virtual int findfirstsubstr()=0;
     virtual ~substringmatching() {};
 private:
     std::string type;
@@ -57,7 +59,7 @@ public:
 
     mergesorting()=delete;
 
-    void sort() override;
+    void run() override;
     std::string getname() override;
     uint32_t getmemory() override;
     std::vector<T> getvalues();
@@ -90,7 +92,7 @@ template<typename T,  typename Comparator>
  {
  public:
 
-     void sort() override;
+     void run() override;
      std::string getname() override;
      uint32_t getmemory() override;
 std::vector<T> getvalues();
@@ -107,16 +109,8 @@ protected:
 
  private:
 
- quicksorting(std::vector<T> v, Comparator c) :vec(v)
- {
-     this->name = "quicksort";
-      this->comparator = c;
- }
- quicksorting( Comparator c)
- {
-     this->name = "quicksort";
-      this->comparator = c;
- }
+ quicksorting(std::vector<T> v, Comparator c);
+ quicksorting( Comparator c);
 
      std::string name;
      uint32_t memory;
@@ -136,7 +130,7 @@ template<typename T,  typename Comparator>
  {
  public:
 
-     void sort() override;
+     void run() override;
      std::string getname() override;
      uint32_t getmemory() override;
     std::vector<T> getvalues();
@@ -151,16 +145,8 @@ template<typename T,  typename Comparator>
      static inline heapsorting<T,Comparator>* heapsorting_;
 
  private:
-     heapsorting(std::vector<T> v, Comparator c):vec(v)
-     {
-         this->name = "heapsort";
-          this->comparator = c;
-     }
-     heapsorting( Comparator c)
-     {
-         this->name = "heapsort";
-          this->comparator = c;
-     }
+     heapsorting(std::vector<T> v, Comparator c);
+     heapsorting( Comparator c);
 
      std::string name;
      uint32_t memory;
@@ -184,7 +170,7 @@ template<typename T,  typename Comparator>
  public:
 
 
-     void sort() override;
+     void run() override;
      std::string getname() override;
      uint32_t getmemory() override;
      void setbase(uint32_t base);
@@ -204,24 +190,9 @@ template<typename T,  typename Comparator>
 
  private:
 
-      countingsorting(std::vector<T> v, Comparator c): vec(v)
-      {
-          this->name = "countingsort";
-          this->base = findmax() + 1;
-           this->comparator = c;
-      }
-      countingsorting( Comparator c)
-      {
-          this->name = "countingsort";
-          this->base = findmax() + 1;
-           this->comparator = c;
-      }
-      countingsorting(std::vector<T> v, std::function<Comparator> c): vec(v)
-      {
-          this->name = "countingsort";
-          this->base = findmax() + 1;
-           this->comparator = c;
-      }
+      countingsorting(std::vector<T> v, Comparator c);
+      countingsorting( Comparator c);
+      countingsorting(std::vector<T> v, std::function<Comparator> c);
 
      std::string name;
      uint32_t memory;
@@ -238,7 +209,7 @@ template<typename T,  typename Comparator>
  {
  public:
      ~radixsorting();
-     void sort() override;
+     void run() override;
      std::string getname() override;
      uint32_t getmemory() override;
      void setbase(uint32_t b);
@@ -255,21 +226,9 @@ template<typename T,  typename Comparator>
      static inline radixsorting<T,Comparator>* radixsorting_;
 
  private:
-     radixsorting(std::vector<T> v, uint32_t b1, Comparator c) : vec(v),  base(b1)
-     {
-         this->name = "radixsort";
-          this->comparator = c;
-     }
-     radixsorting(std::vector<T> v, Comparator c) : vec(v)
-     {
-         this->name = "radixsort";
-          this->comparator = c;
-     }
-     radixsorting( Comparator c)
-     {
-         this->name = "radixsort";
-          this->comparator = c;
-     }
+     radixsorting(std::vector<T> v, uint32_t b1, Comparator c) ;
+     radixsorting(std::vector<T> v, Comparator c);
+     radixsorting( Comparator c);
 
 
      std::string name;
@@ -284,7 +243,7 @@ template<typename T,  typename Comparator>
  {
  public:
      ~insertionsorting();
-     void sort() override;
+     void run() override;
      std::string getname() override;
      uint32_t getmemory() override;
       void setvalues(std::vector<T> v);
@@ -300,21 +259,9 @@ template<typename T,  typename Comparator>
          static inline insertionsorting<T,Comparator>* insertionsorting_;
 
  private:
-         insertionsorting(std::vector<T> v, Comparator c) :vec(v)
-         {
-             this->name = "insertionsort";
-              this->comparator = c;
-         }
-         insertionsorting(std::vector<T> v, std::function<Comparator> c) :vec(v)
-         {
-             this->name = "insertionsort";
-              this->comparator = c;
-         }
-         insertionsorting( Comparator c)
-         {
-             this->name = "insertionsort";
-              this->comparator = c;
-         }
+         insertionsorting(std::vector<T> v, Comparator c);
+         insertionsorting(std::vector<T> v, std::function<Comparator> c) ;
+         insertionsorting( Comparator c);
      std::string name;
      uint32_t memory;
      std::vector<T> vec;
@@ -326,7 +273,7 @@ template<typename T,  typename Comparator>
  {
  public:
     ~bucketsorting();
-     void sort() override;
+     void run() override;
      std::string getname() override;
      uint32_t getmemory() override;
     std::vector<T> getvalues();
@@ -341,16 +288,8 @@ template<typename T,  typename Comparator>
      static inline bucketsorting<T,Comparator>* bucketsorting_;
 
  private:
-     bucketsorting(std::vector<T> v, Comparator c) :vec(v)
-     {
-         this->name = "bucketsort";
-          this->comparator = c;
-     }
-     bucketsorting( Comparator c)
-     {
-         this->name = "bucketsort";
-          this->comparator = c;
-     }
+     bucketsorting(std::vector<T> v, Comparator c);
+     bucketsorting( Comparator c);
      std::string name;
      uint32_t memory;
      std::vector<T> vec;
@@ -369,13 +308,14 @@ public:
       std::string getsample()override;
       void setline(std::string l)override;
       void setsample(std::string s)override;
-      int findfirstsubstr() override;
+      void run() override;
+       int getId();
 private:
      std::string name;
      std::string line;
      std::string sample;
      uint32_t memory;
-
+    int id;
 int horspoolmatching(std::string& sample, std::string line);
 };
 class boyermoor: public substringmatching
@@ -388,12 +328,14 @@ public:
       std::string getsample()override;
       void setline(std::string l)override;
       void setsample(std::string s)override;
-      int findfirstsubstr() override;
+      void run() override;
+      int getId();
 private:
      std::string name;
      std::string line;
      std::string sample;
      uint32_t memory;
+     int id;
       std::vector<int> suffixes(std::string str);
       int boyermoormatching(std::string sample, std::string line);
 };

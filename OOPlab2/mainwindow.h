@@ -4,6 +4,10 @@
 #include <QMainWindow>
 #include <QVector>
 #include <QString>
+#include "facade.h"
+#include "algoslib.h"
+#include <memory>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -20,6 +24,8 @@ private slots:
 
 
     void on_btnrun_clicked();
+
+    void on_algoselector_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;
@@ -38,7 +44,8 @@ private:
 
     bool areValidNumbers(const QVector<QString>&listofnumbers, const QRegularExpression& expr);
 
-
-
+    abstrFacade* facade = nullptr;
+    algorithm* algorithm_=nullptr;
+   // std::unique_ptr<algorithm> algorithm_ = nullptr;
 };
 #endif // MAINWINDOW_H
