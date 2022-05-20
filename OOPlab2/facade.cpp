@@ -1,6 +1,6 @@
 #include "facade.h"
 #include "visitor.h"
-
+#include <QDebug>
 
 
 
@@ -17,6 +17,10 @@ void concreteFacadeInfo::setResult(QString s){
     this->result = s;
 };
 
+abstrFacadeInfo* Facade::getInfo() const
+{
+    return this->facadeInfo_;
+}
 
  void Facade::runAlgo()      //template method
  {
@@ -28,12 +32,12 @@ void concreteFacadeInfo::setResult(QString s){
     }
     else
         this->algorithm_->run();
-
+   std::string a = this->algorithm_->gettype();
     if(!QString::compare("sorting",QString::fromStdString(this->algorithm_->gettype()),Qt::CaseSensitivity::CaseSensitive))
         this->saveResultData("sorted");
     else if(QString::compare("substringmatching",QString::fromStdString(this->algorithm_->gettype()),Qt::CaseSensitivity::CaseSensitive))
     this->saveResultData("substring matching was performed");
-
+    this->saveName();
  };
  void Facade::setTime(bool b){
     this->hasTime = b;
@@ -42,6 +46,11 @@ void concreteFacadeInfo::setResult(QString s){
      this->hasNumberOfComparisons = b;
 
 
+ };
+
+ void Facade::saveName()
+ {
+     this->facadeInfo_->setName(QString::fromStdString(this->algorithm_->getname()));
  };
  void Facade::saveResultData(QString str){
      this->facadeInfo_->setResult(str);
