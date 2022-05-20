@@ -7,6 +7,7 @@
 #include "facade.h"
 #include "algoslib.h"
 #include <memory>
+#include <functional>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,6 +28,8 @@ private slots:
 
     void on_algoselector_currentIndexChanged(int index);
 
+
+
 private:
     Ui::MainWindow *ui;
 
@@ -44,8 +47,26 @@ private:
 
     bool areValidNumbers(const QVector<QString>&listofnumbers, const QRegularExpression& expr);
 
-    abstrFacade* facade = nullptr;
-    algorithm* algorithm_=nullptr;
+    template <typename T>
+      static bool comparatorAscend(T a ,  T b)
+      {
+          if(a >=b)
+              return true;
+
+          return false;
+      }
+
+      template <typename T>
+        bool comparatorDescend(T a ,  T b)
+        {
+            if(a <=b)
+                return true;
+
+            return false;
+        }
+
+    Facade* facade = nullptr;
+    algorithm* algorithm_;
    // std::unique_ptr<algorithm> algorithm_ = nullptr;
 };
 #endif // MAINWINDOW_H

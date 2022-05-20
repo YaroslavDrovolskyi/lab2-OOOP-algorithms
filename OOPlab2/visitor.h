@@ -3,6 +3,7 @@
 #include <QtGlobal>
 #include <QElapsedTimer>
 #include "algoslib.h"
+
 class visitor
 {
 public:
@@ -14,5 +15,6 @@ private:
   QElapsedTimer timer;
   algorithm* algorithm_;
 };
+
 
 #endif // VISITOR_H

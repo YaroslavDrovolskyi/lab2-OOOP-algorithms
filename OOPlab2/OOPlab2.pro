@@ -40,8 +40,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../lib/ -lalgoslib
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../lib/ -lalgoslib
+
+
+win32: LIBS += -L$$PWD/../lib/ -lalgoslib
 
 INCLUDEPATH += $$PWD/../lib
 DEPENDPATH += $$PWD/../lib

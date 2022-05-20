@@ -1,4 +1,4 @@
-#pragma once
+
 #ifndef ALGOSLIB_H
 #define ALGOSLIB_H
 
@@ -6,8 +6,8 @@
 #include <string>
 #include <vector>
 #include <memory>
-
-class  algorithm
+#include <functional>
+class ALGOSLIB_EXPORT  algorithm
 {
 public:
     algorithm() ;
@@ -18,7 +18,7 @@ public:
    virtual ~algorithm();
 };
 template<typename Comparator>
-class  sortingalgo:  public algorithm
+class ALGOSLIB_EXPORT sortingalgo:  public algorithm
 {
 public:
 
@@ -36,7 +36,7 @@ private:
    std::string type;
 };
 
- class  substringmatching :public algorithm
+ class ALGOSLIB_EXPORT substringmatching :public algorithm
 {
 public:
     substringmatching();
@@ -53,7 +53,7 @@ private:
 
 
 template<typename T,  typename Comparator>
-class  mergesorting :  public sortingalgo<Comparator>
+class ALGOSLIB_EXPORT mergesorting :  public sortingalgo<Comparator>
 {
 public:
 
@@ -65,8 +65,8 @@ public:
     std::vector<T> getvalues();
     ~mergesorting() ;
 
-    static inline mergesorting* GetInstance(std::vector<T> v, Comparator c);
-    static inline mergesorting* GetInstance(Comparator c);
+    static  mergesorting* GetInstance(std::vector<T> v, Comparator c);
+    static  mergesorting* GetInstance(Comparator c);
 
     mergesorting(mergesorting<T,Comparator> &other) = delete;
     void operator=(const mergesorting<T,Comparator> &) = delete;
@@ -88,7 +88,7 @@ private:
 
 
 template<typename T,  typename Comparator>
- class  quicksorting : public sortingalgo<Comparator>
+ class ALGOSLIB_EXPORT quicksorting : public sortingalgo<Comparator>
  {
  public:
 
@@ -99,8 +99,8 @@ std::vector<T> getvalues();
 
 ~quicksorting();
 
-static inline quicksorting* GetInstance(std::vector<T> v, Comparator c);
-static inline quicksorting* GetInstance(Comparator c);
+static  quicksorting* GetInstance(std::vector<T> v, Comparator c);
+static  quicksorting* GetInstance(Comparator c);
 
 quicksorting(quicksorting<T,Comparator> &other) = delete;
 void operator=(const quicksorting<T,Comparator> &) = delete;
@@ -126,7 +126,7 @@ protected:
 
 
 template<typename T,  typename Comparator>
-  class  heapsorting :public sortingalgo<Comparator>
+  class ALGOSLIB_EXPORT heapsorting :public sortingalgo<Comparator>
  {
  public:
 
@@ -136,8 +136,8 @@ template<typename T,  typename Comparator>
     std::vector<T> getvalues();
     ~heapsorting();
 
-    static inline heapsorting* GetInstance(std::vector<T> v, Comparator c);
-    static inline heapsorting* GetInstance(Comparator c);
+    static  heapsorting* GetInstance(std::vector<T> v, Comparator c);
+    static  heapsorting* GetInstance(Comparator c);
 
     heapsorting(heapsorting<T,Comparator> &other) = delete;
     void operator=(const heapsorting<T,Comparator> &) = delete;
@@ -165,7 +165,7 @@ template<typename T,  typename Comparator>
 
 
 template<typename T,  typename Comparator>
-  class  countingsorting :public sortingalgo<Comparator>
+  class ALGOSLIB_EXPORT countingsorting :public sortingalgo<Comparator>
  {
  public:
 
@@ -179,9 +179,9 @@ template<typename T,  typename Comparator>
      std::vector<T> getvalues();
      ~countingsorting();
 
-     static inline countingsorting* GetInstance(std::vector<T> v, Comparator c);
-     static inline countingsorting* GetInstance(Comparator c);
-     static inline countingsorting* GetInstance(std::vector<T> v, std::function<Comparator> c);
+     static  countingsorting* GetInstance(std::vector<T> v, Comparator c);
+     static  countingsorting* GetInstance(Comparator c);
+     static  countingsorting* GetInstance(std::vector<T> v, std::function<Comparator> c);
      countingsorting(countingsorting<T,Comparator> &other) = delete;
      void operator=(const countingsorting<T,Comparator> &) = delete;
      protected:
@@ -205,7 +205,7 @@ template<typename T,  typename Comparator>
 
 
 template<typename T,  typename Comparator>
-  class  radixsorting :public sortingalgo<Comparator>
+  class ALGOSLIB_EXPORT  radixsorting :public sortingalgo<Comparator>
  {
  public:
      ~radixsorting();
@@ -216,9 +216,9 @@ template<typename T,  typename Comparator>
     std::vector<T> getvalues();
 
 
-    static inline radixsorting* GetInstance(std::vector<T> v, Comparator c);
-    static inline radixsorting* GetInstance(Comparator c);
-    static inline radixsorting* GetInstance(std::vector<T> v, uint32_t b1, Comparator c);
+    static  radixsorting* GetInstance(std::vector<T> v, Comparator c);
+    static  radixsorting* GetInstance(Comparator c);
+    static  radixsorting* GetInstance(std::vector<T> v, uint32_t b1, Comparator c);
 
     radixsorting(radixsorting<T,Comparator> &other) = delete;
     void operator=(const radixsorting<T,Comparator> &) = delete;
@@ -239,7 +239,7 @@ template<typename T,  typename Comparator>
 
  };
 template<typename T,  typename Comparator>
-  class  insertionsorting :public sortingalgo<Comparator>
+  class ALGOSLIB_EXPORT insertionsorting :public sortingalgo<Comparator>
  {
  public:
      ~insertionsorting();
@@ -249,9 +249,9 @@ template<typename T,  typename Comparator>
       void setvalues(std::vector<T> v);
         std::vector<T> getvalues();
 
-        static inline insertionsorting* GetInstance(std::vector<T> v, Comparator c);
-        static inline insertionsorting* GetInstance(Comparator c);
-        static inline insertionsorting* GetInstance(std::vector<T> v, std::function<Comparator> c);
+        static  insertionsorting* GetInstance(std::vector<T> v, Comparator c);
+        static  insertionsorting* GetInstance(Comparator c);
+        static  insertionsorting* GetInstance(std::vector<T> v, std::function<Comparator> c);
 
         insertionsorting(insertionsorting<T,Comparator> &other) = delete;
         void operator=(const insertionsorting<T,Comparator> &) = delete;
@@ -269,7 +269,7 @@ void insertionsort(std::vector<T>& arr);
 
  };
 template<typename T,  typename Comparator>
-  class  bucketsorting :public sortingalgo<Comparator>
+  class ALGOSLIB_EXPORT bucketsorting :public sortingalgo<Comparator>
  {
  public:
     ~bucketsorting();
@@ -278,8 +278,8 @@ template<typename T,  typename Comparator>
      uint32_t getmemory() override;
     std::vector<T> getvalues();
 
-    static inline bucketsorting* GetInstance(std::vector<T> v, Comparator c);
-    static inline bucketsorting* GetInstance(Comparator c);
+    static  bucketsorting* GetInstance(std::vector<T> v, Comparator c);
+    static  bucketsorting* GetInstance(Comparator c);
 
 
     bucketsorting(bucketsorting<T,Comparator> &other) = delete;
@@ -297,10 +297,10 @@ void bucketsort(std::vector<T>& arr);
 
  };
 
-class horspool: public substringmatching
+class ALGOSLIB_EXPORT horspool: public substringmatching
 {
 public:
-    horspool(std::string l, std::string s):line(l),sample(s){};
+
 
      std::string getname() override;
      uint32_t getmemory() override;
@@ -310,7 +310,21 @@ public:
       void setsample(std::string s)override;
       void run() override;
        int getId();
+
+       static  horspool* GetInstance(std::string l, std::string s);
+
+
+       horspool(horspool &other) = delete;
+       void operator=(const horspool &) = delete;
+
+       ~horspool()
+       {
+           this->horspool_ = nullptr;
+       }
+protected:
+       static inline horspool* horspool_;
 private:
+        horspool(std::string l, std::string s):line(l),sample(s){};
      std::string name;
      std::string line;
      std::string sample;
@@ -318,10 +332,10 @@ private:
     int id;
 int horspoolmatching(std::string& sample, std::string line);
 };
-class boyermoor: public substringmatching
+class ALGOSLIB_EXPORT boyermoor: public substringmatching
 {
 public:
-    boyermoor(std::string l, std::string s):line(l),sample(s){};
+
      std::string getname() override;
      uint32_t getmemory() override;
       std::string getline()override;
@@ -330,7 +344,18 @@ public:
       void setsample(std::string s)override;
       void run() override;
       int getId();
+
+      static  boyermoor* GetInstance(std::string l, std::string s);
+      boyermoor(horspool &other) = delete;
+      void operator=(const boyermoor &) = delete;
+      ~boyermoor()
+      {
+          this->boyermoor_ = nullptr;
+      }
+protected:
+      static inline boyermoor* boyermoor_;
 private:
+     boyermoor(std::string l, std::string s):line(l),sample(s){};
      std::string name;
      std::string line;
      std::string sample;
@@ -366,5 +391,5 @@ private:
 
 
 
-#include "algoslib.inl"
+//#include "algoslib.cpp"
 #endif // ALGOSLIB_H

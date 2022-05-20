@@ -30,10 +30,10 @@ public:
 
 
 
-class abstrFacade                            //"Builder" - builds result
+class Facade                            //"Builder" - builds result
 {
 public:
-    abstrFacade()=default;
+    Facade()=default;
     virtual void runAlgo();                //template method
     virtual void setTime(bool b);
     virtual void setNumberOfComparisons(bool b);

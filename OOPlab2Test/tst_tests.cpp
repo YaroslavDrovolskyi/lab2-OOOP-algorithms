@@ -2,7 +2,7 @@
 //#include "algorithms.h"
 #include "algoslib.h"
 #include <vector>
-
+#include "checklib.h"
 class tests : public QObject
 {
     Q_OBJECT
@@ -30,6 +30,7 @@ private slots:
 
       void test_boyermoor();
 
+      void test_checklib();
 
 private:
    const std::vector<float> floatnumbers{6,1,2,3,5,7,6,12,6,122,1,1,6};
@@ -49,6 +50,9 @@ private:
 
 
 };
+
+
+
 template <typename T>
   bool comparator(T a ,  T b)
   {
@@ -59,6 +63,12 @@ template <typename T>
   }
 
 
+void tests::test_checklib()
+{
+    Checklib<int, bool(int a, int b)> c;
+    c.check(6,comparator<int>);
+   qDebug()<< c.comparator(5,1);
+}
 
 tests::tests()
 {
@@ -132,7 +142,7 @@ std::unique_ptr<bucketsorting<float,bool(float a, float b)>>ms ( bucketsorting<f
 
 void tests::test_horspool()
 {
-    std::unique_ptr<horspool>ms (new horspool(this->line,this->sample));
+    std::unique_ptr<horspool>ms ( horspool::GetInstance(this->line,this->sample));
     ms->run();
     int res = ms->getId();
     QVERIFY(res == this->expectedpos);
@@ -140,7 +150,7 @@ void tests::test_horspool()
 
 void tests::test_boyermoor()
 {
-    std::unique_ptr<boyermoor>ms (new boyermoor(this->line,this->sample));
+    std::unique_ptr<boyermoor>ms ( boyermoor::GetInstance(this->line,this->sample));
     ms->run();
     int res = ms->getId();
     QVERIFY(res == this->expectedpos);

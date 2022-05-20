@@ -18,7 +18,7 @@ void concreteFacadeInfo::setResult(QString s){
 };
 
 
- void abstrFacade::runAlgo()
+ void Facade::runAlgo()      //template method
  {
      this->facadeInfo_ = new concreteFacadeInfo();
     if(this->hasTime)
@@ -29,40 +29,40 @@ void concreteFacadeInfo::setResult(QString s){
     else
         this->algorithm_->run();
 
-    if(QString::compare("sorting",QString::fromStdString(this->algorithm_->gettype()),Qt::CaseSensitivity::CaseSensitive))
+    if(!QString::compare("sorting",QString::fromStdString(this->algorithm_->gettype()),Qt::CaseSensitivity::CaseSensitive))
         this->saveResultData("sorted");
     else if(QString::compare("substringmatching",QString::fromStdString(this->algorithm_->gettype()),Qt::CaseSensitivity::CaseSensitive))
     this->saveResultData("substring matching was performed");
 
  };
- void abstrFacade::setTime(bool b){
+ void Facade::setTime(bool b){
     this->hasTime = b;
  };
- void abstrFacade::setNumberOfComparisons(bool b){
+ void Facade::setNumberOfComparisons(bool b){
      this->hasNumberOfComparisons = b;
 
 
  };
- void abstrFacade::saveResultData(QString str){
+ void Facade::saveResultData(QString str){
      this->facadeInfo_->setResult(str);
 
  };
- void abstrFacade::saveTime(qint64 t){
+ void Facade::saveTime(qint64 t){
     this->facadeInfo_->setTime(t);
  };
- void abstrFacade::saveNumberOfComparisons(){
+ void Facade::saveNumberOfComparisons(){
 
  };
 
- quint64 abstrFacade::calculateTime()
+ quint64 Facade::calculateTime()
  {
      visitor visitor_(this->algorithm_);
      visitor_.calculateTime();
-
+    return visitor_.getTime();
 
  }
 
- void abstrFacade::setAlgorithm(algorithm *alg)
+ void Facade::setAlgorithm(algorithm *alg)
  {
      this->algorithm_ = alg;
  }

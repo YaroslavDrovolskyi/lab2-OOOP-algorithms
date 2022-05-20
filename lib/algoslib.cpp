@@ -1,5 +1,7 @@
-#ifndef ALGOSLIB_INL
-#define ALGOSLIB_INL
+//#pragma once
+
+//#ifndef ALGOSLIB_INL
+//#define ALGOSLIB_INL
 
 #include "algoslib.h"
 #include <iostream>
@@ -7,6 +9,7 @@
 #include<map>
 #include <string>
 #include <exception>
+#include <functional>
 
 
 algorithm::algorithm() = default;
@@ -838,6 +841,16 @@ std::map<char, int> shifttable(std::string& str)
     return table;
 }
 
+
+horspool* horspool::GetInstance(std::string l, std::string s)
+{
+    if(horspool_ == nullptr)
+    {
+        horspool_ = new horspool(l,s);
+    }
+    return horspool_;
+};
+
 std::string horspool::getname()
 {
     return this->name;
@@ -899,6 +912,16 @@ uint32_t horspool::getmemory()
  }
 
  int horspool::getId(){return this->id;}
+
+
+ boyermoor* boyermoor::GetInstance(std::string l, std::string s)
+ {
+     if(boyermoor_ == nullptr)
+     {
+         boyermoor_ = new boyermoor(l,s);
+     }
+     return boyermoor_;
+ };
 
 std::vector<int> boyermoor::suffixes(std::string str)
 {
@@ -991,4 +1014,39 @@ uint32_t boyermoor::getmemory()
 
  int boyermoor::getId(){return this->id;}
 
-#endif
+
+ template class sortingalgo<bool(float, float)>;
+ template class sortingalgo<bool(int, int)>;
+ template class sortingalgo<bool(double, double)>;
+ template class sortingalgo<bool(uint32_t, uint32_t)>;
+
+ template class mergesorting<float,bool(float, float)>;
+ template class mergesorting<int,bool(int, int)>;
+ template class mergesorting<double,bool(double, double)>;
+ template class mergesorting<uint32_t,bool(uint32_t, uint32_t)>;
+
+ template class quicksorting<float,bool(float, float)>;
+ template class quicksorting<int,bool(int, int)>;
+ template class quicksorting<double,bool(double, double)>;
+ template class quicksorting<uint32_t,bool(uint32_t, uint32_t)>;
+
+ template class heapsorting<float,bool(float, float)>;
+ template class heapsorting<int,bool(int, int)>;
+ template class heapsorting<double,bool(double, double)>;
+ template class heapsorting<uint32_t,bool(uint32_t, uint32_t)>;
+
+
+ template class countingsorting<uint32_t,bool(uint32_t, uint32_t)>;
+
+ template class radixsorting<uint32_t,bool(uint32_t, uint32_t)>;
+
+ template class insertionsorting<float,bool(float, float)>;
+ template class insertionsorting<int,bool(int, int)>;
+ template class insertionsorting<double,bool(double, double)>;
+ template class insertionsorting<uint32_t,bool(uint32_t, uint32_t)>;
+
+ template class bucketsorting<float,bool(float, float)>;
+ template class bucketsorting<int,bool(int, int)>;
+ template class bucketsorting<double,bool(double, double)>;
+ template class bucketsorting<uint32_t,bool(uint32_t, uint32_t)>;
+//#endif
