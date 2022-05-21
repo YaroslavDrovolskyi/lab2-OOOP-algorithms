@@ -2,32 +2,10 @@
 #define FACADE_H
 #include "algoslib.h"
 #include <QString>
+#include "facadeinfo.h"
+#include "factory.h"
 
 
-
-class abstrFacadeInfo
-{
-public:
-
-   virtual void setTime(qint64 t)=0;
-   virtual void setName(QString n)=0;
-   virtual void setResult(QString s)=0;
-   virtual ~abstrFacadeInfo()=default;
-
-};
-class concreteFacadeInfo:public abstrFacadeInfo
-{
-public:
-    concreteFacadeInfo() = default;
-    void setTime(qint64 t) override;
-    void setName(QString n)override;
-    void setResult(QString s)override;
-    private:
-        qint64 time=0;
-        QString name="";
-        QString result="";
-        uint32_t counter;
-};
 
 
 
@@ -45,13 +23,16 @@ public:
     virtual void saveNumberOfComparisons();
     virtual abstrFacadeInfo* getInfo() const;
     virtual quint64 calculateTime();
+    virtual void selectCreator(int index);
+    virtual ~Facade()=default;
 
 protected:
     abstrFacadeInfo* facadeInfo_ = nullptr;
+    algoCreator* algoCreator_;
     algorithm* algorithm_;
     bool hasTime = false;
     bool hasNumberOfComparisons  =false;
-    QString line ="";
+   // QString line ="";
 
 
 

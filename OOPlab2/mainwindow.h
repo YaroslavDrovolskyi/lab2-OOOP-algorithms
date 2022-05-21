@@ -58,7 +58,7 @@ private:
       }
 
       template <typename T>
-        bool comparatorDescend(T a ,  T b)
+      static  bool comparatorDescend(T a ,  T b)
         {
             if(a <=b)
                 return true;
@@ -72,6 +72,7 @@ private:
 protected:
     static inline Facade* facade  ;
    // std::unique_ptr<algorithm> algorithm_ = nullptr;
+
 };
 
 

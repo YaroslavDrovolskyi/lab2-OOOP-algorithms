@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include "facade.h"
 #include <memory>
+#include "factory.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -66,44 +67,19 @@ void MainWindow::on_btnrun_clicked()
 //   if(!areValidNumbers(listofnumbers,validNumberRegex))
 //       ui->inputline->clear();
 
-facade->setAlgorithm(this->algorithm_);
-    facade->setTime(true);
-    facade->runAlgo();
+//facade->setAlgorithm(this->algorithm_);
+//    facade->setTime(true);
+//    facade->runAlgo();
+
+    algoCreator* ac = new mergeSortCreator(ui->inputline->text(),this->comparatorAscend<float>);
+    ac->runAlgo();
 }
 
 
 void MainWindow::on_algoselector_currentIndexChanged(int index) //move to facade
 {
     std::vector<float> exmpl = {1,23,4,5}; //delete
-   //  bool (MainWindow::*fptr) (float , float) = &MainWindow::comparatorAscend;
-    switch (index) {
-    case(0):
 
-       this->algorithm_ = mergesorting<float,bool(float a, float b)>::GetInstance(exmpl,this->comparatorAscend<float>);
 
-        break;
-    case(1):
-
-        break;
-    case(2):
-
-        break;
-    case(3):
-
-        break;
-    case(4):
-
-        break;
-    case(5):
-
-        break;
-    case(6):
-
-        break;
-    case(7):
-
-        break;
-
-    }
 }
 

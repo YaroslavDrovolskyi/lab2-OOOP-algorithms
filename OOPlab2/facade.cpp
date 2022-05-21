@@ -1,37 +1,22 @@
 #include "facade.h"
 #include "visitor.h"
 #include <QDebug>
+#include "facadeinfo.h"
 
 
 
 
-
-void concreteFacadeInfo::setTime(qint64 t) {
-    this->time = t;
-};
-void concreteFacadeInfo::setName(QString n){
-    this->name = n;
-
-};
-void concreteFacadeInfo::setResult(QString s){
-    this->result = s;
-};
-
-abstrFacadeInfo* Facade::getInfo() const
-{
-    return this->facadeInfo_;
-}
 
  void Facade::runAlgo()      //template method
  {
-     this->facadeInfo_ = new concreteFacadeInfo();
+   //  this->facadeInfo_ = new concreteFacadeInfo();
     if(this->hasTime)
     {
         qint64 t = this->calculateTime();
         this->saveTime(t);
     }
     else
-        this->algorithm_->run();
+ //       this->algorithm_->run();
    std::string a = this->algorithm_->gettype();
     if(!QString::compare("sorting",QString::fromStdString(this->algorithm_->gettype()),Qt::CaseSensitivity::CaseSensitive))
         this->saveResultData("sorted");
@@ -39,6 +24,46 @@ abstrFacadeInfo* Facade::getInfo() const
     this->saveResultData("substring matching was performed");
     this->saveName();
  };
+
+
+
+
+
+ void Facade::selectCreator(int index)
+ {
+     switch (index) {
+     case(0):
+
+      //  this-> = mergesorting<float,bool(float a, float b)>::GetInstance(exmpl,this->comparatorAscend<float>);
+
+         break;
+     case(1):
+
+         break;
+     case(2):
+
+         break;
+     case(3):
+
+         break;
+     case(4):
+
+         break;
+     case(5):
+
+         break;
+     case(6):
+
+         break;
+     case(7):
+
+         break;
+
+     }
+ }
+
+
+
  void Facade::setTime(bool b){
     this->hasTime = b;
  };
@@ -47,6 +72,11 @@ abstrFacadeInfo* Facade::getInfo() const
 
 
  };
+
+ abstrFacadeInfo* Facade::getInfo() const
+ {
+     return this->facadeInfo_;
+ }
 
  void Facade::saveName()
  {
