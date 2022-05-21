@@ -8,6 +8,61 @@
 #include "SortingAlgorithms.h"
 
 
+/* CombSort */
+template <typename T, typename Comparator>
+CombSort<T, Comparator>::CombSort(Comparator c) :
+    arr(nullptr), size(0), name("combsort"), memory(0)
+{
+    this->comparator = c;
+}
+
+template <typename T, typename Comparator>
+CombSort<T, Comparator>::CombSort(std::vector<T>& vec, Comparator c) :
+    arr(nullptr), size(vec.size()), name("combsort"), memory(0)
+{
+    if (size > 0){
+        arr = &vec[0];
+    }
+
+    this->comparator = c;
+}
+
+template <typename T, typename Comparator>
+void CombSort<T, Comparator>::getname(){
+    return this->name;
+}
+
+template <typename T, typename Comparator>
+uint32_t CombSort<T, Comparator>::getmemory(){
+    return this->memory;
+}
+
+template <typename T, typename Comparator>
+void CombSort<T, Comparator>::run(){
+    if (size <= 1){
+        return;
+    }
+    this->sort(arr, size, this->comparator);
+}
+
+template<typename T,  typename Comparator>
+CombSort<T,Comparator>* CombSort<T,Comparator>::GetInstance(std::vector<T> arr, Comparator c) {
+    if(combsort_ == nullptr) {
+        combsort_ = new CombSort<T,Comparator>(arr,c);
+    }
+    return combsort_;
+};
+
+template<typename T,  typename Comparator>
+CombSort<T,Comparator>* CombSort<T,Comparator>::GetInstance(Comparator c) {
+    if(combsort_ == nullptr) {
+        combsort_ = new CombSort<T,Comparator>(c);
+    }
+    return combsort_;
+};
+
+
+
 template <typename T, typename Comparator>
 void CombSort<T, Comparator>::sort(T* arr, std::size_t size, Comparator comparator) {
     assert(arr);
@@ -40,13 +95,61 @@ void CombSort<T, Comparator>::sort(T* arr, std::size_t size, Comparator comparat
 // Algorithm of combsort: https://en.wikipedia.org/wiki/Comb_sort
 
 
+template <typename T, typename Comparator>
+ShellSort<T, Comparator>::ShellSort(Comparator c) :
+    arr(nullptr), size(0), name("shellsort"), memory(0)
+{
+    this->comparator = c;
+}
 
 template <typename T, typename Comparator>
-void ShellSort<T, Comparator>::sort(std::vector<T>vec, Comparator comparator) {
+ShellSort<T, Comparator>::ShellSort(std::vector<T>& vec, Comparator c) :
+    arr(nullptr), size(vec.size()), name("combsort"), memory(0)
+{
+    if (size > 0){
+        arr = &vec[0];
+    }
 
-    const auto size = vec.size();
-    T*arr = &vec[0];
+    this->comparator = c;
+}
 
+template <typename T, typename Comparator>
+void ShellSort<T, Comparator>::getname(){
+    return this->name;
+}
+
+template <typename T, typename Comparator>
+uint32_t ShellSort<T, Comparator>::getmemory(){
+    return this->memory;
+}
+
+template <typename T, typename Comparator>
+void ShellSort<T, Comparator>::run(){
+    if (size <= 1){
+        return;
+    }
+    this->sort(arr, size, this->comparator);
+}
+
+template<typename T,  typename Comparator>
+ShellSort<T,Comparator>* ShellSort<T,Comparator>::GetInstance(std::vector<T> arr, Comparator c) {
+    if(shellsort_ == nullptr) {
+        shellsort_ = new ShellSort<T,Comparator>(arr,c);
+    }
+    return shellsort_;
+};
+
+template<typename T,  typename Comparator>
+ShellSort<T,Comparator>* ShellSort<T,Comparator>::GetInstance(Comparator c) {
+    if(shellsort_ == nullptr) {
+        shellsort_ = new ShellSort<T,Comparator>(c);
+    }
+    return shellsort_;
+};
+
+
+template <typename T, typename Comparator>
+void ShellSort<T, Comparator>::sort(T* arr, std::size_t size, Comparator comparator) {
     const std::size_t gaps_number = 8;
     int gaps[] = {701, 301, 132, 57, 23, 10, 4, 1};
 
@@ -72,6 +175,7 @@ void ShellSort<T, Comparator>::sort(std::vector<T>vec, Comparator comparator) {
     }
 }
 // Algorithm of shellsort: https://en.wikipedia.org/wiki/Shellsort
+
 
 template <typename T, typename Comparator>
 void ShellSort<T, Comparator>::sortInsertion(T* arr, std::size_t size, Comparator comparator) {
@@ -102,6 +206,60 @@ void ShellSort<T, Comparator>::sortInsertion(T* arr, std::size_t size, Comparato
 
 
 
+
+template <typename T, typename Comparator>
+OddEvenSort<T, Comparator>::OddEvenSort(Comparator c) :
+    arr(nullptr), size(0), name("odd-even sort"), memory(0)
+{
+    this->comparator = c;
+}
+
+template <typename T, typename Comparator>
+OddEvenSort<T, Comparator>::OddEvenSort(std::vector<T>& vec, Comparator c) :
+    arr(nullptr), size(vec.size()), name("odd-even sort"), memory(0)
+{
+    if (size > 0){
+        arr = &vec[0];
+    }
+
+    this->comparator = c;
+}
+
+template <typename T, typename Comparator>
+void OddEvenSort<T, Comparator>::getname(){
+    return this->name;
+}
+
+template <typename T, typename Comparator>
+uint32_t OddEvenSort<T, Comparator>::getmemory(){
+    return this->memory;
+}
+
+template <typename T, typename Comparator>
+void OddEvenSort<T, Comparator>::run(){
+    if (size <= 1){
+        return;
+    }
+    this->sort(arr, size, this->comparator);
+}
+
+template<typename T,  typename Comparator>
+OddEvenSort<T,Comparator>* OddEvenSort<T,Comparator>::GetInstance(std::vector<T> arr, Comparator c) {
+    if(oddevensort_ == nullptr) {
+        oddevensort_ = new OddEvenSort<T,Comparator>(arr,c);
+    }
+    return oddevensort_;
+};
+
+template<typename T,  typename Comparator>
+OddEvenSort<T,Comparator>* OddEvenSort<T,Comparator>::GetInstance(Comparator c) {
+    if(oddevensort_ == nullptr) {
+        oddevensort_ = new OddEvenSort<T,Comparator>(c);
+    }
+    return oddevensort_;
+};
+
+
 template <typename T, typename Comparator>
 void OddEvenSort<T, Comparator>::sort(T* arr, std::size_t size, Comparator comparator) {
     bool is_sorted = false;
@@ -129,6 +287,60 @@ void OddEvenSort<T, Comparator>::sort(T* arr, std::size_t size, Comparator compa
 // Algorithm of odd-even sort: https://en.wikipedia.org/wiki/Odd%E2%80%93even_sort
 
 
+
+
+
+template <typename T, typename Comparator>
+CocktailShakerSort<T, Comparator>::CocktailShakerSort(Comparator c) :
+    arr(nullptr), size(0), name("cocktail-shaker sort"), memory(0)
+{
+    this->comparator = c;
+}
+
+template <typename T, typename Comparator>
+CocktailShakerSort<T, Comparator>::CocktailShakerSort(std::vector<T>& vec, Comparator c) :
+    arr(nullptr), size(vec.size()), name("cocktail-shaker sort"), memory(0)
+{
+    if (size > 0){
+        arr = &vec[0];
+    }
+
+    this->comparator = c;
+}
+
+template <typename T, typename Comparator>
+void CocktailShakerSort<T, Comparator>::getname(){
+    return this->name;
+}
+
+template <typename T, typename Comparator>
+uint32_t CocktailShakerSort<T, Comparator>::getmemory(){
+    return this->memory;
+}
+
+template <typename T, typename Comparator>
+void CocktailShakerSort<T, Comparator>::run(){
+    if (size <= 1){
+        return;
+    }
+    this->sort(arr, size, this->comparator);
+}
+
+template<typename T,  typename Comparator>
+CocktailShakerSort<T,Comparator>* CocktailShakerSort<T,Comparator>::GetInstance(std::vector<T> arr, Comparator c) {
+    if(cocktailshackersort_ == nullptr) {
+        cocktailshackersort_ = new CocktailShakerSort<T,Comparator>(arr,c);
+    }
+    return cocktailshackersort_;
+};
+
+template<typename T,  typename Comparator>
+CocktailShakerSort<T,Comparator>* CocktailShakerSort<T,Comparator>::GetInstance(Comparator c) {
+    if(cocktailshackersort_ == nullptr) {
+        cocktailshackersort_ = new CocktailShakerSort<T,Comparator>(c);
+    }
+    return cocktailshackersort_;
+};
 
 
 template <typename T, typename Comparator>
