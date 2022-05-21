@@ -19,7 +19,6 @@ public:
     virtual void saveResultData(QString str);
     virtual void saveTime(qint64 t);
      virtual void saveName();
-    virtual void setAlgorithm(algorithm* alg);
     virtual void saveNumberOfComparisons();
     virtual abstrFacadeInfo* getInfo() const;
     virtual quint64 calculateTime();

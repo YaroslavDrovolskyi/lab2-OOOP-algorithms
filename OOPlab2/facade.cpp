@@ -7,26 +7,43 @@
 
 
 
+
+
  void Facade::runAlgo()      //template method
  {
-   //  this->facadeInfo_ = new concreteFacadeInfo();
+     this->facadeInfo_ = new concreteFacadeInfo();
     if(this->hasTime)
     {
         qint64 t = this->calculateTime();
         this->saveTime(t);
     }
     else
- //       this->algorithm_->run();
-   std::string a = this->algorithm_->gettype();
-    if(!QString::compare("sorting",QString::fromStdString(this->algorithm_->gettype()),Qt::CaseSensitivity::CaseSensitive))
-        this->saveResultData("sorted");
-    else if(QString::compare("substringmatching",QString::fromStdString(this->algorithm_->gettype()),Qt::CaseSensitivity::CaseSensitive))
+        this->algoCreator_->runAlgo();
+
     this->saveResultData("substring matching was performed");
     this->saveName();
  };
 
 
+ template <typename T>
+    bool Facade::comparatorAscend(T a ,  T b)
+   {
+       if(a >=b)
+           return true;
 
+       return false;
+
+   }
+
+   template <typename T>
+     bool Facade::comparatorDescend(T a ,  T b)
+     {
+         if(a <=b)
+             return true;
+
+         return false;
+
+     }
 
 
  void Facade::selectCreator(int index)
@@ -34,8 +51,8 @@
      switch (index) {
      case(0):
 
-      //  this-> = mergesorting<float,bool(float a, float b)>::GetInstance(exmpl,this->comparatorAscend<float>);
 
+      this->algoCreator_ = new mergeSortCreator(std::move(this->inputLine),this->comparatorAscend<float>);
          break;
      case(1):
 
@@ -80,7 +97,7 @@
 
  void Facade::saveName()
  {
-     this->facadeInfo_->setName(QString::fromStdString(this->algorithm_->getname()));
+     this->facadeInfo_->setName(QString::fromStdString(this->algoCreator_->getAlgorithm()->getname()));
  };
  void Facade::saveResultData(QString str){
      this->facadeInfo_->setResult(str);
@@ -95,13 +112,10 @@
 
  quint64 Facade::calculateTime()
  {
-     visitor visitor_(this->algorithm_);
+     visitor visitor_(this->algoCreator_->getAlgorithm());
      visitor_.calculateTime();
     return visitor_.getTime();
 
  }
 
- void Facade::setAlgorithm(algorithm *alg)
- {
-     this->algorithm_ = alg;
- }
+

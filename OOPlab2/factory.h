@@ -37,4 +37,6 @@ private:
     mergesorting<float,bool(float,float)>*mergesorting_;
 };
 
+
+
 #endif // FACTORY_H
