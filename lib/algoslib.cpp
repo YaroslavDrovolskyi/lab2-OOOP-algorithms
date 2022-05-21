@@ -10,7 +10,7 @@
 #include <string>
 #include <exception>
 #include <functional>
-
+#include <cassert>
 
 algorithm::algorithm() = default;
 algorithm::~algorithm() =default ;
@@ -1109,9 +1109,7 @@ uint32_t boyermoor::getmemory()
 
 
 
-#include <iostream>
-#include <cassert>
-#include "SortingAlgorithms.h"
+
 
 
 /* CombSort */
