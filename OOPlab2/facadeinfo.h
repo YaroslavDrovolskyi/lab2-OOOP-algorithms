@@ -15,7 +15,7 @@ public:
    virtual ~abstrFacadeInfo()=default;
 
 };
-template<typename T>
+
 class concreteFacadeInfo:public abstrFacadeInfo
 {
 public:
@@ -29,10 +29,7 @@ public:
         QString name="";
         QString result="";
         uint32_t counter;
-        //saved vector
-        std::vector<T> vec;
-        //id of the first successful string matching
-        int firstMatching;
+
 
 
 };

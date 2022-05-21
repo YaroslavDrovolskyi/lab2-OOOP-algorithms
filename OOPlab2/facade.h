@@ -29,11 +29,16 @@ public:
 protected:
     abstrFacadeInfo* facadeInfo_ = nullptr;
     algoCreator* algoCreator_;
-    algorithm* algorithm_;
+ //  algorithm* algorithm_;
     bool hasTime = false;
     bool hasNumberOfComparisons  =false;
    // QString line ="";
-
+private:
+    template <typename T>
+      static bool comparatorAscend(T a ,  T b);
+       template <typename T>
+        static  bool comparatorDescend(T a ,  T b);
+          QString inputLine;
 
 
 };
