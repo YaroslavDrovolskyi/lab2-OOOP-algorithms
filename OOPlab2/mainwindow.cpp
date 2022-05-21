@@ -82,6 +82,15 @@ void MainWindow::on_algoselector_currentIndexChanged(int index) //move to facade
 {
     std::vector<float> exmpl = {1,23,4,5}; //delete
 
+//
 
+
+}
+
+
+void MainWindow::on_removeRowBtn_clicked()
+{
+    ui->resultTable->insertRow(0);
+    this->results_table_originator.writeInRow(concreteFacadeInfo(100, "algo", "result", 99), 0);
 }
 

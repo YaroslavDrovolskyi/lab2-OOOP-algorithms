@@ -32,6 +32,8 @@ private slots:
 
 
 
+    void on_removeRowBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
 

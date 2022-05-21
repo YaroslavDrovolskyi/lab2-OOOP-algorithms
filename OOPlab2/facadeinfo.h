@@ -27,6 +27,7 @@ class concreteFacadeInfo:public abstrFacadeInfo
 public:
 
     concreteFacadeInfo() = default;
+    concreteFacadeInfo(qint64 time, QString name, QString result, uint32_t counter);
     void setTime(qint64 t) override;
     void setName(QString n)override;
     void setResult(QString s)override;

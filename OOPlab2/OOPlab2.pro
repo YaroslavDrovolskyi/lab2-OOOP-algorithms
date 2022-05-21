@@ -14,6 +14,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     facade.cpp \
+    memento.cpp \
     visitor.cpp
 
 HEADERS += \
@@ -21,6 +22,7 @@ HEADERS += \
     factory.h \
     mainwindow.h \
         facade.h \
+    memento.h \
     visitor.h
 
 FORMS += \
