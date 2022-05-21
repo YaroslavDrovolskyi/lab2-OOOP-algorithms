@@ -33,15 +33,15 @@ private slots:
 
 
 private:
-   const std::vector<float> floatnumbers{6,1,2,3,5,7,6,12,6,122,1,1,6};
-   const std::vector<float> expectedfloat{1,1,1,2,3,5,6,6,6,6,7,12,122};
+    std::vector<float> floatnumbers{6,1,2,3,5,7,6,12,6,122,1,1,6};
+    std::vector<float> expectedfloat{1,1,1,2,3,5,6,6,6,6,7,12,122};
 
-   const std::vector<uint32_t> wholenumbers{6,1,2,3,5,7,6,12,6,122,1,1,6};
-   const std::vector<uint32_t> expectedwhole{1,1,1,2,3,5,6,6,6,6,7,12,122};
+    std::vector<uint32_t> wholenumbers{6,1,2,3,5,7,6,12,6,122,1,1,6};
+    std::vector<uint32_t> expectedwhole{1,1,1,2,3,5,6,6,6,6,7,12,122};
 
 
-   const std::vector<float> bucketnumbers{0.06,0.001,0.2,0.003,0.5,0.7,0.6,0.12,0.6,0.00122,0.1,0.1,0.6};
-   const std::vector<float> expectedbucket{0.001,0.00122,0.003,0.06,0.1,0.1,0.12,0.2,0.5,0.6,0.6,0.6,0.7};
+    std::vector<float> bucketnumbers{0.06,0.001,0.2,0.003,0.5,0.7,0.6,0.12,0.6,0.00122,0.1,0.1,0.6};
+    std::vector<float> expectedbucket{0.001,0.00122,0.003,0.06,0.1,0.1,0.12,0.2,0.5,0.6,0.6,0.6,0.7};
 
    const std::string line ="ydytjdfjfgfjdf[ipoipjdfs";
    const std::string sample ="jdfs";

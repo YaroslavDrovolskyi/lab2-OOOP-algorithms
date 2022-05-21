@@ -52,6 +52,12 @@ std::string substringmatching::gettype()
     return this->type;
 }
 
+  template<typename T,  typename Comparator>
+ void mergesorting<T,Comparator>::setValue(std::vector<T>&v)
+ {
+     this->vec = v;
+ }
+
 template<typename T,  typename Comparator>
 void mergesorting<T,Comparator>::merge(std::vector<T>& arr, int p, int mid, int r)
 {
@@ -101,7 +107,7 @@ void mergesorting<T,Comparator>::merge(std::vector<T>& arr, int p, int mid, int 
 
 }
 template<typename T,  typename Comparator>
- mergesorting<T,Comparator>* mergesorting<T,Comparator>::GetInstance(std::vector<T> v, Comparator c)
+ mergesorting<T,Comparator>* mergesorting<T,Comparator>::GetInstance(std::vector<T>& v, Comparator c)
 {
     if(mergesorting_ == nullptr)
     {
@@ -151,7 +157,7 @@ uint32_t mergesorting<T,Comparator>::getmemory()
     return this->memory;
 }
 template<typename T,  typename Comparator>
-mergesorting<T,Comparator>::mergesorting(std::vector<T> v,Comparator c) :vec(v)
+mergesorting<T,Comparator>::mergesorting(std::vector<T>& v,Comparator c) :vec(v)
 {
     this->name = "mergesort";
     this->comparator = c;
@@ -173,7 +179,7 @@ std::vector<T> mergesorting<T,Comparator>::getvalues()
 
 
 template<typename T,  typename Comparator>
- quicksorting<T,Comparator>* quicksorting<T,Comparator>::GetInstance(std::vector<T> v, Comparator c)
+ quicksorting<T,Comparator>* quicksorting<T,Comparator>::GetInstance(std::vector<T>& v, Comparator c)
 {
     if(quicksorting_ == nullptr)
     {
@@ -196,7 +202,7 @@ quicksorting<T,Comparator>::~quicksorting()
     quicksorting_ = nullptr;
 }
 template<typename T,  typename Comparator>
-quicksorting<T,Comparator>::quicksorting(std::vector<T> v, Comparator c) :vec(v)
+quicksorting<T,Comparator>::quicksorting(std::vector<T>& v, Comparator c) :vec(v)
 {
     this->name = "quicksort";
      this->comparator = c;
@@ -208,6 +214,11 @@ quicksorting<T,Comparator>::quicksorting( Comparator c)
      this->comparator = c;
 }
 
+template<typename T,  typename Comparator>
+void quicksorting<T,Comparator>::setValue(std::vector<T>&v)
+{
+   this->vec = v;
+}
 
 template<typename T,  typename Comparator>
 int quicksorting<T,Comparator>::partition(std::vector<T>& arr, int p, int r)
@@ -271,11 +282,15 @@ std::vector<T> quicksorting<T,Comparator>::getvalues()
 }
 
 
-
+template<typename T,  typename Comparator>
+void heapsorting<T,Comparator>::setValue(std::vector<T>&v)
+{
+   this->vec = v;
+}
 
 
 template<typename T,  typename Comparator>
- heapsorting<T,Comparator>* heapsorting<T,Comparator>::GetInstance(std::vector<T> v, Comparator c)
+ heapsorting<T,Comparator>* heapsorting<T,Comparator>::GetInstance(std::vector<T> &v, Comparator c)
 {
     if(heapsorting_ == nullptr)
     {
@@ -299,7 +314,7 @@ heapsorting<T,Comparator>::~heapsorting()
 }
 
 template<typename T,  typename Comparator>
-heapsorting<T,Comparator>::heapsorting(std::vector<T> v, Comparator c):vec(v)
+heapsorting<T,Comparator>::heapsorting(std::vector<T>& v, Comparator c):vec(v)
 {
     this->name = "heapsort";
      this->comparator = c;
@@ -392,8 +407,14 @@ int getMax(std::vector<uint32_t>arr)
     return max;
 }
 
+ template<typename T,  typename Comparator>
+void countingsorting<T,Comparator>::setValue(std::vector<T>&v)
+{
+   this->vec = v;
+}
+
 template<typename T,  typename Comparator>
- countingsorting<T,Comparator>::countingsorting(std::vector<T> v, Comparator c): vec(v)
+ countingsorting<T,Comparator>::countingsorting(std::vector<T>& v, Comparator c): vec(v)
 {
     this->name = "countingsort";
     this->base = findmax() + 1;
@@ -407,7 +428,7 @@ template<typename T,  typename Comparator>
      this->comparator = c;
 }
   template<typename T,  typename Comparator>
-   countingsorting<T,Comparator>::countingsorting(std::vector<T> v, std::function<Comparator> c): vec(v)
+   countingsorting<T,Comparator>::countingsorting(std::vector<T> &v, std::function<Comparator> c): vec(v)
 {
     this->name = "countingsort";
     this->base = findmax() + 1;
@@ -415,7 +436,7 @@ template<typename T,  typename Comparator>
 }
 
 template<typename T,  typename Comparator>
- countingsorting<T,Comparator>* countingsorting<T,Comparator>::GetInstance(std::vector<T> v, Comparator c)
+ countingsorting<T,Comparator>* countingsorting<T,Comparator>::GetInstance(std::vector<T>& v, Comparator c)
 {
     if(countingsorting_ == nullptr)
     {
@@ -433,7 +454,7 @@ template<typename T,  typename Comparator>
      return countingsorting_;
  };
  template<typename T,  typename Comparator>
-countingsorting<T,Comparator>* countingsorting<T,Comparator>::GetInstance(std::vector<T> v, std::function<Comparator> c)
+countingsorting<T,Comparator>* countingsorting<T,Comparator>::GetInstance(std::vector<T>& v, std::function<Comparator> c)
  {
     if(countingsorting_ == nullptr)
     {
@@ -553,11 +574,14 @@ template<typename T,  typename Comparator>
      this->vec = cs->getvalues();
      delete cs;
  }
-
-
+ template<typename T,  typename Comparator>
+ void radixsorting<T,Comparator>::setValue(std::vector<T>&v)
+ {
+    this->vec = v;
+ }
 
  template<typename T,  typename Comparator>
-  radixsorting<T,Comparator>* radixsorting<T,Comparator>::GetInstance(std::vector<T> v, Comparator c)
+  radixsorting<T,Comparator>* radixsorting<T,Comparator>::GetInstance(std::vector<T>& v, Comparator c)
  {
      if(radixsorting_ == nullptr)
      {
@@ -575,7 +599,7 @@ template<typename T,  typename Comparator>
       return radixsorting_;
   };
   template<typename T,  typename Comparator>
- radixsorting<T,Comparator>* radixsorting<T,Comparator>::GetInstance(std::vector<T> v, uint32_t b1, Comparator c)
+ radixsorting<T,Comparator>* radixsorting<T,Comparator>::GetInstance(std::vector<T>& v, uint32_t b1, Comparator c)
   {
      if(radixsorting_ == nullptr)
      {
@@ -584,13 +608,13 @@ template<typename T,  typename Comparator>
      return radixsorting_;
   }
  template<typename T,  typename Comparator>
-radixsorting<T,Comparator>::radixsorting(std::vector<T> v, uint32_t b1, Comparator c) : vec(v),  base(b1)
+radixsorting<T,Comparator>::radixsorting(std::vector<T>& v, uint32_t b1, Comparator c) : vec(v),  base(b1)
  {
      this->name = "radixsort";
       this->comparator = c;
  }
 template<typename T,  typename Comparator>
-radixsorting<T,Comparator>::radixsorting(std::vector<T> v, Comparator c) : vec(v)
+radixsorting<T,Comparator>::radixsorting(std::vector<T>& v, Comparator c) : vec(v)
  {
      this->name = "radixsort";
       this->comparator = c;
@@ -635,10 +659,14 @@ std::vector<T> radixsorting<T,Comparator>::getvalues()
     return this->vec;
 }
 
-
+template<typename T,  typename Comparator>
+void insertionsorting<T,Comparator>::setValue(std::vector<T>&v)
+{
+  this->vec = v;
+}
 
 template<typename T,  typename Comparator>
- insertionsorting<T,Comparator>* insertionsorting<T,Comparator>::GetInstance(std::vector<T> v, Comparator c)
+ insertionsorting<T,Comparator>* insertionsorting<T,Comparator>::GetInstance(std::vector<T> &v, Comparator c)
 {
     if(insertionsorting_ == nullptr)
     {
@@ -656,7 +684,7 @@ template<typename T,  typename Comparator>
      return insertionsorting_;
  };
  template<typename T,  typename Comparator>
-insertionsorting<T,Comparator>* insertionsorting<T,Comparator>::GetInstance(std::vector<T> v, std::function<Comparator> c)
+insertionsorting<T,Comparator>* insertionsorting<T,Comparator>::GetInstance(std::vector<T>& v, std::function<Comparator> c)
  {
     if(insertionsorting_ == nullptr)
     {
@@ -665,13 +693,13 @@ insertionsorting<T,Comparator>* insertionsorting<T,Comparator>::GetInstance(std:
     return insertionsorting_;
  }
 template<typename T,  typename Comparator>
-insertionsorting<T,Comparator>::insertionsorting(std::vector<T> v, Comparator c) :vec(v)
+insertionsorting<T,Comparator>::insertionsorting(std::vector<T> &v, Comparator c) :vec(v)
 {
     this->name = "insertionsort";
      this->comparator = c;
 }
 template<typename T,  typename Comparator>
-insertionsorting<T,Comparator>::insertionsorting(std::vector<T> v, std::function<Comparator> c) :vec(v)
+insertionsorting<T,Comparator>::insertionsorting(std::vector<T>& v, std::function<Comparator> c) :vec(v)
 {
     this->name = "insertionsort";
      this->comparator = c;
@@ -749,6 +777,13 @@ uint32_t bucketsorting<T,Comparator>::getmemory()
 {
     return this->memory;
 }
+
+template<typename T,  typename Comparator>
+void bucketsorting<T,Comparator>::setValue(std::vector<T>&v)
+{
+  this->vec = v;
+}
+
 template<typename T,  typename Comparator>
 void bucketsorting<T,Comparator>::bucketsort(std::vector<T>& arr)
 {
@@ -795,7 +830,7 @@ delete inss;
 }
 
 template<typename T,  typename Comparator>
- bucketsorting<T,Comparator>* bucketsorting<T,Comparator>::GetInstance(std::vector<T> v, Comparator c)
+ bucketsorting<T,Comparator>* bucketsorting<T,Comparator>::GetInstance(std::vector<T> &v, Comparator c)
 {
     if(bucketsorting_ == nullptr)
     {
@@ -814,7 +849,7 @@ template<typename T,  typename Comparator>
  };
 
  template<typename T,  typename Comparator>
-bucketsorting<T,Comparator>::bucketsorting(std::vector<T> v, Comparator c) :vec(v)
+bucketsorting<T,Comparator>::bucketsorting(std::vector<T>& v, Comparator c) :vec(v)
  {
      this->name = "bucketsort";
       this->comparator = c;

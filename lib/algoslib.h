@@ -70,9 +70,10 @@ public:
     std::string getname() override;
     uint32_t getmemory() override;
     std::vector<T> getvalues();
+    void setValue(std::vector<T>&);
     ~mergesorting() ;
 
-    static  mergesorting* GetInstance(std::vector<T> v, Comparator c);
+    static  mergesorting* GetInstance(std::vector<T>& v, Comparator c);
     static  mergesorting* GetInstance(Comparator c);
 
     mergesorting(mergesorting<T,Comparator> &other) = delete;
@@ -81,7 +82,7 @@ public:
      static inline mergesorting<T,Comparator>* mergesorting_;
 private:
 
-    mergesorting(std::vector<T> v, Comparator c);
+    mergesorting(std::vector<T>& v, Comparator c);
    mergesorting(Comparator c);
     std::string name;
     uint32_t memory;
@@ -102,11 +103,12 @@ template<typename T,  typename Comparator>
      void run() override;
      std::string getname() override;
      uint32_t getmemory() override;
+      void setValue(std::vector<T>&);
 std::vector<T> getvalues();
 
 ~quicksorting();
 
-static  quicksorting* GetInstance(std::vector<T> v, Comparator c);
+static  quicksorting* GetInstance(std::vector<T> &v, Comparator c);
 static  quicksorting* GetInstance(Comparator c);
 
 quicksorting(quicksorting<T,Comparator> &other) = delete;
@@ -116,7 +118,7 @@ protected:
 
  private:
 
- quicksorting(std::vector<T> v, Comparator c);
+ quicksorting(std::vector<T> &v, Comparator c);
  quicksorting( Comparator c);
 
      std::string name;
@@ -141,9 +143,10 @@ template<typename T,  typename Comparator>
      std::string getname() override;
      uint32_t getmemory() override;
     std::vector<T> getvalues();
+     void setValue(std::vector<T>&);
     ~heapsorting();
 
-    static  heapsorting* GetInstance(std::vector<T> v, Comparator c);
+    static  heapsorting* GetInstance(std::vector<T> &v, Comparator c);
     static  heapsorting* GetInstance(Comparator c);
 
     heapsorting(heapsorting<T,Comparator> &other) = delete;
@@ -152,7 +155,7 @@ template<typename T,  typename Comparator>
      static inline heapsorting<T,Comparator>* heapsorting_;
 
  private:
-     heapsorting(std::vector<T> v, Comparator c);
+     heapsorting(std::vector<T>& v, Comparator c);
      heapsorting( Comparator c);
 
      std::string name;
@@ -184,11 +187,12 @@ template<typename T,  typename Comparator>
      void setexp(uint32_t exp);
      std::vector<T> getarray();
      std::vector<T> getvalues();
+      void setValue(std::vector<T>&);
      ~countingsorting();
 
-     static  countingsorting* GetInstance(std::vector<T> v, Comparator c);
+     static  countingsorting* GetInstance(std::vector<T>& v, Comparator c);
      static  countingsorting* GetInstance(Comparator c);
-     static  countingsorting* GetInstance(std::vector<T> v, std::function<Comparator> c);
+     static  countingsorting* GetInstance(std::vector<T>& v, std::function<Comparator> c);
      countingsorting(countingsorting<T,Comparator> &other) = delete;
      void operator=(const countingsorting<T,Comparator> &) = delete;
      protected:
@@ -197,9 +201,9 @@ template<typename T,  typename Comparator>
 
  private:
 
-      countingsorting(std::vector<T> v, Comparator c);
+      countingsorting(std::vector<T>& v, Comparator c);
       countingsorting( Comparator c);
-      countingsorting(std::vector<T> v, std::function<Comparator> c);
+      countingsorting(std::vector<T>& v, std::function<Comparator> c);
 
      std::string name;
      uint32_t memory;
@@ -220,12 +224,13 @@ template<typename T,  typename Comparator>
      std::string getname() override;
      uint32_t getmemory() override;
      void setbase(uint32_t b);
+      void setValue(std::vector<T>&);
     std::vector<T> getvalues();
 
 
-    static  radixsorting* GetInstance(std::vector<T> v, Comparator c);
+    static  radixsorting* GetInstance(std::vector<T> &v, Comparator c);
     static  radixsorting* GetInstance(Comparator c);
-    static  radixsorting* GetInstance(std::vector<T> v, uint32_t b1, Comparator c);
+    static  radixsorting* GetInstance(std::vector<T>& v, uint32_t b1, Comparator c);
 
     radixsorting(radixsorting<T,Comparator> &other) = delete;
     void operator=(const radixsorting<T,Comparator> &) = delete;
@@ -233,8 +238,8 @@ template<typename T,  typename Comparator>
      static inline radixsorting<T,Comparator>* radixsorting_;
 
  private:
-     radixsorting(std::vector<T> v, uint32_t b1, Comparator c) ;
-     radixsorting(std::vector<T> v, Comparator c);
+     radixsorting(std::vector<T>& v, uint32_t b1, Comparator c) ;
+     radixsorting(std::vector<T>& v, Comparator c);
      radixsorting( Comparator c);
 
 
@@ -255,10 +260,11 @@ template<typename T,  typename Comparator>
      uint32_t getmemory() override;
       void setvalues(std::vector<T> v);
         std::vector<T> getvalues();
+ void setValue(std::vector<T>&);
 
-        static  insertionsorting* GetInstance(std::vector<T> v, Comparator c);
+        static  insertionsorting* GetInstance(std::vector<T>& v, Comparator c);
         static  insertionsorting* GetInstance(Comparator c);
-        static  insertionsorting* GetInstance(std::vector<T> v, std::function<Comparator> c);
+        static  insertionsorting* GetInstance(std::vector<T>& v, std::function<Comparator> c);
 
         insertionsorting(insertionsorting<T,Comparator> &other) = delete;
         void operator=(const insertionsorting<T,Comparator> &) = delete;
@@ -266,8 +272,8 @@ template<typename T,  typename Comparator>
          static inline insertionsorting<T,Comparator>* insertionsorting_;
 
  private:
-         insertionsorting(std::vector<T> v, Comparator c);
-         insertionsorting(std::vector<T> v, std::function<Comparator> c) ;
+         insertionsorting(std::vector<T> &v, Comparator c);
+         insertionsorting(std::vector<T>& v, std::function<Comparator> c) ;
          insertionsorting( Comparator c);
      std::string name;
      uint32_t memory;
@@ -284,8 +290,9 @@ template<typename T,  typename Comparator>
      std::string getname() override;
      uint32_t getmemory() override;
     std::vector<T> getvalues();
+ void setValue(std::vector<T>&);
 
-    static  bucketsorting* GetInstance(std::vector<T> v, Comparator c);
+    static  bucketsorting* GetInstance(std::vector<T> &v, Comparator c);
     static  bucketsorting* GetInstance(Comparator c);
 
 
@@ -295,7 +302,7 @@ template<typename T,  typename Comparator>
      static inline bucketsorting<T,Comparator>* bucketsorting_;
 
  private:
-     bucketsorting(std::vector<T> v, Comparator c);
+     bucketsorting(std::vector<T>& v, Comparator c);
      bucketsorting( Comparator c);
      std::string name;
      uint32_t memory;

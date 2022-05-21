@@ -21,9 +21,5 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../lib/ -lalgoslib
 INCLUDEPATH += $$PWD/../lib
 DEPENDPATH += $$PWD/../lib
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../QT/labs/build-checklib-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/release/ -lchecklib
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../QT/labs/build-checklib-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/debug/ -lchecklib
 
-
-HEADERS +=
 

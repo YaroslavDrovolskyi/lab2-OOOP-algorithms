@@ -14,6 +14,8 @@ private:
   qint64 time=0;
   QElapsedTimer timer;
   algorithm* algorithm_;
+
+
 };
 
 
