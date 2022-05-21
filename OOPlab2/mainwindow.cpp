@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     facade = new Facade();
 
+    results_table_originator = ResultTableOriginator(ui->resultTable);
+    results_history = ResultTableHistory(&results_table_originator);
 
 
 }

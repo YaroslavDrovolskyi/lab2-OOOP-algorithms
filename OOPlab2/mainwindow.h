@@ -9,6 +9,8 @@
 #include <memory>
 #include <functional>
 
+#include"memento.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -44,6 +46,9 @@ private:
         "horspool",
         "boyermoor"
     };
+
+    ResultTableOriginator results_table_originator;
+    ResultTableHistory results_history;
 
     bool areValidNumbers(const QVector<QString>&listofnumbers, const QRegularExpression& expr);
 

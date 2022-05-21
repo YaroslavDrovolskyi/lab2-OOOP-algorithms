@@ -1111,7 +1111,7 @@ uint32_t boyermoor::getmemory()
 
 #include <iostream>
 #include <cassert>
-#include "SortingAlgorithms.h"
+//#include "SortingAlgorithms.h"
 
 
 /* CombSort */
