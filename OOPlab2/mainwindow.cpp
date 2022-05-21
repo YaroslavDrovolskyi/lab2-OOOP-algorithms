@@ -25,7 +25,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->resultTable->setColumnCount(4);
     ui->resultTable->setHorizontalHeaderLabels(colnames);
 
-    this->facade = new Facade();
+    facade = new Facade();
+
+
 
 }
 
@@ -64,18 +66,20 @@ void MainWindow::on_btnrun_clicked()
 //   if(!areValidNumbers(listofnumbers,validNumberRegex))
 //       ui->inputline->clear();
 
-this->facade->setAlgorithm(this->algorithm_);
-    this->facade->setTime(true);
-    this->facade->runAlgo();
+facade->setAlgorithm(this->algorithm_);
+    facade->setTime(true);
+    facade->runAlgo();
 }
 
 
-void MainWindow::on_algoselector_currentIndexChanged(int index)
+void MainWindow::on_algoselector_currentIndexChanged(int index) //move to facade
 {
     std::vector<float> exmpl = {1,23,4,5}; //delete
+   //  bool (MainWindow::*fptr) (float , float) = &MainWindow::comparatorAscend;
     switch (index) {
     case(0):
-       this->algorithm_ = mergesorting<float,bool(float a, float b)>::GetInstance(exmpl,comparatorAscend<float>);
+
+       this->algorithm_ = mergesorting<float,bool(float a, float b)>::GetInstance(exmpl,this->comparatorAscend<float>);
 
         break;
     case(1):

@@ -2,7 +2,7 @@
 //#include "algorithms.h"
 #include "algoslib.h"
 #include <vector>
-#include "checklib.h"
+
 class tests : public QObject
 {
     Q_OBJECT
@@ -30,7 +30,7 @@ private slots:
 
       void test_boyermoor();
 
-      void test_checklib();
+
 
 private:
    const std::vector<float> floatnumbers{6,1,2,3,5,7,6,12,6,122,1,1,6};
@@ -63,12 +63,6 @@ template <typename T>
   }
 
 
-void tests::test_checklib()
-{
-    Checklib<int, bool(int a, int b)> c;
-    c.check(6,comparator<int>);
-   qDebug()<< c.comparator(5,1);
-}
 
 tests::tests()
 {

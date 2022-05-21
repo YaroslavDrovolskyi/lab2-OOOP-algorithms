@@ -48,12 +48,13 @@ private:
     bool areValidNumbers(const QVector<QString>&listofnumbers, const QRegularExpression& expr);
 
     template <typename T>
-      static bool comparatorAscend(T a ,  T b)
+     static  bool comparatorAscend(T a ,  T b)
       {
           if(a >=b)
               return true;
 
           return false;
+
       }
 
       template <typename T>
@@ -63,10 +64,15 @@ private:
                 return true;
 
             return false;
+
         }
 
-    Facade* facade = nullptr;
+
     algorithm* algorithm_;
+protected:
+    static inline Facade* facade  ;
    // std::unique_ptr<algorithm> algorithm_ = nullptr;
 };
+
+
 #endif // MAINWINDOW_H

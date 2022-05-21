@@ -26,6 +26,7 @@ public:
         qint64 time=0;
         QString name="";
         QString result="";
+        uint32_t counter;
 };
 
 
@@ -39,8 +40,10 @@ public:
     virtual void setNumberOfComparisons(bool b);
     virtual void saveResultData(QString str);
     virtual void saveTime(qint64 t);
+     virtual void saveName();
     virtual void setAlgorithm(algorithm* alg);
     virtual void saveNumberOfComparisons();
+    virtual abstrFacadeInfo* getInfo() const;
     virtual quint64 calculateTime();
 
 protected:
@@ -49,6 +52,7 @@ protected:
     bool hasTime = false;
     bool hasNumberOfComparisons  =false;
     QString line ="";
+
 
 
 };
