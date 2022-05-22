@@ -96,7 +96,7 @@ concreteFacadeInfo ResultTableOriginator::readFromRow(std::size_t index){
     row_info.setName(item->text());
 
     item = table->item(index, 1);
-    row_info.setTime(item->text().toLongLong());
+    row_info.setTime(item->text());
 
     item = table->item(index, 2);
     row_info.setCounter(item->text().toLongLong());
@@ -111,7 +111,7 @@ void ResultTableOriginator::writeInRow(const concreteFacadeInfo& row_info, std::
     QString name = row_info.getName();
     this->table->setItem(index, 0, new QTableWidgetItem(name));
 
-    QString time = QString::number(row_info.getTime());
+    QString time = row_info.getTime();
     this->table->setItem(index, 1, new QTableWidgetItem(time));
 
     QString counter = QString::number(row_info.getCounter());

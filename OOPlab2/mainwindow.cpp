@@ -80,7 +80,7 @@ void MainWindow::on_btnrun_clicked()
  //   ui->resultTable->setRowCount(100);
     for (std::size_t i = 0; i < 10; i++){
         ui->resultTable->insertRow(i);
-        this->results_table_originator.writeInRow(concreteFacadeInfo(rand()%100, "algo", "result", rand()%100), i);
+        this->results_table_originator.writeInRow(concreteFacadeInfo(QString::number(rand()%100) + " ms", "algo", "result", rand()%100), i);
     }
 
 }
