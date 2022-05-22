@@ -78,10 +78,19 @@ void MainWindow::on_btnrun_clicked()
 //    ac->runAlgo();
 
  //   ui->resultTable->setRowCount(100);
-    for (std::size_t i = 0; i < 10; i++){
-        ui->resultTable->insertRow(i);
-        this->results_table_originator.writeInRow(concreteFacadeInfo(QString::number(rand()%100) + " ms", "algo", "result", rand()%100), i);
-    }
+//    for (std::size_t i = 0; i < 10; i++){
+//        ui->resultTable->insertRow(i);
+//        this->results_table_originator.writeInRow(concreteFacadeInfo(QString::number(rand()%100) + " ms", "algo", "result", rand()%100), i);
+//    }
+
+    //12 45 12 7 34 7 23 78 45 233235 653 3231 4 12 12 12 3 12
+
+    // "ilove bee drinkingbee beer"   "beer"
+//    this->facade->runAlgo(0,this->ui->inputline->text());
+//    this->facade->runAlgo(1,this->ui->inputline->text());
+//    this->facade->runAlgo(2,this->ui->inputline->text());
+    this->facade->runAlgo(7,this->ui->inputline->text());
+    this->facade->runAlgo(8,this->ui->inputline->text());
 
 }
 

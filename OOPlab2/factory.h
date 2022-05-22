@@ -3,6 +3,7 @@
 #include "algoslib.h"
 #include <vector>
 #include "facadeinfo.h"
+#include <QDebug>
 
 class algoCreator
 {
@@ -28,6 +29,10 @@ public:
     mergeSortCreator(QString&&, bool(float,float));
     algorithm* getAlgorithm() override;
     void runAlgo() override;
+    ~mergeSortCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+    }
 private:
     void convertToQString() override;
     bool readLine(QString&&) override;
@@ -138,7 +143,6 @@ public:
 private:
     void convertToQString() override;
     bool readLine(QString&&) override;
-   int id;
    QString sample;
    QString line;
 

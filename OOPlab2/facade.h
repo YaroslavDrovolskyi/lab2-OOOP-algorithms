@@ -32,13 +32,14 @@ protected:
  //  algorithm* algorithm_;
     bool hasTime = false;
     bool hasNumberOfComparisons  =false;
+    uint32_t counter;
    // QString line ="";
 private:
     virtual QString calculateTime();
     template <typename T>
-      static bool comparatorAscend(T a ,  T b);
+       bool comparatorAscend(T a ,  T b);
        template <typename T>
-        static  bool comparatorDescend(T a ,  T b);
+          bool comparatorDescend(T a ,  T b);
           QString inputLine;
 
 

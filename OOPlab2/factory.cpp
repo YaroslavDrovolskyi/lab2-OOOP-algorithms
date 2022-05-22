@@ -655,10 +655,10 @@ void bucketSortCreator::convertToQString()
 //}
 
 //horspool
-horspoolCreator::horspoolCreator(QString&& line )
+horspoolCreator::horspoolCreator(QString&& l )
 {
 
-    if(this->readLine(std::move(line)))
+    if(this->readLine(std::move(l)))
      horspool_ = horspool::GetInstance(this->line.toStdString(),this->sample.toStdString());
 }
 algorithm* horspoolCreator::getAlgorithm()
@@ -696,11 +696,11 @@ bool horspoolCreator::readLine(QString&& l)
       while(i < size && l[i]!='"'){
           if(l[i] == '\\' && i<size-1 && l[i+1]=='"')
           {
-              this->line.push_back('"');
+              this->sample.push_back('"');
              ++i;
           }
           else
-          this->line.push_back(l[i]);
+          this->sample.push_back(l[i]);
           ++i;
       }
       if(i == size )
@@ -721,10 +721,10 @@ void horspoolCreator::convertToQString()
 }
 
 //boyermoorCreator
-boyermoorCreator::boyermoorCreator(QString&& line )
+boyermoorCreator::boyermoorCreator(QString&& l )
 {
 
-    if(this->readLine(std::move(line)))
+    if(this->readLine(std::move(l)))
      boyermoor_ = boyermoor::GetInstance(this->line.toStdString(),this->sample.toStdString());
 }
 algorithm* boyermoorCreator::getAlgorithm()
@@ -762,11 +762,11 @@ bool boyermoorCreator::readLine(QString&& l)
       while(i < size && l[i]!='"'){
           if(l[i] == '\\' && i<size-1 && l[i+1]=='"')
           {
-              this->line.push_back('"');
+              this->sample.push_back('"');
              ++i;
           }
           else
-          this->line.push_back(l[i]);
+          this->sample.push_back(l[i]);
           ++i;
       }
       if(i == size )

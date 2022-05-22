@@ -334,7 +334,7 @@ public:
 protected:
        static inline horspool* horspool_;
 private:
-        horspool(std::string l, std::string s):line(l),sample(s){};
+        horspool(std::string l, std::string s):line(l),sample(s){this->name="horspoolMatching";};
      std::string name;
      std::string line;
      std::string sample;
@@ -365,7 +365,7 @@ public:
 protected:
       static inline boyermoor* boyermoor_;
 private:
-     boyermoor(std::string l, std::string s):line(l),sample(s){};
+     boyermoor(std::string l, std::string s):line(l),sample(s){this->name="boyerMoorMatching";};
      std::string name;
      std::string line;
      std::string sample;

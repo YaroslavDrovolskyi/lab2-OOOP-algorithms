@@ -11,6 +11,7 @@
 
  void Facade::runAlgo(const int ind, QString line)      //template method
  {
+     this->counter=0;
      this->inputLine = line;
      this->selectCreator(ind);//creator
 
