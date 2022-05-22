@@ -11,6 +11,8 @@
  bool algoCreator::areValidNumbers(const QVector<QString>&listofnumbers, const QRegularExpression& expr)
  {
      size_t len = listofnumbers.size();
+     if(len==0)
+         return false;
      for(auto i=0; i<len; i++)
      {
          if(!listofnumbers[i].contains(expr))
@@ -52,7 +54,7 @@
         {
 
            // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
-
+        throw std::invalid_argument("Invalid input data");
             return false;
         }
 
@@ -110,7 +112,7 @@ bool quickSortCreator::readLine(QString&& line)
        {
 
           // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
-
+        throw std::invalid_argument("Invalid input data");
            return false;
        }
 
@@ -167,7 +169,7 @@ bool heapSortCreator::readLine(QString&& line)
       {
 
          // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
-
+         throw std::invalid_argument("Invalid input data");
           return false;
       }
 
@@ -225,7 +227,7 @@ bool countingSortCreator::readLine(QString&& line)
       {
 
          // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
-
+         throw std::invalid_argument("Invalid input data");
           return false;
       }
 
@@ -283,7 +285,7 @@ bool radixSortCreator::readLine(QString&& line)
       {
 
          // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
-
+         throw std::invalid_argument("Invalid input data");
           return false;
       }
 
@@ -340,7 +342,7 @@ bool insertionSortCreator::readLine(QString&& line)
       {
 
          // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
-
+         throw std::invalid_argument("Invalid input data");
           return false;
       }
 
@@ -398,7 +400,7 @@ bool bucketSortCreator::readLine(QString&& line)
       {
 
          // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
-
+         throw std::invalid_argument("Invalid input data");
           return false;
       }
 
