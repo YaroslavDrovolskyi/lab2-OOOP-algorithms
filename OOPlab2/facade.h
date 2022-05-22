@@ -32,7 +32,7 @@ protected:
  //  algorithm* algorithm_;
     bool hasTime = false;
     bool hasNumberOfComparisons  =false;
-  static  uint32_t counter;
+  static inline  uint32_t counter;
    // QString line ="";
 private:
     virtual QString calculateTime();
