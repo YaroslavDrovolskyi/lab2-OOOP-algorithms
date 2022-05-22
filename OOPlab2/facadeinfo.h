@@ -9,7 +9,7 @@ class abstrFacadeInfo
 {
 public:
 
-   virtual void setTime(QString& t)=0;
+   virtual void setTime(QString t)=0;
    virtual void setName(QString n)=0;
    virtual void setResult(QString s)=0;
    virtual void setCounter(uint32_t c)=0;
@@ -28,7 +28,7 @@ public:
 
     concreteFacadeInfo() = default;
     concreteFacadeInfo(QString time, QString name, QString result, uint32_t counter);
-    void setTime(QString& t) override;
+    void setTime(QString t) override;
     void setName(QString n)override;
     void setResult(QString s)override;
     void setCounter(uint32_t c) override;

@@ -8,7 +8,7 @@ concreteFacadeInfo::concreteFacadeInfo(QString time, QString name, QString resul
 
 }
 
-void concreteFacadeInfo::setTime(QString& t) {
+void concreteFacadeInfo::setTime(QString t) {
     this->time = t;
 };
 
