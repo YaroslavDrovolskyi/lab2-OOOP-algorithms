@@ -1096,6 +1096,11 @@ uint32_t boyermoor::getmemory()
 #include <cassert>
 //#include "SortingAlgorithms.h"
 
+template<typename T, typename Comparator>
+std::string SortArrayAlgo<T, Comparator>::gettype()
+{
+    return this->type;
+}
 
 /* CombSort */
 template <typename T, typename Comparator>
@@ -1125,6 +1130,17 @@ template <typename T, typename Comparator>
 uint32_t CombSort<T, Comparator>::getmemory(){
     return this->memory;
 }
+
+template <typename T, typename Comparator>
+T* CombSort<T, Comparator>::getArray() const {
+    return this->arr;
+}
+
+template <typename T, typename Comparator>
+std::size_t CombSort<T, Comparator>::getArraySize() const {
+    return this->size;
+}
+
 
 template <typename T, typename Comparator>
 void CombSort<T, Comparator>::run(){
@@ -1214,6 +1230,16 @@ std::string ShellSort<T, Comparator>::getname(){
 template <typename T, typename Comparator>
 uint32_t ShellSort<T, Comparator>::getmemory(){
     return this->memory;
+}
+
+template <typename T, typename Comparator>
+T* ShellSort<T, Comparator>::getArray() const {
+    return this->arr;
+}
+
+template <typename T, typename Comparator>
+std::size_t ShellSort<T, Comparator>::getArraySize() const {
+    return this->size;
 }
 
 template <typename T, typename Comparator>
@@ -1333,6 +1359,17 @@ uint32_t OddEvenSort<T, Comparator>::getmemory(){
     return this->memory;
 }
 
+
+template <typename T, typename Comparator>
+T* OddEvenSort<T, Comparator>::getArray() const {
+    return this->arr;
+}
+
+template <typename T, typename Comparator>
+std::size_t OddEvenSort<T, Comparator>::getArraySize() const {
+    return this->size;
+}
+
 template <typename T, typename Comparator>
 void OddEvenSort<T, Comparator>::run(){
     if (size <= 1){
@@ -1421,6 +1458,16 @@ std::string CocktailShakerSort<T, Comparator>::getname(){
 template <typename T, typename Comparator>
 uint32_t CocktailShakerSort<T, Comparator>::getmemory(){
     return this->memory;
+}
+
+template <typename T, typename Comparator>
+T* CocktailShakerSort<T, Comparator>::getArray() const {
+    return this->arr;
+}
+
+template <typename T, typename Comparator>
+std::size_t CocktailShakerSort<T, Comparator>::getArraySize() const {
+    return this->size;
 }
 
 template <typename T, typename Comparator>
@@ -1513,6 +1560,16 @@ std::string TimSort<T, Comparator>::getname(){
 template <typename T, typename Comparator>
 uint32_t TimSort<T, Comparator>::getmemory(){
     return this->memory;
+}
+
+template <typename T, typename Comparator>
+T* TimSort<T, Comparator>::getArray() const {
+    return this->arr;
+}
+
+template <typename T, typename Comparator>
+std::size_t TimSort<T, Comparator>::getArraySize() const {
+    return this->size;
 }
 
 template <typename T, typename Comparator>

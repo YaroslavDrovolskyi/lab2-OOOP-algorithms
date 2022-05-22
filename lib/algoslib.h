@@ -8,6 +8,7 @@
 #include <vector>
 #include <memory>
 #include <functional>
+#include <utility>
 class ALGOSLIB_EXPORT  algorithm
 {
 public:
@@ -391,8 +392,35 @@ void print(T* arr, std::size_t size) {
 }
 
 
+
+
+template<typename T, typename Comparator>
+class ALGOSLIB_EXPORT SortArrayAlgo:  public algorithm
+{
+public:
+
+    SortArrayAlgo() = default;
+
+   virtual std::string gettype() override;
+   virtual T* getArray() const = 0;
+   virtual std::size_t getArraySize() const = 0;
+   virtual ~SortArrayAlgo() = default;
+
+protected:
+    std::function<Comparator> comparator;
+private:
+   std::string type;
+};
+
+
+
+
+
+
+
+
 template <typename T, typename Comparator>
-class ALGOSLIB_EXPORT CombSort : public sortingalgo<Comparator> {
+class ALGOSLIB_EXPORT CombSort : public SortArrayAlgo<T, Comparator> {
 private:
     std::string name;
     uint32_t memory;
@@ -404,7 +432,8 @@ public:
     virtual void run() override;
     virtual std::string getname() override;
     uint32_t getmemory() override;
-    std::vector<T> getvalues();
+    virtual T* getArray() const override;
+    virtual std::size_t getArraySize() const override;
     virtual ~CombSort();
 
     static  CombSort* GetInstance(std::vector<T>& v, Comparator c);
@@ -424,7 +453,7 @@ private:
 
 
 template <typename T, typename Comparator>
-class ALGOSLIB_EXPORT ShellSort : public sortingalgo<Comparator> {
+class ALGOSLIB_EXPORT ShellSort : public SortArrayAlgo<T, Comparator> {
 private:
     std::string name;
     uint32_t memory;
@@ -436,8 +465,9 @@ public:
     virtual void run() override;
     virtual std::string getname() override;
     uint32_t getmemory() override;
-    std::vector<T> getvalues();
-    virtual ~ShellSort() override;
+    virtual T* getArray() const override;
+    virtual std::size_t getArraySize() const override;
+    virtual ~ShellSort();
 
     static  ShellSort* GetInstance(std::vector<T>& v, Comparator c);
     static  ShellSort* GetInstance(Comparator c);
@@ -456,7 +486,7 @@ private:
 };
 
 template <typename T, typename Comparator>
-class ALGOSLIB_EXPORT OddEvenSort : public sortingalgo<Comparator> {
+class ALGOSLIB_EXPORT OddEvenSort : public SortArrayAlgo<T, Comparator> {
 private:
     std::string name;
     uint32_t memory;
@@ -468,8 +498,9 @@ public:
     virtual void run() override;
     virtual std::string getname() override;
     uint32_t getmemory() override;
-    std::vector<T> getvalues();
-    virtual ~OddEvenSort() override;
+    virtual T* getArray() const override;
+    virtual std::size_t getArraySize() const override;
+    virtual ~OddEvenSort();
 
     static  OddEvenSort* GetInstance(std::vector<T>& v, Comparator c);
     static  OddEvenSort* GetInstance(Comparator c);
@@ -487,7 +518,7 @@ private:
 };
 
 template <typename T, typename Comparator>
-class ALGOSLIB_EXPORT CocktailShakerSort : public sortingalgo<Comparator> {
+class ALGOSLIB_EXPORT CocktailShakerSort : public SortArrayAlgo<T, Comparator> {
 private:
     std::string name;
     uint32_t memory;
@@ -499,8 +530,9 @@ public:
     virtual void run() override;
     virtual std::string getname() override;
     uint32_t getmemory() override;
-    std::vector<T> getvalues();
-    virtual ~CocktailShakerSort() override;
+    virtual T* getArray() const override;
+    virtual std::size_t getArraySize() const override;
+    virtual ~CocktailShakerSort();
 
     static  CocktailShakerSort* GetInstance(std::vector<T>& v, Comparator c);
     static  CocktailShakerSort* GetInstance(Comparator c);
@@ -518,7 +550,7 @@ private:
 };
 
 template <typename T, typename Comparator>
-class ALGOSLIB_EXPORT TimSort : public sortingalgo<Comparator> {
+class ALGOSLIB_EXPORT TimSort : public SortArrayAlgo<T, Comparator> {
 private:
     std::string name;
     uint32_t memory;
@@ -530,8 +562,9 @@ public:
     virtual void run() override;
     virtual std::string getname() override;
     uint32_t getmemory() override;
-    std::vector<T> getvalues();
-    virtual ~TimSort() override;
+    virtual T* getArray() const override;
+    virtual std::size_t getArraySize() const override;
+    virtual ~TimSort();
 
     static  TimSort* GetInstance(std::vector<T>& v, Comparator c);
     static  TimSort* GetInstance(Comparator c);
