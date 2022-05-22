@@ -2,13 +2,13 @@
 #include <QString>
 
 
-concreteFacadeInfo::concreteFacadeInfo(qint64 time, QString name, QString result, uint32_t counter):
+concreteFacadeInfo::concreteFacadeInfo(QString time, QString name, QString result, uint32_t counter):
     time(time), name(name), result(result), counter(counter)
 {
 
 }
 
-void concreteFacadeInfo::setTime(qint64 t) {
+void concreteFacadeInfo::setTime(QString& t) {
     this->time = t;
 };
 
@@ -26,7 +26,7 @@ void concreteFacadeInfo::setCounter(uint32_t c) {
 };
 
 
-qint64 concreteFacadeInfo::getTime() const{
+QString concreteFacadeInfo::getTime() const{
     return this->time;
 }
 

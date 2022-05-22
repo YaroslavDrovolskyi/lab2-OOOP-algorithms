@@ -9,19 +9,24 @@
 
 
 
- void Facade::runAlgo()      //template method
+ void Facade::runAlgo(const int ind, QString line)      //template method
  {
-     this->facadeInfo_ = new concreteFacadeInfo();
+     this->inputLine = line;
+     this->selectCreator(ind);//creator
+
+
+     this->facadeInfo_ =std::make_shared<concreteFacadeInfo>();
     if(this->hasTime)
     {
-        qint64 t = this->calculateTime();
+        QString t = this->calculateTime();
         this->saveTime(t);
     }
     else
         this->algoCreator_->runAlgo();
 
-    this->saveResultData("substring matching was performed");
+    this->saveResultData(this->algoCreator_->getResult());
     this->saveName();
+
  };
 
 
@@ -52,29 +57,45 @@
      case(0):
 
 
-      this->algoCreator_ = new mergeSortCreator(std::move(this->inputLine),this->comparatorAscend<float>);
+      this->algoCreator_ =std::make_shared<mergeSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
          break;
      case(1):
-
+ this->algoCreator_ =std::make_shared<quickSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
          break;
      case(2):
-
+ this->algoCreator_ =std::make_shared<heapSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
          break;
      case(3):
-
+ this->algoCreator_ =std::make_shared<countingSortCreator>( std::move(this->inputLine),this->comparatorAscend<uint32_t>);
          break;
      case(4):
-
+ this->algoCreator_ =std::make_shared<radixSortCreator>( std::move(this->inputLine),this->comparatorAscend<uint32_t>);
          break;
      case(5):
-
+ this->algoCreator_ =std::make_shared<insertionSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
          break;
      case(6):
-
+ this->algoCreator_ =std::make_shared<bucketSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
          break;
      case(7):
+ this->algoCreator_ =std::make_shared<horspoolCreator>( std::move(this->inputLine));
+         break;
+     case(8):
+ this->algoCreator_ =std::make_shared<boyermoorCreator>( std::move(this->inputLine));
+         break;
+     case(9):
 
          break;
+     case(10):
+
+         break;
+     case(11):
+
+         break;
+     case(12):
+
+         break;
+
 
      }
  }
@@ -90,7 +111,7 @@
 
  };
 
- abstrFacadeInfo* Facade::getInfo() const
+ std::shared_ptr<abstrFacadeInfo> Facade::getInfo() const
  {
      return this->facadeInfo_;
  }
@@ -103,14 +124,14 @@
      this->facadeInfo_->setResult(str);
 
  };
- void Facade::saveTime(qint64 t){
+ void Facade::saveTime(QString& t){
     this->facadeInfo_->setTime(t);
  };
  void Facade::saveNumberOfComparisons(){
 
  };
 
- quint64 Facade::calculateTime()
+ QString Facade::calculateTime()
  {
      visitor visitor_(this->algoCreator_->getAlgorithm());
      visitor_.calculateTime();
@@ -118,4 +139,7 @@
 
  }
 
-
+void Facade::setInputLine(QString& l)
+{
+    this->inputLine = l;
+}

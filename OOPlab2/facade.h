@@ -4,7 +4,7 @@
 #include <QString>
 #include "facadeinfo.h"
 #include "factory.h"
-
+#include <memory>
 
 
 
@@ -13,26 +13,28 @@ class Facade                            //"Builder" - builds result
 {
 public:
     Facade()=default;
-    virtual void runAlgo();                //template method
+    virtual void runAlgo(const int ind, QString line);                //template method
     virtual void setTime(bool b);
     virtual void setNumberOfComparisons(bool b);
+    virtual void setInputLine(QString& l);
     virtual void saveResultData(QString str);
-    virtual void saveTime(qint64 t);
+    virtual void saveTime(QString& t);
      virtual void saveName();
     virtual void saveNumberOfComparisons();
-    virtual abstrFacadeInfo* getInfo() const;
-    virtual quint64 calculateTime();
+    virtual  std::shared_ptr<abstrFacadeInfo> getInfo() const;
+
     virtual void selectCreator(int index);
     virtual ~Facade()=default;
 
 protected:
-    abstrFacadeInfo* facadeInfo_ = nullptr;
-    algoCreator* algoCreator_;
+     std::shared_ptr<abstrFacadeInfo>facadeInfo_ ;
+     std::shared_ptr<algoCreator>algoCreator_;
  //  algorithm* algorithm_;
     bool hasTime = false;
     bool hasNumberOfComparisons  =false;
    // QString line ="";
 private:
+    virtual QString calculateTime();
     template <typename T>
       static bool comparatorAscend(T a ,  T b);
        template <typename T>

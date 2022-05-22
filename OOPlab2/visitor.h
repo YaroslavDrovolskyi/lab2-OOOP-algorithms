@@ -3,15 +3,15 @@
 #include <QtGlobal>
 #include <QElapsedTimer>
 #include "algoslib.h"
-
+#include <QString>
 class visitor
 {
 public:
     visitor(algorithm* algo): algorithm_(algo){};
     void calculateTime();
-        qint64 getTime();
+        QString getTime();
 private:
-  qint64 time=0;
+  QString time;
   QElapsedTimer timer;
   algorithm* algorithm_;
 
