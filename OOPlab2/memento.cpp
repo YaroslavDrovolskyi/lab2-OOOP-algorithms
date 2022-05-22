@@ -30,6 +30,10 @@ ResultTableHistory::~ResultTableHistory(){
     }
 }
 
+bool ResultTableHistory::empty() const{
+    return this->mementos.empty();
+}
+
 void ResultTableHistory::backup(){
     ResultTableMemento* memento = this->originator->save();
     this->mementos.push_back(memento);

@@ -8,6 +8,7 @@
 #include "facade.h"
 #include <memory>
 #include "factory.h"
+#include <set>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -73,8 +74,15 @@ void MainWindow::on_btnrun_clicked()
 //    facade->setTime(true);
 //    facade->runAlgo();
 
-    algoCreator* ac = new mergeSortCreator(ui->inputline->text(),this->comparatorAscend<float>);
-    ac->runAlgo();
+//    algoCreator* ac = new mergeSortCreator(ui->inputline->text(),this->comparatorAscend<float>);
+//    ac->runAlgo();
+
+ //   ui->resultTable->setRowCount(100);
+    for (std::size_t i = 0; i < 10; i++){
+        ui->resultTable->insertRow(i);
+        this->results_table_originator.writeInRow(concreteFacadeInfo(rand()%100, "algo", "result", rand()%100), i);
+    }
+
 }
 
 
@@ -90,7 +98,42 @@ void MainWindow::on_algoselector_currentIndexChanged(int index) //move to facade
 
 void MainWindow::on_removeRowBtn_clicked()
 {
-    ui->resultTable->insertRow(0);
-    this->results_table_originator.writeInRow(concreteFacadeInfo(100, "algo", "result", 99), 0);
+
+    auto selected_items = this->ui->resultTable->selectedItems();
+    if (!selected_items.empty()){
+        this->results_history.backup();
+        ui->undoRemoveRow->setEnabled(true);
+    }
+
+    std::set<std::size_t> selected_rows;
+
+    // insert rows indexes into set to make them unique
+    for(const auto& i : selected_items){
+        selected_rows.insert(i->row());
+    }
+
+    // get rows indexes and push them into vector, in order to have possibility to iterate from end to begin
+    std::vector<std::size_t> rows_to_remove;
+    for (const auto i : selected_rows){
+        rows_to_remove.push_back(i);
+    }
+
+    // remove rows from end to begin
+    for (qint64 i = rows_to_remove.size() - 1; i>=0; i--){
+        ui->resultTable->removeRow(rows_to_remove[i]);
+    }
+
+
+}
+
+
+void MainWindow::on_undoRemoveRow_clicked()
+{
+    this->results_history.undo();
+
+    if (this->results_history.empty()){
+        ui->undoRemoveRow->setEnabled(false);
+    }
+
 }
 

@@ -45,6 +45,7 @@ public:
     ~ResultTableHistory();
     void backup(); // add originator's state // this->mementos_.push_back(this->originator_->Save());
     void undo(); //
+    bool empty() const;
 };
 
 #endif // MEMENTO_H

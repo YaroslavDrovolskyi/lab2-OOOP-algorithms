@@ -87,45 +87,55 @@
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
-           <item row="0" column="2">
-            <widget class="QPushButton" name="pushButton">
-             <property name="text">
-              <string>generateRandombtn</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0" alignment="Qt::AlignHCenter">
-            <widget class="QCheckBox" name="checkBoxTime">
-             <property name="text">
-              <string>Time</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="2">
+           <item row="4" column="3">
             <widget class="QRadioButton" name="radioDescend">
              <property name="text">
               <string>Sort in descending order</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="0" alignment="Qt::AlignHCenter">
-            <widget class="QCheckBox" name="checkBoxMemory">
+           <item row="0" column="1">
+            <widget class="QComboBox" name="algoselector"/>
+           </item>
+           <item row="4" column="1" alignment="Qt::AlignHCenter">
+            <widget class="QCheckBox" name="checkBoxTime">
              <property name="text">
-              <string>Memory</string>
+              <string>Time</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="2">
+           <item row="3" column="3">
             <widget class="QRadioButton" name="radioAscend">
              <property name="text">
               <string>Sort in ascending order</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="0">
-            <widget class="QComboBox" name="algoselector"/>
+           <item row="3" column="1" alignment="Qt::AlignHCenter">
+            <widget class="QCheckBox" name="checkBoxMemory">
+             <property name="text">
+              <string>Memory</string>
+             </property>
+            </widget>
            </item>
-           <item row="1" column="2">
+           <item row="0" column="3">
+            <widget class="QPushButton" name="pushButton">
+             <property name="text">
+              <string>generateRandombtn</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QPushButton" name="undoRemoveRow">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>undoRemoveRow</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
             <widget class="QPushButton" name="removeRowBtn">
              <property name="text">
               <string>removeRow</string>
