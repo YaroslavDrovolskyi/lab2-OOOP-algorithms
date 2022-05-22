@@ -5,7 +5,7 @@
 void visitor::calculateTime()
 {
     this->timer.start();
-    algorithm_->run();
+    this->algoCreator_->runAlgo();
     qint64 t= this->timer.nsecsElapsed();
     qint64 nsMax = qPow(qint64(10),6);
     qint64 msMax = qPow(qint64(10),9);

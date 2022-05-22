@@ -24,29 +24,12 @@ std::string sortingalgo<Comparator>::gettype()
 {
     return this->type;
 }
-template< typename Comparator>
-uint32_t sortingalgo<Comparator>::getCounter()
-{
-    return this->counter;
-}
-template< typename Comparator>
-void sortingalgo<Comparator>::setCounter(const uint32_t count)
-{
-    this->counter = count;
-}
+
 
  substringmatching::substringmatching() { this->type = "substringmatching"; };
 
 
- uint32_t substringmatching::getCounter()
- {
-     return this->counter;
- }
 
- void substringmatching::setCounter(const uint32_t count)
- {
-     this->counter = count;
- }
 std::string substringmatching::gettype()
 {
     return this->type;

@@ -133,7 +133,7 @@
 
  QString Facade::calculateTime()
  {
-     visitor visitor_(this->algoCreator_->getAlgorithm());
+     visitor visitor_(this->algoCreator_);
      visitor_.calculateTime();
     return visitor_.getTime();
 

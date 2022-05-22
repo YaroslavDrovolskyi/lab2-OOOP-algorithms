@@ -15,8 +15,6 @@ public:
    virtual std::string getname() = 0;
    virtual std::string gettype() = 0;
    virtual uint32_t getmemory() = 0;
-   virtual uint32_t getCounter() = 0;
-    virtual void setCounter(const uint32_t count) = 0;
     virtual void run()=0;
    virtual ~algorithm();
 };
@@ -28,8 +26,7 @@ public:
    sortingalgo() ;
 
    std::string gettype() override;
-    uint32_t getCounter() override;
-     void setCounter(const uint32_t count) override;
+
 
 
    virtual ~sortingalgo();
@@ -38,7 +35,6 @@ protected:
     std::function<Comparator> comparator;
 private:
    std::string type;
-   uint32_t counter;
 };
 
  class ALGOSLIB_EXPORT substringmatching :public algorithm
@@ -52,8 +48,7 @@ public:
     virtual void setsample(std::string s)=0;
  //   virtual int findfirstsubstr()=0;
     virtual ~substringmatching() {};
-    uint32_t getCounter() override;
-     void setCounter(const uint32_t count) override;
+
 private:
     std::string type;
     uint32_t counter;
