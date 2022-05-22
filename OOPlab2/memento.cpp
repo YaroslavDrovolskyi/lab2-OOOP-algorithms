@@ -107,16 +107,30 @@ concreteFacadeInfo ResultTableOriginator::readFromRow(std::size_t index){
     return row_info;
 }
 
-void ResultTableOriginator::writeInRow(const concreteFacadeInfo& row_info, std::size_t index){
-    QString name = row_info.getName();
+//void ResultTableOriginator::writeInRow(const concreteFacadeInfo& row_info, std::size_t index){
+//    QString name = row_info.getName();
+//    this->table->setItem(index, 0, new QTableWidgetItem(name));
+
+//    QString time = row_info.getTime();
+//    this->table->setItem(index, 1, new QTableWidgetItem(time));
+
+//    QString counter = QString::number(row_info.getCounter());
+//    this->table->setItem(index, 2, new QTableWidgetItem(counter));
+
+//    QString result = row_info.getResult();
+//    this->table->setItem(index, 3, new QTableWidgetItem(result));
+//}
+
+void ResultTableOriginator::writeInRow(abstrFacadeInfo* row_info, std::size_t index){
+    QString name = row_info->getName();
     this->table->setItem(index, 0, new QTableWidgetItem(name));
 
-    QString time = row_info.getTime();
+    QString time = row_info->getTime();
     this->table->setItem(index, 1, new QTableWidgetItem(time));
 
-    QString counter = QString::number(row_info.getCounter());
+    QString counter = QString::number(row_info->getCounter());
     this->table->setItem(index, 2, new QTableWidgetItem(counter));
 
-    QString result = row_info.getResult();
+    QString result = row_info->getResult();
     this->table->setItem(index, 3, new QTableWidgetItem(result));
 }

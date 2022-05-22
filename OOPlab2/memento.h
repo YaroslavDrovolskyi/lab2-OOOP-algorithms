@@ -28,7 +28,8 @@ public:
     ResultTableMemento* save(); // save state // return new Memento
     void restore(ResultTableMemento* memento); // restore state
 
-    void writeInRow(const concreteFacadeInfo& row_info, std::size_t index);
+   // void writeInRow(const concreteFacadeInfo& row_info, std::size_t index);
+    void writeInRow( abstrFacadeInfo* row_info, std::size_t index);
     concreteFacadeInfo readFromRow(std::size_t index);
 };
 

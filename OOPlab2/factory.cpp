@@ -3,6 +3,8 @@
 #include <QRegularExpression>
 #include <QMessageBox>
 #include <QStack>
+#include <stdexcept>
+#include <QDebug>
 //TODO: negative numbers in regex for float
 
 
@@ -12,7 +14,7 @@
      for(auto i=0; i<len; i++)
      {
          if(!listofnumbers[i].contains(expr))
-             return false;
+             throw std::invalid_argument("Invalid input data");
      }
      return true;
  }
@@ -23,6 +25,7 @@
     }
   mergeSortCreator::mergeSortCreator(QString&& line, bool a(float,float) )
   {
+        qDebug()<<"mergeSortCreator";
 
       if(this->readLine(std::move(line)))
        mergesorting_ = mergesorting<float, bool(float,float)>::GetInstance(this->vec,a);
@@ -65,6 +68,7 @@
  {
      this->mergesorting_->run();
      this->convertToQString();
+
  }
  void mergeSortCreator::convertToQString()
  {
@@ -384,7 +388,7 @@ algorithm* bucketSortCreator::getAlgorithm()
 bool bucketSortCreator::readLine(QString&& line)
 {
       const QRegularExpression regexp("[^0-9.]");
-      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
+      const QRegularExpression validNumberRegex("\\A0+\\.[0-9]*$");
 
       const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
 
@@ -675,7 +679,7 @@ bool horspoolCreator::readLine(QString&& l)
       while(i <size && l[i]!='"')
           i++;
       if(++i>=size)
-          return false;
+          throw std::invalid_argument("Invalid input data");
 
       while(i < size && l[i]!='"'){
           if(l[i] == '\\' && i<size-1 && l[i+1]=='"')
@@ -688,11 +692,11 @@ bool horspoolCreator::readLine(QString&& l)
           ++i;
       }
       if(++i>=size)
-          return false;
+         throw std::invalid_argument("Invalid input data");
       while(i <size && l[i]!='"')
           i++;
       if(++i>=size)
-          return false;
+          throw std::invalid_argument("Invalid input data");
       while(i < size && l[i]!='"'){
           if(l[i] == '\\' && i<size-1 && l[i+1]=='"')
           {
@@ -704,7 +708,7 @@ bool horspoolCreator::readLine(QString&& l)
           ++i;
       }
       if(i == size )
-          return false;
+          throw std::invalid_argument("Invalid input data");
 
 return true;
 }
@@ -741,7 +745,7 @@ bool boyermoorCreator::readLine(QString&& l)
       while(i <size && l[i]!='"')
           i++;
       if(++i>=size)
-          return false;
+          throw std::invalid_argument("Invalid input data");
 
       while(i < size && l[i]!='"'){
           if(l[i] == '\\' && i<size-1 && l[i+1]=='"')
@@ -754,11 +758,11 @@ bool boyermoorCreator::readLine(QString&& l)
           ++i;
       }
       if(++i>=size)
-          return false;
+         throw std::invalid_argument("Invalid input data");
       while(i <size && l[i]!='"')
           i++;
       if(++i>=size)
-          return false;
+          throw std::invalid_argument("Invalid input data");
       while(i < size && l[i]!='"'){
           if(l[i] == '\\' && i<size-1 && l[i+1]=='"')
           {
@@ -770,7 +774,7 @@ bool boyermoorCreator::readLine(QString&& l)
           ++i;
       }
       if(i == size )
-          return false;
+         throw std::invalid_argument("Invalid input data");
 
 return true;
 }

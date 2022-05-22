@@ -27,6 +27,7 @@
 
     this->saveResultData(this->algoCreator_->getResult());
     this->saveName();
+    this->saveNumberOfComparisons();
 
  };
 
@@ -38,7 +39,7 @@
            return true;
 
        return false;
-
+         counter++;
    }
 
    template <typename T>
@@ -48,6 +49,7 @@
              return true;
 
          return false;
+         counter++;
 
      }
 
@@ -55,29 +57,57 @@
  void Facade::selectCreator(int index)
  {
 
+     this->algoCreator_.reset();
      switch (index) {
      case(0):
 
-
+    if(this->isAscend)
       this->algoCreator_ =std::make_shared<mergeSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
+    else
+          this->algoCreator_ =std::make_shared<mergeSortCreator>( std::move(this->inputLine),this->comparatorDescend<float>);
+        // this->algoCreator_ =std::make_shared<mergeSortCreator>( std::move(this->inputLine),this->currentComparator<float>);
          break;
      case(1):
+         if(this->isAscend)
  this->algoCreator_ =std::make_shared<quickSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
+         else
+               this->algoCreator_ =std::make_shared<quickSortCreator>( std::move(this->inputLine),this->comparatorDescend<float>);
+        // this->algoCreator_ =std::make_shared<quickSortCreator>( std::move(this->inputLine),this->currentComparator<float>);
          break;
      case(2):
+         if(this->isAscend)
  this->algoCreator_ =std::make_shared<heapSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
+         else
+               this->algoCreator_ =std::make_shared<heapSortCreator>( std::move(this->inputLine),this->comparatorDescend<float>);
+        // this->algoCreator_ =std::make_shared<heapSortCreator>( std::move(this->inputLine),this->currentComparator<float>);
          break;
      case(3):
+         if(this->isAscend)
  this->algoCreator_ =std::make_shared<countingSortCreator>( std::move(this->inputLine),this->comparatorAscend<uint32_t>);
+         else
+               this->algoCreator_ =std::make_shared<countingSortCreator>( std::move(this->inputLine),this->comparatorDescend<uint32_t>);
+       //  this->algoCreator_ =std::make_shared<countingSortCreator>( std::move(this->inputLine),this->currentComparator<uint32_t>);
          break;
      case(4):
+         if(this->isAscend)
  this->algoCreator_ =std::make_shared<radixSortCreator>( std::move(this->inputLine),this->comparatorAscend<uint32_t>);
+         else
+               this->algoCreator_ =std::make_shared<radixSortCreator>( std::move(this->inputLine),this->comparatorDescend<uint32_t>);
+        // this->algoCreator_ =std::make_shared<radixSortCreator>( std::move(this->inputLine),this->currentComparator<uint32_t>);
          break;
      case(5):
+         if(this->isAscend)
  this->algoCreator_ =std::make_shared<insertionSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
+         else
+               this->algoCreator_ =std::make_shared<insertionSortCreator>( std::move(this->inputLine),this->comparatorDescend<float>);
+        // this->algoCreator_ =std::make_shared<insertionSortCreator>( std::move(this->inputLine),this->currentComparator<float>);
          break;
      case(6):
+         if(this->isAscend)
  this->algoCreator_ =std::make_shared<bucketSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
+         else
+               this->algoCreator_ =std::make_shared<bucketSortCreator>( std::move(this->inputLine),this->comparatorDescend<float>);
+        // this->algoCreator_ =std::make_shared<bucketSortCreator>( std::move(this->inputLine),this->currentComparator<float>);
          break;
      case(7):
  this->algoCreator_ =std::make_shared<horspoolCreator>( std::move(this->inputLine));
@@ -131,6 +161,8 @@
  };
  void Facade::saveNumberOfComparisons(){
 
+     this->facadeInfo_->setCounter(this->counter);
+
  };
 
  QString Facade::calculateTime()
@@ -145,3 +177,11 @@ void Facade::setInputLine(QString& l)
 {
     this->inputLine = l;
 }
+
+
+void Facade::setIsAscend(bool b)
+{
+    this->isAscend = b;
+}
+
+

@@ -32,6 +32,8 @@ public:
     ~mergeSortCreator()
     {
         qDebug()<<"~mergeSortCreator";
+         delete this->mergesorting_;
+        this->mergesorting_ = nullptr;
     }
 private:
     void convertToQString() override;
@@ -48,6 +50,12 @@ public:
     algorithm* getAlgorithm() override;
 
     void runAlgo() override;
+    ~quickSortCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+        delete this->quicksorting_;
+        this->quicksorting_ = nullptr;
+    }
 private:
     void convertToQString() override;
     bool readLine(QString&&) override;
@@ -64,6 +72,12 @@ public:
     algorithm* getAlgorithm() override;
 
     void runAlgo() override;
+    ~heapSortCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+        delete this->heapsorting_;
+        this->heapsorting_ = nullptr;
+    }
 private:
     void convertToQString() override;
     bool readLine(QString&&) override;
@@ -79,6 +93,12 @@ public:
     algorithm* getAlgorithm() override;
 
     void runAlgo() override;
+    ~countingSortCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+        delete this->countingsorting_;
+        this->countingsorting_ = nullptr;
+    }
 private:
     void convertToQString() override;
     bool readLine(QString&&) override;
@@ -94,6 +114,12 @@ public:
     algorithm* getAlgorithm() override;
 
     void runAlgo() override;
+    ~radixSortCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+        delete this->radixsorting_;
+        this->radixsorting_ = nullptr;
+    }
 private:
     void convertToQString() override;
     bool readLine(QString&&) override;
@@ -110,6 +136,12 @@ public:
     algorithm* getAlgorithm() override;
 
     void runAlgo() override;
+    ~insertionSortCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+        delete this->insertionsorting_;
+        this->insertionsorting_ = nullptr;
+    }
 private:
     void convertToQString() override;
     bool readLine(QString&&) override;
@@ -125,6 +157,12 @@ public:
     algorithm* getAlgorithm() override;
 
     void runAlgo() override;
+    ~bucketSortCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+        delete this->bucketsorting_;
+        this->bucketsorting_ = nullptr;
+    }
 private:
     void convertToQString() override;
     bool readLine(QString&&) override;
@@ -140,6 +178,12 @@ public:
     algorithm* getAlgorithm() override;
 
     void runAlgo() override;
+    ~horspoolCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+        delete this->horspool_;
+        this->horspool_ = nullptr;
+    }
 private:
     void convertToQString() override;
     bool readLine(QString&&) override;
@@ -156,6 +200,12 @@ public:
     algorithm* getAlgorithm() override;
 
     void runAlgo() override;
+    ~boyermoorCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+        delete this->boyermoor_;
+        this->boyermoor_ = nullptr;
+    }
 private:
     void convertToQString() override;
     bool readLine(QString&&) override;

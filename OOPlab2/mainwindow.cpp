@@ -21,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
     {
         ui->algoselector->addItem(i,0);
     }
+    //radio button initialization
+    ui->radioAscend->setChecked(true);
 
     //add labels to table
     QVector<QString> colnames = {"Name","Time","Memory","Result"};
@@ -89,8 +91,36 @@ void MainWindow::on_btnrun_clicked()
 //    this->facade->runAlgo(0,this->ui->inputline->text());
 //    this->facade->runAlgo(1,this->ui->inputline->text());
 //    this->facade->runAlgo(2,this->ui->inputline->text());
-    this->facade->runAlgo(7,this->ui->inputline->text());
-    this->facade->runAlgo(8,this->ui->inputline->text());
+    //this->facade->runAlgo(7,this->ui->inputline->text());
+  //  this->facade->runAlgo(8,this->ui->inputline->text());
+
+    if(ui->radioDescend->isChecked())
+        this->facade->setIsAscend(false);
+    else
+        this->facade->setIsAscend(true);
+    if(ui->checkBoxMemory->isChecked())
+        this->facade->setNumberOfComparisons(true);
+    else
+        this->facade->setNumberOfComparisons(false);
+    if(ui->checkBoxTime->isChecked())
+        this->facade->setTime(true);
+    else
+         this->facade->setTime(false);
+
+      try {
+          this->facade->runAlgo(this->ui->algoselector->currentIndex(), this->ui->inputline->text());
+          //Save memento here
+          ui->resultTable->insertRow(ui->resultTable->rowCount());
+         auto inf = this->facade->getInfo().get();
+          this->results_table_originator.writeInRow(inf, ui->resultTable->rowCount()-1);
+
+      }  catch (const std::exception& e) {
+
+          QMessageBox::warning(this, "Error occured",e.what(), QMessageBox::Ok,QMessageBox::Ok);
+
+
+
+      }
 
 }
 
