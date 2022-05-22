@@ -84,7 +84,7 @@ void ResultTableOriginator::restore(ResultTableMemento* memento){
     table->setRowCount(rows_info.size());
 
     for (int i = 0; i < rows_info.size(); i++){
-        writeInRow(rows_info[i], i);
+        writeInRow(&rows_info[i], i);
     }
 }
 

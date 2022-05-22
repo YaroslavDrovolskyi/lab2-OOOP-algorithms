@@ -35,21 +35,23 @@
  template <typename T>
     bool Facade::comparatorAscend(T a ,  T b)
    {
+        counter++;
        if(a >=b)
            return true;
 
        return false;
-         counter++;
+
    }
 
    template <typename T>
      bool Facade::comparatorDescend(T a ,  T b)
      {
+         counter++;
          if(a <=b)
              return true;
 
          return false;
-         counter++;
+
 
      }
 
@@ -116,18 +118,40 @@
  this->algoCreator_ =std::make_shared<boyermoorCreator>( std::move(this->inputLine));
          break;
      case(9):
-
+         if(this->isAscend)
+ this->algoCreator_ =std::make_shared<CombSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
+         else
+               this->algoCreator_ =std::make_shared<CombSortCreator>( std::move(this->inputLine),this->comparatorDescend<float>);
          break;
      case(10):
+         if(this->isAscend)
+ this->algoCreator_ =std::make_shared<ShellSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
+         else
+               this->algoCreator_ =std::make_shared<ShellSortCreator>( std::move(this->inputLine),this->comparatorDescend<float>);
 
          break;
      case(11):
+         if(this->isAscend)
+ this->algoCreator_ =std::make_shared<OddEvenSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
+         else
+               this->algoCreator_ =std::make_shared<OddEvenSortCreator>( std::move(this->inputLine),this->comparatorDescend<float>);
 
          break;
      case(12):
+         if(this->isAscend)
+ this->algoCreator_ =std::make_shared<CocktailShakerSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
+         else
+               this->algoCreator_ =std::make_shared<CocktailShakerSortCreator>( std::move(this->inputLine),this->comparatorDescend<float>);
 
          break;
 
+     case(13):
+         if(this->isAscend)
+ this->algoCreator_ =std::make_shared<TimSortCreator>( std::move(this->inputLine),this->comparatorAscend<float>);
+         else
+               this->algoCreator_ =std::make_shared<TimSortCreator>( std::move(this->inputLine),this->comparatorDescend<float>);
+
+         break;
 
      }
  }

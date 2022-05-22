@@ -1115,7 +1115,9 @@ CombSort<T, Comparator>::CombSort(std::vector<T>& vec, Comparator c) :
     name("combsort"), memory(0), arr(nullptr), size(vec.size())
 {
     if (size > 0){
-        arr = &vec[0];
+       // arr = &vec[0];
+        arr = new T[size];
+        std::copy(vec.begin(), vec.end(), arr);
     }
 
     this->comparator = c;

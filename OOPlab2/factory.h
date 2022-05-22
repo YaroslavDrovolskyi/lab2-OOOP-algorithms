@@ -215,78 +215,103 @@ private:
     boyermoor* boyermoor_;
 };
 
-//class CombSortCreator : public algoCreator
-//{
-//public:
-//    CombSortCreator(QString&&, bool(float,float));
-//    algorithm* getAlgorithm() override;
+class CombSortCreator : public algoCreator
+{
+public:
+    CombSortCreator(QString&&, bool(float,float));
+    algorithm* getAlgorithm() override;
+    ~CombSortCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+        delete this->CombSort_;
+        this->CombSort_ = nullptr;
+    }
+    void runAlgo() override;
+private:
+    void convertToQString() override;
+    bool readLine(QString&&) override;
+    std::vector<float> vec;
 
-//    void runAlgo() override;
-//private:
-//    void convertToQString() override;
-//    bool readLine(QString&&) override;
-//    std::vector<float> vec;
+    CombSort<float,bool(float,float)>*CombSort_;
+};
 
-//    CombSort<float,bool(float,float)>*CombSort_;
-//};
+class ShellSortCreator : public algoCreator
+{
+public:
+    ShellSortCreator(QString&&, bool(float,float));
+    algorithm* getAlgorithm() override;
+    ~ShellSortCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+        delete this->ShellSort_;
+        this->ShellSort_ = nullptr;
+    }
+    void runAlgo() override;
+private:
+    void convertToQString() override;
+    bool readLine(QString&&) override;
+    std::vector<float> vec;
 
-//class ShellSortCreator : public algoCreator
-//{
-//public:
-//    ShellSortCreator(QString&&, bool(float,float));
-//    algorithm* getAlgorithm() override;
+    ShellSort<float,bool(float,float)>*ShellSort_;
+};
 
-//    void runAlgo() override;
-//private:
-//    void convertToQString() override;
-//    bool readLine(QString&&) override;
-//    std::vector<float> vec;
+class OddEvenSortCreator : public algoCreator
+{
+public:
+    OddEvenSortCreator(QString&&, bool(float,float));
+    algorithm* getAlgorithm() override;
+    ~OddEvenSortCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+        delete this->OddEvenSort_;
+        this->OddEvenSort_ = nullptr;
+    }
+    void runAlgo() override;
+private:
+    void convertToQString() override;
+    bool readLine(QString&&) override;
+    std::vector<float> vec;
 
-//    ShellSort<float,bool(float,float)>*ShellSort_;
-//};
+    OddEvenSort<float,bool(float,float)>*OddEvenSort_;
+};
 
-//class OddEvenSortCreator : public algoCreator
-//{
-//public:
-//    OddEvenSortCreator(QString&&, bool(float,float));
-//    algorithm* getAlgorithm() override;
+class CocktailShakerSortCreator : public algoCreator
+{
+public:
+    CocktailShakerSortCreator(QString&&, bool(float,float));
+    algorithm* getAlgorithm() override;
+    ~CocktailShakerSortCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+        delete this->CocktailShakerSort_;
+        this->CocktailShakerSort_ = nullptr;
+    }
+    void runAlgo() override;
+private:
+    void convertToQString() override;
+    bool readLine(QString&&) override;
+    std::vector<float> vec;
 
-//    void runAlgo() override;
-//private:
-//    void convertToQString() override;
-//    bool readLine(QString&&) override;
-//    std::vector<float> vec;
+    CocktailShakerSort<float,bool(float,float)>*CocktailShakerSort_;
+};
 
-//    OddEvenSort<float,bool(float,float)>*OddEvenSort_;
-//};
+class TimSortCreator : public algoCreator
+{
+public:
+    TimSortCreator(QString&&, bool(float,float));
+    algorithm* getAlgorithm() override;
+    ~TimSortCreator()
+    {
+        qDebug()<<"~mergeSortCreator";
+        delete this->TimSort_;
+        this->TimSort_ = nullptr;
+    }
+    void runAlgo() override;
+private:
+    void convertToQString() override;
+    bool readLine(QString&&) override;
+    std::vector<float> vec;
 
-//class CocktailShakerSortCreator : public algoCreator
-//{
-//public:
-//    CocktailShakerSortCreator(QString&&, bool(float,float));
-//    algorithm* getAlgorithm() override;
-
-//    void runAlgo() override;
-//private:
-//    void convertToQString() override;
-//    bool readLine(QString&&) override;
-//    std::vector<float> vec;
-
-//    CocktailShakerSort<float,bool(float,float)>*CocktailShakerSort_;
-//};
-
-//class TimSortCreator : public algoCreator
-//{
-//public:
-//    TimSortCreator(QString&&, bool(float,float));
-//    algorithm* getAlgorithm() override;
-
-//    void runAlgo() override;
-//private:
-//    void convertToQString() override;
-//    bool readLine(QString&&) override;
-//    std::vector<float> vec;
-
-//    TimSort<float,bool(float,float)>*TimSort_;
-//};
+    TimSort<float,bool(float,float)>*TimSort_;
+};
 #endif // FACTORY_H

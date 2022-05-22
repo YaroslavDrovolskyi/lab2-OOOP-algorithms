@@ -48,7 +48,12 @@ private:
         "insertionsort",
         "bucketsort",
         "horspool",
-        "boyermoor"
+        "boyermoor",
+        "CombSort",
+        "ShellSort",
+        "OddEvenSort",
+        "CocktailShakerSort",
+        "TimSort"
     };
 
     ResultTableOriginator results_table_originator;

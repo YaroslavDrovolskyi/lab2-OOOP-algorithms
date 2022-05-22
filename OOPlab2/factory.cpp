@@ -5,6 +5,7 @@
 #include <QStack>
 #include <stdexcept>
 #include <QDebug>
+#include "adapter.h"
 //TODO: negative numbers in regex for float
 
 
@@ -430,235 +431,299 @@ void bucketSortCreator::convertToQString()
             this->res.append(" ");
    }
 }
+//combsort
+CombSortCreator::CombSortCreator(QString&& line, bool a(float,float) )
+{
 
-////combsort
-//CombSortCreator::CombSortCreator(QString&& line, bool a(float,float) )
-//{
+    if(this->readLine(std::move(line)))
+     CombSort_ = CombSort<float, bool(float,float)>::GetInstance(this->vec,a);
+}
+algorithm* CombSortCreator::getAlgorithm()
+{
 
-//    if(this->readLine(std::move(line)))
-//     CombSort_ = CombSort<float, bool(float,float)>::GetInstance(this->vec,a);
-//}
-//algorithm* CombSortCreator::getAlgorithm()
-//{
+   return this->CombSort_;
+}
 
-//   return this->CombSort_;
-//}
+bool CombSortCreator::readLine(QString&& line)
+{
+      const QRegularExpression regexp("[^0-9.]");
+      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
 
-//bool CombSortCreator::readLine(QString&& line)
-//{
-//      const QRegularExpression regexp("[^0-9.]");
-//      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
-
-//      const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
-
-
-
-//      if(!areValidNumbers(listofnumbers,validNumberRegex))        //process error
-//      {
-
-//         // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
-
-//          return false;
-//      }
-
-//    size_t size = listofnumbers.size();
-//   for(auto i =0; i< size; i++)
-//   {
-//      this->vec.push_back(listofnumbers[i].toFloat());
-//   }
-
-//return true;
-//}
-//void CombSortCreator::runAlgo()
-//{
-//   this->CombSort_->run();
-//   this->convertToQString();
-//}
-//void CombSortCreator::convertToQString()
-//{
-
-
-//   size_t size = this->vec.size();
-//   auto res = this->CombSort_->getvalues();
-//   for(auto i=0; i< size; i++)
-//   {
-//        this->res.append(QString::number(res[i]));
-//       if(i!= size-1)
-//            this->res.append(" ");
-//   }
-//}
-
-////shellsort
-//ShellSortCreator::ShellSortCreator(QString&& line, bool a(float,float) )
-//{
-
-//    if(this->readLine(std::move(line)))
-//     ShellSort_ = ShellSort<float, bool(float,float)>::GetInstance(this->vec,a);
-//}
-//algorithm* ShellSortCreator::getAlgorithm()
-//{
-
-//   return this->ShellSort_;
-//}
-
-//bool ShellSortCreator::readLine(QString&& line)
-//{
-//      const QRegularExpression regexp("[^0-9.]");
-//      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
-
-//      const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
+      const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
 
 
 
-//      if(!areValidNumbers(listofnumbers,validNumberRegex))        //process error
-//      {
+      if(!areValidNumbers(listofnumbers,validNumberRegex))        //process error
+      {
 
-//         // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
+         // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
+    throw std::invalid_argument("Invalid input data");
+          return false;
+      }
 
-//          return false;
-//      }
+    size_t size = listofnumbers.size();
+   for(auto i =0; i< size; i++)
+   {
+      this->vec.push_back(listofnumbers[i].toFloat());
+   }
 
-//    size_t size = listofnumbers.size();
-//   for(auto i =0; i< size; i++)
-//   {
-//      this->vec.push_back(listofnumbers[i].toFloat());
-//   }
-
-//return true;
-//}
-//void ShellSortCreator::runAlgo()
-//{
-//   this->ShellSort_->run();
-//   this->convertToQString();
-//}
-//void ShellSortCreator::convertToQString()
-//{
-
-
-//   size_t size = this->vec.size();
-//   auto res = this->ShellSort_->getvalues();
-//   for(auto i=0; i< size; i++)
-//   {
-//        this->res.append(QString::number(res[i]));
-//       if(i!= size-1)
-//            this->res.append(" ");
-//   }
-//}
-
-////oddeven
-
-//OddEvenSortCreator::OddEvenSortCreator(QString&& line, bool a(float,float) )
-//{
-
-//    if(this->readLine(std::move(line)))
-//     OddEvenSort_ = OddEvenSort<float, bool(float,float)>::GetInstance(this->vec,a);
-//}
-//algorithm* OddEvenSortCreator::getAlgorithm()
-//{
-
-//   return this->OddEvenSort_;
-//}
-
-//bool OddEvenSortCreator::readLine(QString&& line)
-//{
-//      const QRegularExpression regexp("[^0-9.]");
-//      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
-
-//      const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
+return true;
+}
+void CombSortCreator::runAlgo()
+{
+   this->CombSort_->run();
+   this->convertToQString();
+}
+void CombSortCreator::convertToQString()
+{
 
 
+   size_t size = this->vec.size();
+   auto check = this->CombSort_->getArray();
+    for(int i=0; i<size; i++)
+        qDebug()<<check[i];
+    AdapterForSortArrayAlgo<float,bool(float,float)> adapt(this->CombSort_);
+   auto res = adapt.getvalues();
+   for(auto i=0; i< size; i++)
+   {
+        this->res.append(QString::number(res[i]));
+       if(i!= size-1)
+            this->res.append(" ");
+   }
+}
+//cocktailSort
+CocktailShakerSortCreator::CocktailShakerSortCreator(QString&& line, bool a(float,float) )
+{
 
-//      if(!areValidNumbers(listofnumbers,validNumberRegex))        //process error
-//      {
+    if(this->readLine(std::move(line)))
+     CocktailShakerSort_ = CocktailShakerSort<float, bool(float,float)>::GetInstance(this->vec,a);
+}
+algorithm* CocktailShakerSortCreator::getAlgorithm()
+{
 
-//         // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
+   return this->CocktailShakerSort_;
+}
 
-//          return false;
-//      }
+bool CocktailShakerSortCreator::readLine(QString&& line)
+{
+      const QRegularExpression regexp("[^0-9.]");
+      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
 
-//    size_t size = listofnumbers.size();
-//   for(auto i =0; i< size; i++)
-//   {
-//      this->vec.push_back(listofnumbers[i].toFloat());
-//   }
-
-//return true;
-//}
-//void OddEvenSortCreator::runAlgo()
-//{
-//   this->OddEvenSort_->run();
-//   this->convertToQString();
-//}
-//void OddEvenSortCreator::convertToQString()
-//{
-
-
-//   size_t size = this->vec.size();
-//   auto res = this->OddEvenSort_->getvalues();
-//   for(auto i=0; i< size; i++)
-//   {
-//        this->res.append(QString::number(res[i]));
-//       if(i!= size-1)
-//            this->res.append(" ");
-//   }
-//}
-
-////timsort
-//TimSortCreator::TimSortCreator(QString&& line, bool a(float,float) )
-//{
-
-//    if(this->readLine(std::move(line)))
-//     TimSort_ = TimSort<float, bool(float,float)>::GetInstance(this->vec,a);
-//}
-//algorithm* TimSortCreator::getAlgorithm()
-//{
-
-//   return this->TimSort_;
-//}
-
-//bool TimSortCreator::readLine(QString&& line)
-//{
-//      const QRegularExpression regexp("[^0-9.]");
-//      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
-
-//      const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
+      const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
 
 
 
-//      if(!areValidNumbers(listofnumbers,validNumberRegex))        //process error
-//      {
+      if(!areValidNumbers(listofnumbers,validNumberRegex))        //process error
+      {
 
-//         // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
+         // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
+    throw std::invalid_argument("Invalid input data");
+          return false;
+      }
 
-//          return false;
-//      }
+    size_t size = listofnumbers.size();
+   for(auto i =0; i< size; i++)
+   {
+      this->vec.push_back(listofnumbers[i].toFloat());
+   }
 
-//    size_t size = listofnumbers.size();
-//   for(auto i =0; i< size; i++)
-//   {
-//      this->vec.push_back(listofnumbers[i].toFloat());
-//   }
-
-//return true;
-//}
-//void TimSortCreator::runAlgo()
-//{
-//   this->TimSort_->run();
-//   this->convertToQString();
-//}
-//void TimSortCreator::convertToQString()
-//{
+return true;
+}
+void CocktailShakerSortCreator::runAlgo()
+{
+   this->CocktailShakerSort_->run();
+   this->convertToQString();
+}
+void CocktailShakerSortCreator::convertToQString()
+{
 
 
-//   size_t size = this->vec.size();
-//   auto res = this->TimSort_->getvalues();
-//   for(auto i=0; i< size; i++)
-//   {
-//        this->res.append(QString::number(res[i]));
-//       if(i!= size-1)
-//            this->res.append(" ");
-//   }
-//}
+   size_t size = this->vec.size();
+    AdapterForSortArrayAlgo<float,bool(float,float)> adapt(this->CocktailShakerSort_);
+   auto res = adapt.getvalues();
+   for(auto i=0; i< size; i++)
+   {
+        this->res.append(QString::number(res[i]));
+       if(i!= size-1)
+            this->res.append(" ");
+   }
+}
+
+
+
+//shellsort
+ShellSortCreator::ShellSortCreator(QString&& line, bool a(float,float) )
+{
+
+    if(this->readLine(std::move(line)))
+     ShellSort_ = ShellSort<float, bool(float,float)>::GetInstance(this->vec,a);
+}
+algorithm* ShellSortCreator::getAlgorithm()
+{
+
+   return this->ShellSort_;
+}
+
+bool ShellSortCreator::readLine(QString&& line)
+{
+      const QRegularExpression regexp("[^0-9.]");
+      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
+
+      const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
+
+
+
+      if(!areValidNumbers(listofnumbers,validNumberRegex))        //process error
+      {
+
+         // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
+throw std::invalid_argument("Invalid input data");
+          return false;
+      }
+
+    size_t size = listofnumbers.size();
+   for(auto i =0; i< size; i++)
+   {
+      this->vec.push_back(listofnumbers[i].toFloat());
+   }
+
+return true;
+}
+void ShellSortCreator::runAlgo()
+{
+   this->ShellSort_->run();
+   this->convertToQString();
+}
+void ShellSortCreator::convertToQString()
+{
+
+
+   size_t size = this->vec.size();
+   AdapterForSortArrayAlgo<float,bool(float,float)> adapt(this->ShellSort_);
+   auto res = adapt.getvalues();
+   for(auto i=0; i< size; i++)
+   {
+        this->res.append(QString::number(res[i]));
+       if(i!= size-1)
+            this->res.append(" ");
+   }
+}
+
+//oddeven
+
+OddEvenSortCreator::OddEvenSortCreator(QString&& line, bool a(float,float) )
+{
+
+    if(this->readLine(std::move(line)))
+     OddEvenSort_ = OddEvenSort<float, bool(float,float)>::GetInstance(this->vec,a);
+}
+algorithm* OddEvenSortCreator::getAlgorithm()
+{
+
+   return this->OddEvenSort_;
+}
+
+bool OddEvenSortCreator::readLine(QString&& line)
+{
+      const QRegularExpression regexp("[^0-9.]");
+      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
+
+      const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
+
+
+
+      if(!areValidNumbers(listofnumbers,validNumberRegex))        //process error
+      {
+
+         // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
+throw std::invalid_argument("Invalid input data");
+          return false;
+      }
+
+    size_t size = listofnumbers.size();
+   for(auto i =0; i< size; i++)
+   {
+      this->vec.push_back(listofnumbers[i].toFloat());
+   }
+
+return true;
+}
+void OddEvenSortCreator::runAlgo()
+{
+   this->OddEvenSort_->run();
+   this->convertToQString();
+}
+void OddEvenSortCreator::convertToQString()
+{
+
+
+   size_t size = this->vec.size();
+   AdapterForSortArrayAlgo<float,bool(float,float)> adapt(this->OddEvenSort_);
+   auto res = adapt.getvalues();
+   for(auto i=0; i< size; i++)
+   {
+        this->res.append(QString::number(res[i]));
+       if(i!= size-1)
+            this->res.append(" ");
+   }
+}
+
+//timsort
+TimSortCreator::TimSortCreator(QString&& line, bool a(float,float) )
+{
+
+    if(this->readLine(std::move(line)))
+     TimSort_ = TimSort<float, bool(float,float)>::GetInstance(this->vec,a);
+}
+algorithm* TimSortCreator::getAlgorithm()
+{
+
+   return this->TimSort_;
+}
+
+bool TimSortCreator::readLine(QString&& line)
+{
+      const QRegularExpression regexp("[^0-9.]");
+      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
+
+      const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
+
+
+
+      if(!areValidNumbers(listofnumbers,validNumberRegex))        //process error
+      {
+
+         // QMessageBox::warning(this, "Invalid input data","Invalid input data", QMessageBox::Ok,QMessageBox::Ok);
+    throw std::invalid_argument("Invalid input data");
+          return false;
+      }
+
+    size_t size = listofnumbers.size();
+   for(auto i =0; i< size; i++)
+   {
+      this->vec.push_back(listofnumbers[i].toFloat());
+   }
+
+return true;
+}
+void TimSortCreator::runAlgo()
+{
+   this->TimSort_->run();
+   this->convertToQString();
+}
+void TimSortCreator::convertToQString()
+{
+
+    AdapterForSortArrayAlgo<float,bool(float,float)> adapt(this->TimSort_);
+   size_t size = this->vec.size();
+   auto res = adapt.getvalues();
+   for(auto i=0; i< size; i++)
+   {
+        this->res.append(QString::number(res[i]));
+       if(i!= size-1)
+            this->res.append(" ");
+   }
+}
 
 //horspool
 horspoolCreator::horspoolCreator(QString&& l )
