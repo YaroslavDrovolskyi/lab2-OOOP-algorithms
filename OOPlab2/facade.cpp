@@ -27,6 +27,7 @@
 
     this->saveResultData(this->algoCreator_->getResult());
     this->saveName();
+    if(this->hasNumberOfComparisons)
     this->saveNumberOfComparisons();
 
  };
@@ -36,7 +37,7 @@
     bool Facade::comparatorAscend(T a ,  T b)
    {
         counter++;
-       if(a >=b)
+       if(a <=b)
            return true;
 
        return false;
@@ -47,7 +48,7 @@
      bool Facade::comparatorDescend(T a ,  T b)
      {
          counter++;
-         if(a <=b)
+         if(a >=b)
              return true;
 
          return false;

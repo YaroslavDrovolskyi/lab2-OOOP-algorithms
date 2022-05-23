@@ -61,7 +61,7 @@ void mergesorting<T,Comparator>::merge(std::vector<T>& arr, int p, int mid, int 
 
     while (leftindex < leftsize && rightindex < rightsize)
     {
-        if (/*left[leftindex] < right[rightindex]*/ !this->comparator(left[leftindex],right[rightindex]))
+        if (/*left[leftindex] < right[rightindex]*/ this->comparator(left[leftindex],right[rightindex]))
         {
             arr[arrindex] = left[leftindex];
             leftindex++;
@@ -210,7 +210,7 @@ int quicksorting<T,Comparator>::partition(std::vector<T>& arr, int p, int r)
     int i = p - 1;
     for (int j = p; j < r; j++)
     {
-        if (/*arr[j] <= arr[r]*/ !this->comparator(arr[j],arr[r]) )
+        if (/*arr[j] <= arr[r]*/ this->comparator(arr[j],arr[r]) )
         {
             i++;
             float temp = arr[j];
@@ -338,11 +338,11 @@ void heapsorting<T,Comparator>::maxheapify(std::vector<T>& arr, int i, int p)
     int left = i * 2 + 1;
     int right = i * 2 + 2;
     int max = i;
-    if (left < p && /*arr[left] > arr[max]*/ this->comparator(arr[left],arr[max]) )
+    if (left < p && /*arr[left] > arr[max]*/ !this->comparator(arr[left],arr[max]) )
     {
         max = left;
     }
-    if (right < p && /*arr[right] > arr[max]*/ this->comparator(arr[right],arr[max]))
+    if (right < p && /*arr[right] > arr[max]*/ !this->comparator(arr[right],arr[max]))
         max = right;
 
     if (max != i)
@@ -378,17 +378,7 @@ void heapsorting<T,Comparator>::heapsort(std::vector<T>& arr)
     }
 }
 
-int getMax(std::vector<uint32_t>arr)
-{
-    int max = arr[0];
-    int size = arr.size();
-    for (int i = 1; i < size; i++)
-    {
-        if (arr[i] > max)
-            max = arr[i];
-    }
-    return max;
-}
+
 
  template<typename T,  typename Comparator>
 void countingsorting<T,Comparator>::setValue(std::vector<T>&v)
@@ -472,21 +462,17 @@ void countingsorting<T,Comparator>::countingsort(std::vector<T>& arr, uint32_t e
     }
 
 
-//    for (int i = 0; i < size; i++)
-//    {
-//        arr[i] = out[i];
-//    }
 
-    if(!this->comparator(1,2))
+   // if(this->comparator(1,2))
     for (int i = 0; i < size; i++)
     {
         arr[i] = out[i];
     }
-    else
-        for (int i = 0; i < size; i++)
-        {
-            arr[i] = out[size - i -1];
-        }
+//    else
+//        for (int i = 0; i < size; i++)
+//        {
+//            arr[i] = out[size - i -1];
+//        }
 
 
 }
@@ -539,12 +525,27 @@ template<typename T,  typename Comparator>
 template<typename T,  typename Comparator>
  std::vector<T> countingsorting<T,Comparator>::getvalues()
  {
+
+     if(!this->comparator(1,2))
+         std::reverse(this->vec.begin(),this->vec.end());
      return this->vec;
+ }
+ template<typename T,  typename Comparator>
+ T radixsorting<T,Comparator>::getMax()
+ {
+     int max = this->vec[0];
+     int size = this->vec.size();
+     for (int i = 1; i < size; i++)
+     {
+         if (this->vec[i] > max)
+             max = this->vec[i];
+     }
+     return max;
  }
 template<typename T,  typename Comparator>
  void radixsorting<T,Comparator>::radixsort(std::vector<T>& arr, uint32_t b)
  {
-     int max = getMax(arr);
+     int max = getMax();
      countingsorting<T,Comparator>* cs =  countingsorting<T,Comparator>::GetInstance(arr,this->comparator);
 
      cs->setbase(b);
@@ -553,6 +554,7 @@ template<typename T,  typename Comparator>
 
          cs->setexp(exp);
          cs->run();
+
      }
      this->vec = cs->getvalues();
      delete cs;
@@ -731,7 +733,7 @@ void insertionsorting<T,Comparator>::insertionsort(std::vector<T>&arr)
     {
         k = arr[i];
         j = i - 1;
-        while (j >= 0 && /*arr[j] > k*/ this->comparator(arr[j],k))
+        while (j >= 0 && /*arr[j] > k*/ !this->comparator(arr[j],k))
         {
             arr[j + 1] = arr[j];
             j = j - 1;
@@ -788,7 +790,7 @@ void bucketsorting<T,Comparator>::bucketsort(std::vector<T>& arr)
     }
 delete inss;
     int k = 0;
-    if(!this->comparator(1,2)) //checking order of sorting
+    if(this->comparator(1,2)) //checking order of sorting
     for (int i = 0; i < len; i++)
     {
         int sublen = out[i].size();
