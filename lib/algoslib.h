@@ -239,7 +239,7 @@ template<typename T,  typename Comparator>
      radixsorting(std::vector<T>& v, Comparator c);
      radixsorting( Comparator c);
 
-
+     T getMax();
      std::string name;
      uint32_t memory;
      std::vector<T> vec;

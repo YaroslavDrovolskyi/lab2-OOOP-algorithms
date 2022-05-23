@@ -44,8 +44,8 @@
 
  bool mergeSortCreator::readLine(QString&& line)
  {
-        const QRegularExpression regexp("[^0-9.]");
-        const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
+        const QRegularExpression regexp("[^0-9.-]");
+        const QRegularExpression validNumberRegex("\\A-{0,1}[0-9]+\\.{0,1}[0-9]*$");
 
         const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
 
@@ -102,8 +102,8 @@
 
 bool quickSortCreator::readLine(QString&& line)
 {
-       const QRegularExpression regexp("[^0-9.]");
-       const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
+    const QRegularExpression regexp("[^0-9.-]");
+    const QRegularExpression validNumberRegex("\\A-{0,1}[0-9]+\\.{0,1}[0-9]*$");
 
        const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
 
@@ -159,8 +159,8 @@ algorithm* heapSortCreator::getAlgorithm()
 
 bool heapSortCreator::readLine(QString&& line)
 {
-      const QRegularExpression regexp("[^0-9.]");
-      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
+    const QRegularExpression regexp("[^0-9.-]");
+    const QRegularExpression validNumberRegex("\\A-{0,1}[0-9]+\\.{0,1}[0-9]*$");
 
       const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
 
@@ -332,8 +332,8 @@ algorithm* insertionSortCreator::getAlgorithm()
 
 bool insertionSortCreator::readLine(QString&& line)
 {
-      const QRegularExpression regexp("[^0-9.]");
-      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
+    const QRegularExpression regexp("[^0-9.-]");
+    const QRegularExpression validNumberRegex("\\A-{0,1}[0-9]+\\.{0,1}[0-9]*$");
 
       const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
 
@@ -566,8 +566,8 @@ algorithm* ShellSortCreator::getAlgorithm()
 
 bool ShellSortCreator::readLine(QString&& line)
 {
-      const QRegularExpression regexp("[^0-9.]");
-      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
+    const QRegularExpression regexp("[^0-9.-]");
+    const QRegularExpression validNumberRegex("\\A-{0,1}[0-9]+\\.{0,1}[0-9]*$");
 
       const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
 
@@ -625,8 +625,8 @@ algorithm* OddEvenSortCreator::getAlgorithm()
 
 bool OddEvenSortCreator::readLine(QString&& line)
 {
-      const QRegularExpression regexp("[^0-9.]");
-      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
+    const QRegularExpression regexp("[^0-9.-]");
+    const QRegularExpression validNumberRegex("\\A-{0,1}[0-9]+\\.{0,1}[0-9]*$");
 
       const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
 
@@ -683,8 +683,8 @@ algorithm* TimSortCreator::getAlgorithm()
 
 bool TimSortCreator::readLine(QString&& line)
 {
-      const QRegularExpression regexp("[^0-9.]");
-      const QRegularExpression validNumberRegex("\\A[0-9]+\\.{0,1}[0-9]*$");
+    const QRegularExpression regexp("[^0-9.-]");
+    const QRegularExpression validNumberRegex("\\A-{0,1}[0-9]+\\.{0,1}[0-9]*$");
 
       const QVector<QString> listofnumbers =  line.split(regexp,Qt::SkipEmptyParts);
 
