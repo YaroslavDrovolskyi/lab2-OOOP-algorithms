@@ -36,6 +36,8 @@ private slots:
 
     void on_undoRemoveRow_clicked();
 
+    void on_genRandInputBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -58,6 +60,13 @@ private:
 
     ResultTableOriginator results_table_originator;
     ResultTableHistory results_history;
+
+    QString getRandomInputLine(std::size_t algo_index);
+    std::vector<int> getRandomIntArray(std::size_t size, int min, int max);
+    std::vector<double> getRandomDoubleArray(std::size_t size, int min, int max); // generate numbers in [min, max) interval
+    QString getRandomMatchingSustringInputLine();
+    template <typename T>
+    QString arrayIntoInputLine(const std::vector<T>& vec);
 
     bool areValidNumbers(const QVector<QString>&listofnumbers, const QRegularExpression& expr);
 

@@ -95,7 +95,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>706</width>
+            <width>700</width>
             <height>148</height>
            </rect>
           </property>
@@ -132,7 +132,7 @@
             </widget>
            </item>
            <item row="0" column="3">
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="genRandInputBtn">
              <property name="text">
               <string>generateRandombtn</string>
              </property>
@@ -177,7 +177,7 @@
      <x>0</x>
      <y>0</y>
      <width>746</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

@@ -9,6 +9,7 @@
 #include <memory>
 #include "factory.h"
 #include <set>
+#include <random>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -146,3 +147,101 @@ void MainWindow::on_undoRemoveRow_clicked()
 
 }
 
+
+void MainWindow::on_genRandInputBtn_clicked()
+{
+    QString random_input = getRandomInputLine(this->ui->algoselector->currentIndex());
+    this->ui->inputline->setText(random_input);
+
+}
+
+std::vector<int> MainWindow::getRandomIntArray(std::size_t size, int min, int max){
+    assert(size >= 1);
+    assert(min < max);
+
+    std::vector<int> result;
+
+    static std::default_random_engine gen;
+    std::uniform_int_distribution<int>dis(min, max);
+
+
+    for (std::size_t i = 0; i < size; i++){
+        result.push_back(dis(gen));
+    }
+
+    return result;
+}
+
+std::vector<double> MainWindow::getRandomDoubleArray(std::size_t size, int min, int max){
+    assert(size >= 1);
+    assert(min < max);
+
+    std::vector<double> result;
+
+    static std::default_random_engine gen;
+    std::uniform_real_distribution<double>dis(min, max);
+
+
+    for (std::size_t i = 0; i < size; i++){
+        result.push_back(dis(gen));
+    }
+
+    return result;
+}
+
+template <typename T>
+QString MainWindow::arrayIntoInputLine(const std::vector<T>& vec){
+    QString result;
+    if (vec.empty()){
+        return result;
+    }
+
+    for (std::size_t i = 0; i < vec.size() - 1; i++){
+        result += QString::number(vec[i]) + ", ";
+    }
+    result += QString::number(vec.back());
+
+    return result;
+}
+
+
+QString MainWindow::getRandomMatchingSustringInputLine(){
+    static QString alphabet="0123456789abcdefghijklmnopqrstuvwxyz";
+    QString result;
+
+    static std::default_random_engine gen;
+    static std::uniform_int_distribution<int>dis(0, alphabet.size() - 1);
+
+    // generate string
+    result += "\"";
+    for (std::size_t i = 0; i < 20; i++){
+        result += alphabet[dis(gen)];
+    }
+    result += "\" \"";
+
+    // generate example
+    for (std::size_t i = 0; i < 5; i++){
+        result += alphabet[dis(gen)];
+    }
+    result += "\"";
+
+    return result;
+}
+
+QString MainWindow::getRandomInputLine(std::size_t algo_index){
+    if (algo_index >= 0 && algo_index <= 2 || algo_index == 5 || algo_index >= 9){
+        std::vector<int> vec = getRandomIntArray(20, -500, 500);
+        return arrayIntoInputLine(vec);
+    }
+    else if (algo_index >= 3 && algo_index <= 4){
+        std::vector<int> vec = getRandomIntArray(20, 0, 500);
+        return arrayIntoInputLine(vec);
+    }
+    else if (algo_index == 6){
+        std::vector<double> vec = getRandomDoubleArray(20, 0, 1);
+        return arrayIntoInputLine(vec);
+    }
+    else{
+        return getRandomMatchingSustringInputLine();
+    }
+}
