@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->radioAscend->setChecked(true);
 
     //add labels to table
-    QVector<QString> colnames = {"Name","Time","Comparisons(according to comparators)","Result"};
+    QVector<QString> colnames = {"Name","Time","N of comparisons","Result"};
     ui->resultTable->setColumnCount(4);
     ui->resultTable->setHorizontalHeaderLabels(colnames);
 
@@ -34,6 +34,8 @@ MainWindow::MainWindow(QWidget *parent)
     results_table_originator = ResultTableOriginator(ui->resultTable);
     results_history = ResultTableHistory(&results_table_originator);
 
+    //table width
+    ui->resultTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
 }
 
@@ -87,8 +89,6 @@ void MainWindow::on_btnrun_clicked()
       }  catch (const std::exception& e) {
 
           QMessageBox::warning(this, "Error occured",e.what(), QMessageBox::Ok,QMessageBox::Ok);
-
-
 
       }
 

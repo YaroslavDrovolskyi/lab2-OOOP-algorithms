@@ -1,7 +1,7 @@
 #include "adapter.h"
 #include <iostream>
 #include <vector>
-
+#include <iostream>
 template <typename T, typename Comparator>
 AdapterForSortArrayAlgo<T, Comparator>::AdapterForSortArrayAlgo(SortArrayAlgo<T, Comparator>* sort_algo):
     sort_algo(sort_algo)
@@ -29,7 +29,8 @@ std::vector<T> AdapterForSortArrayAlgo<T, Comparator>::getvalues(){
     T* arr = this->sort_algo->getArray();
     std::size_t size = this->sort_algo->getArraySize();
 
-    std::vector<T> result{};
+    std::vector<T> result(size);
+
     if (size > 0){
         std::copy(arr, arr + size, result.begin());
 
