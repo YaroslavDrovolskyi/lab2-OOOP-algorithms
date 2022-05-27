@@ -1,3 +1,8 @@
+/**!
+  *     \file
+  *     \brief File with implementation of class MainWindow
+*/
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "algoslib.h"

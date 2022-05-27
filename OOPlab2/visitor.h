@@ -16,7 +16,7 @@
 
 
 /**!
-  *     \brief Class that implement Visitor pattern
+  *     \brief Class that implement Visitor pattern.
   *     Visitor's task is to run algo and calculate running time
   *
 */

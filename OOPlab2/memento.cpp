@@ -40,7 +40,7 @@ ResultTableHistory::~ResultTableHistory(){
 /**!
   *     Show if originator is in initial state
   *
-  *     \returns true originator hasn't previouse state, and false otherwise
+  *     \returns true if originator hasn't previouse state, and false otherwise
   *
 */
 bool ResultTableHistory::empty() const{
@@ -166,8 +166,6 @@ concreteFacadeInfo ResultTableOriginator::readFromRow(std::size_t index){
   *
   *     \param[in] row_info is info that we need to write in row
   *     \param[in] index is index of row
-  *
-  *     \retruns concreteFacadeInfo object with info in row
 */
 void ResultTableOriginator::writeInRow(abstrFacadeInfo* row_info, std::size_t index){
     QString name = row_info->getName();

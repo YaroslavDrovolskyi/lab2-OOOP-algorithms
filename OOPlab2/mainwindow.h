@@ -1,3 +1,9 @@
+/**!
+  *     \file
+  *     \brief Header file with decrlaration of class MainWindow
+*/
+
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

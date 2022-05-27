@@ -1,6 +1,6 @@
 /**!
   *     \file
-  *     \brief header file with declaration of classes for Memento pattern
+  *     \brief header file with declaration of classes for Memento pattern. \n
   *     Necessity of Memento pattern arise because we have button that remove some rows from table,
   *     so we need to have possibility to undo removing
   *
@@ -39,7 +39,7 @@ public:
 
 
 /**!
-  *     \brief Originator class (Memento pattern)
+  *     \brief Originator class (Memento pattern),
   *     It symbolize table as object.
   *     In fact it is wrapper for QTableWidget, that allows us to implement Memento pattern
   *
@@ -60,7 +60,7 @@ public:
 
 
 /**!
-  *     \brief Main class of the memento pattern
+  *     \brief Main class of the memento pattern.
   *     It holds history of table states.
   *     Also it allows us to save state of table in some moment, or restore previous state of table\n\n
   *     About it: we store there only previous states of originator (not current state).\n
