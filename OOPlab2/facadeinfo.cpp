@@ -1,3 +1,9 @@
+/**!
+  *     \file
+  *     \brief file with implementation of class concreteFacadeInfo
+*/
+
+
 #include "facadeinfo.h"
 #include <QString>
 

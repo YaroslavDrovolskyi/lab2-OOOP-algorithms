@@ -1,10 +1,20 @@
+/**!
+  *     \file
+  *     \brief header file with declaration of interface abstrFacadeInfo and class concreteFacadeInfo
+*/
+
+
+
 #ifndef FACADEINFO_H
 #define FACADEINFO_H
 #include <QString>
 
 
 
-
+/**!
+  *     \brief Interface for class that can contain algo results
+  *
+*/
 class abstrFacadeInfo
 {
 public:
@@ -22,6 +32,12 @@ public:
 
 };
 
+
+/**!
+  *     \brief Class that contain information about algo running
+  *     It has getters and setters for corresponding result fields
+  *
+*/
 class concreteFacadeInfo:public abstrFacadeInfo
 {
 public:

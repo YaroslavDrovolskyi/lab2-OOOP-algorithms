@@ -58,6 +58,12 @@ MainWindow::~MainWindow()
       return true;
  };
 
+
+/**!
+  *    Handler of clicking Run button
+  *    It initialize facade with input data, launch facade, and display algo results in results table
+  *
+*/
 void MainWindow::on_btnrun_clicked()
 {
 
@@ -105,7 +111,11 @@ void MainWindow::on_algoselector_currentIndexChanged(int index) //move to facade
 
 }
 
-
+/**!
+  *    Handler of clicking RemoveRow button
+  *    It removes selected rows from result table
+  *
+*/
 void MainWindow::on_removeRowBtn_clicked()
 {
 
@@ -136,7 +146,11 @@ void MainWindow::on_removeRowBtn_clicked()
 
 }
 
-
+/**!
+  *    Handler of clicking UndoRemoveRow button
+  *    It return result table in the previous state
+  *
+*/
 void MainWindow::on_undoRemoveRow_clicked()
 {
     this->results_history.undo();
@@ -155,6 +169,16 @@ void MainWindow::on_genRandInputBtn_clicked()
 
 }
 
+/**!
+  *    Function to generate radom vector with elements of type int in interval [min, max]
+  *
+  *    \param[in] size is size of vector to be generated (size must be >= 1)
+  *    \param[in] min
+  *    \param[in] max
+  *
+  *    \returns random vector
+  *
+*/
 std::vector<int> MainWindow::getRandomIntArray(std::size_t size, int min, int max){
     assert(size >= 1);
     assert(min < max);
@@ -172,6 +196,17 @@ std::vector<int> MainWindow::getRandomIntArray(std::size_t size, int min, int ma
     return result;
 }
 
+
+/**!
+  *    Function to generate radom vector with elements of type double in interval [min, max)
+  *
+  *    \param[in] size is size of vector to be generated (size must be >= 1)
+  *    \param[in] min
+  *    \param[in] max
+  *
+  *    \returns random vector
+  *
+*/
 std::vector<double> MainWindow::getRandomDoubleArray(std::size_t size, int min, int max){
     assert(size >= 1);
     assert(min < max);
@@ -189,6 +224,15 @@ std::vector<double> MainWindow::getRandomDoubleArray(std::size_t size, int min, 
     return result;
 }
 
+
+/**!
+  *    Converts std::vector into string in format: "v[i], v[i+1]"
+  *
+  *    \param[in] vec is vector to be converted
+  *
+  *    \returns result string
+  *
+*/
 template <typename T>
 QString MainWindow::arrayIntoInputLine(const std::vector<T>& vec){
     QString result;
@@ -204,7 +248,13 @@ QString MainWindow::arrayIntoInputLine(const std::vector<T>& vec){
     return result;
 }
 
-
+/**!
+  *    Generate random input line for substringmatching algorithm.
+  *    Text length is 20, example length is 5
+  *
+  *    \returns generated random line
+  *
+*/
 QString MainWindow::getRandomMatchingSustringInputLine(){
     static QString alphabet="0123456789abcdefghijklmnopqrstuvwxyz";
     QString result;
@@ -228,6 +278,15 @@ QString MainWindow::getRandomMatchingSustringInputLine(){
     return result;
 }
 
+
+/**!
+  *    Main random-generating function.
+  *    It generates random input line according to selected algorithm
+  *    Text length is 20, example length is 5. Array size is 20
+  *
+  *    \returns generated random input line
+  *
+*/
 QString MainWindow::getRandomInputLine(std::size_t algo_index){
     if (algo_index >= 0 && algo_index <= 2 || algo_index == 5 || algo_index >= 9){
         std::vector<int> vec = getRandomIntArray(20, -500, 500);

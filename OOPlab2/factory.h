@@ -1,3 +1,11 @@
+/**!
+  *     \file
+  *     \brief header file with declaration of algoCreator classes (Factory pattern)
+*/
+
+
+
+
 #ifndef FACTORY_H
 #define FACTORY_H
 #include "algoslib.h"
@@ -5,20 +13,25 @@
 #include "facadeinfo.h"
 #include <QDebug>
 
+
+/**!
+  *     \brief Abstract class for all algo creators. Each subclass is creator for conctrete algorithm
+  *
+*/
 class algoCreator
 {
 public:
     algoCreator()=default;
-   virtual algorithm* getAlgorithm()=0;
-    virtual QString getResult();
+   virtual algorithm* getAlgorithm()=0; //< Getter of concrete algorithm object
+    virtual QString getResult(); //< Returns algo result
   // virtual concreteFacadeInfo
-    virtual void runAlgo()=0;
-    virtual void convertToQString()=0;
-    virtual bool areValidNumbers(const QVector<QString>&listofnumbers, const QRegularExpression& expr);
+    virtual void runAlgo()=0; //< Run algo
+    virtual void convertToQString()=0; //< Convert algo result into string
+    virtual bool areValidNumbers(const QVector<QString>&listofnumbers, const QRegularExpression& expr);//< Check if parsed numerical strings (by readLine()) can be converted in number
     virtual ~algoCreator()=default;
 
 protected:
-   virtual bool readLine(QString&&)=0;
+   virtual bool readLine(QString&&)=0; //< Parse input line into vector of strings with number symbols
     QString res;
 };
 

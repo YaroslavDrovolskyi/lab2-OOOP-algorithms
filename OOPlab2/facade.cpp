@@ -1,3 +1,10 @@
+/**!
+  *     \file
+  *     \brief file with implementation of class Facade
+*/
+
+
+
 #include "facade.h"
 #include "visitor.h"
 #include <QDebug>
@@ -8,7 +15,14 @@
 
 
 
-
+/**!
+  *     It is the main fnction in Facade class. It launch algo and create result-of-algo structure according
+  *     to algo type and flags: hasTime, hasNumberOfComparisons
+  *
+  *     \param[in] ind is index of selected algo name in SelectBox(ComboBox)
+  *     \param[in] is input line
+  *
+*/
  void Facade::runAlgo(const int ind, QString line)      //template method
  {
      this->counter=0;
@@ -32,7 +46,10 @@
 
  };
 
-
+ /**!
+   *     Ascending comparator. Also it increase number-of-comparings counter by 1
+   *
+ */
  template <typename T>
     bool Facade::comparatorAscend(T a ,  T b)
    {
@@ -44,6 +61,11 @@
 
    }
 
+
+/**!
+  *     Descending comparator. Also it increase number-of-comparings counter by 1
+  *
+*/
    template <typename T>
      bool Facade::comparatorDescend(T a ,  T b)
      {
@@ -57,6 +79,13 @@
      }
 
 
+
+ /**!
+   *     This method create AlgoCreator for specific algorithm according to name of algorithm selected by user
+   *
+   *     \param[in] index is index of selected algo name in SelectBox(ComboBox)
+   *
+ */
  void Facade::selectCreator(int index)
  {
 
@@ -158,38 +187,77 @@
  }
 
 
-
+ /**!
+   *     Set flag that match if we need to calculate algo running time
+   *
+ */
  void Facade::setTime(bool b){
     this->hasTime = b;
  };
+
+
+ /**!
+   *     Set flag that match if we need to calculate number of comparisons during the algo
+   *
+ */
  void Facade::setNumberOfComparisons(bool b){
      this->hasNumberOfComparisons = b;
 
 
  };
 
+ /**!
+   *     Getter for object that contains results of algo running
+   *
+ */
  std::shared_ptr<abstrFacadeInfo> Facade::getInfo() const
  {
      return this->facadeInfo_;
  }
 
+ /**!
+   *     Set algo name
+   *
+ */
  void Facade::saveName()
  {
      this->facadeInfo_->setName(QString::fromStdString(this->algoCreator_->getAlgorithm()->getname()));
  };
+
+ /**!
+   *     Save algo result string into result class
+   *
+ */
  void Facade::saveResultData(QString str){
      this->facadeInfo_->setResult(str);
 
  };
+
+ /**!
+   *     Set algo name
+   *
+ */
  void Facade::saveTime(QString& t){
     this->facadeInfo_->setTime(t);
  };
+
+ /**!
+   *     Set algo number of comparisons
+   *
+ */
  void Facade::saveNumberOfComparisons(){
 
      this->facadeInfo_->setCounter(this->counter);
 
  };
 
+
+ /**!
+   *     This method create instance of Visitor, that calculate time
+   *
+   *     \returns string with algo running time
+   *
+ */
  QString Facade::calculateTime()
  {
      visitor visitor_(this->algoCreator_);
@@ -198,12 +266,21 @@
 
  }
 
+
+/**!
+  *     Setter for input line\n
+  *     It used in MainWindow class to pass input line into Facade
+  *
+*/
 void Facade::setInputLine(QString& l)
 {
     this->inputLine = l;
 }
 
-
+/**!
+  *     Set flag that match what type of comparator use: ascending or descending
+  *
+*/
 void Facade::setIsAscend(bool b)
 {
     this->isAscend = b;

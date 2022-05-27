@@ -1,4 +1,7 @@
-
+/**!
+  *     \file
+  *     \brief header files for all algo classes
+*/
 #ifndef ALGOSLIB_H
 #define ALGOSLIB_H
 
@@ -9,16 +12,28 @@
 #include <memory>
 #include <functional>
 #include <utility>
+
+/**!
+  *     \brief Abstract class for all algos
+  *
+*/
 class ALGOSLIB_EXPORT  algorithm
 {
 public:
     algorithm() ;
-   virtual std::string getname() = 0;
-   virtual std::string gettype() = 0;
-   virtual uint32_t getmemory() = 0;
-    virtual void run()=0;
+   virtual std::string getname() = 0; //< Returns algo name
+   virtual std::string gettype() = 0; //< Returns algo type
+   virtual uint32_t getmemory() = 0; //< Returns used memory during running algorithm. NEED TO IMPLEMENT
+    virtual void run()=0; //< Launch algorithm
    virtual ~algorithm();
 };
+
+
+
+/**!
+  *     \brief Abstract class for all sorting algos
+  *
+*/
 template<typename Comparator>
 class ALGOSLIB_EXPORT sortingalgo:  public algorithm
 {
@@ -26,7 +41,7 @@ public:
 
    sortingalgo() ;
 
-   std::string gettype() override;
+   std::string gettype() override; //< overriding base class method
 
 
 
@@ -38,15 +53,19 @@ private:
    std::string type;
 };
 
+/**!
+  *     \brief Abstract class for all substringmatching algos
+  *
+*/
  class ALGOSLIB_EXPORT substringmatching :public algorithm
 {
 public:
     substringmatching();
-    std::string gettype() override;
-    virtual std::string getline()=0;
-    virtual std::string getsample()=0;
-    virtual void setline(std::string l)=0;
-    virtual void setsample(std::string s)=0;
+    std::string gettype() override; //< overriding base class method
+    virtual std::string getline()=0; //< Returns input line whrer we need to find sample
+    virtual std::string getsample()=0; //< Returns sample
+    virtual void setline(std::string l)=0; //< Setter for line
+    virtual void setsample(std::string s)=0; //< Setter for example
  //   virtual int findfirstsubstr()=0;
     virtual ~substringmatching() {};
 

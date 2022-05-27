@@ -1,8 +1,7 @@
-//#pragma once
-
-//#ifndef ALGOSLIB_INL
-//#define ALGOSLIB_INL
-
+/**!
+  *     \file
+  *     \brief implementation for all algo classes
+*/
 #include "algoslib.h"
 #include <iostream>
 #include <vector>
@@ -1119,7 +1118,7 @@ CombSort<T, Comparator>::CombSort(std::vector<T>& vec, Comparator c) :
     if (size > 0){
        arr = &vec[0];
       //  arr = new T[size];
-        std::copy(vec.begin(), vec.end(), arr);
+      //  std::copy(vec.begin(), vec.end(), arr);
     }
 
     this->comparator = c;

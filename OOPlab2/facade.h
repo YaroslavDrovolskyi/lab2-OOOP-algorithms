@@ -1,3 +1,10 @@
+/**!
+  *     \file
+  *     \brief header file with declaration of class Facade
+*/
+
+
+
 #ifndef FACADE_H
 #define FACADE_H
 #include "algoslib.h"
@@ -8,7 +15,11 @@
 #include <functional>
 
 
-
+/**!
+  *     \brief Class that implement Facade pattern
+  *     Facade manage all classes and helps MainWindow to interact with algos
+  *
+*/
 class Facade                            //"Builder" - builds result
 {
 public:

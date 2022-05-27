@@ -1,7 +1,20 @@
+/**!
+  *     \file
+  *     \brief file with implementation of class AdapterForSortArrayAlgo
+*/
+
 #include "adapter.h"
 #include <iostream>
 #include <vector>
 #include <iostream>
+
+
+
+
+/**!
+  *     \brief Constructor, that init class by algo object
+  *
+*/
 template <typename T, typename Comparator>
 AdapterForSortArrayAlgo<T, Comparator>::AdapterForSortArrayAlgo(SortArrayAlgo<T, Comparator>* sort_algo):
     sort_algo(sort_algo)

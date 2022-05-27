@@ -1,3 +1,9 @@
+/**!
+  *     \file
+  *     \brief file with implementation of algoCreator classes (Factory pattern)
+*/
+
+
 #include "factory.h"
 #include "facadeinfo.h"
 #include <QRegularExpression>

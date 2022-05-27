@@ -1,3 +1,9 @@
+/**!
+  *     \file
+  *     \brief file with implementation of classes for Memento pattern
+*/
+
+
 #include "memento.h"
 
 
@@ -30,15 +36,30 @@ ResultTableHistory::~ResultTableHistory(){
     }
 }
 
+
+/**!
+  *     Show if originator is in initial state
+  *
+  *     \returns true originator hasn't previouse state, and false otherwise
+  *
+*/
 bool ResultTableHistory::empty() const{
     return this->mementos.empty();
 }
 
+/**!
+  *     Save originators current state and append it to the states storage (queue)
+  *
+*/
 void ResultTableHistory::backup(){
     ResultTableMemento* memento = this->originator->save();
     this->mementos.push_back(memento);
 }
 
+/**!
+  *     Set originator into previous state
+  *
+*/
 void ResultTableHistory::undo(){
     if (this->mementos.empty()){
         return;
@@ -65,6 +86,13 @@ ResultTableOriginator::ResultTableOriginator(QTableWidget* table):
 
 }
 
+
+/**!
+  *     Save and return current own state
+  *
+  *     \returns current state
+  *
+*/
 ResultTableMemento* ResultTableOriginator::save(){
     std::vector<concreteFacadeInfo> rows_info;
 
@@ -76,7 +104,12 @@ ResultTableMemento* ResultTableOriginator::save(){
     return new ResultTableMemento(rows_info);
 }
 
-
+/**!
+  *     Set originator into state memento
+  *
+  *     \param[in] memento is state
+  *
+*/
 void ResultTableOriginator::restore(ResultTableMemento* memento){
     std::vector<concreteFacadeInfo> rows_info = memento->state();
 
@@ -88,7 +121,13 @@ void ResultTableOriginator::restore(ResultTableMemento* memento){
     }
 }
 
-
+/**!
+  *     Read information from [index] row from table
+  *
+  *     \param[in] index is index of row
+  *
+  *     \returns concreteFacadeInfo object with info in row
+*/
 concreteFacadeInfo ResultTableOriginator::readFromRow(std::size_t index){
     concreteFacadeInfo row_info;
 
@@ -121,6 +160,15 @@ concreteFacadeInfo ResultTableOriginator::readFromRow(std::size_t index){
 //    this->table->setItem(index, 3, new QTableWidgetItem(result));
 //}
 
+
+/**!
+  *     Write information in [index] row of table
+  *
+  *     \param[in] row_info is info that we need to write in row
+  *     \param[in] index is index of row
+  *
+  *     \retruns concreteFacadeInfo object with info in row
+*/
 void ResultTableOriginator::writeInRow(abstrFacadeInfo* row_info, std::size_t index){
     QString name = row_info->getName();
     this->table->setItem(index, 0, new QTableWidgetItem(name));
