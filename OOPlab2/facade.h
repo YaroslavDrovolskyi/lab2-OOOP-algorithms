@@ -13,17 +13,17 @@ class Facade                            //"Builder" - builds result
 {
 public:
     Facade()=default;
-     void runAlgo(const int ind, QString line);                //template method
-     void setTime(bool b);
-     void setNumberOfComparisons(bool b);
-     void setInputLine(QString& l);
-     void saveResultData(QString str);
-     void saveTime(QString& t);
-      void saveName();
-     void saveNumberOfComparisons();
-      std::shared_ptr<abstrFacadeInfo> getInfo() const;
-    void setIsAscend(bool b);
-     void selectCreator(int index);
+    virtual void runAlgo(const int ind, QString line);                //template method
+   virtual  void setTime(bool b);
+    virtual void setNumberOfComparisons(bool b);
+    virtual void setInputLine(QString& l);
+   virtual  void saveResultData(QString str);
+    virtual void saveTime(QString& t);
+   virtual   void saveName();
+   virtual  void saveNumberOfComparisons();
+    virtual  std::shared_ptr<abstrFacadeInfo> getInfo() const;
+  virtual  void setIsAscend(bool b);
+  virtual   void selectCreator(int index);
      ~Facade()=default;
 
 protected:
@@ -35,7 +35,7 @@ protected:
   static inline  uint32_t counter;
 
    // QString line ="";
-private:
+//private:
 
     bool isAscend = true;
     virtual QString calculateTime();
