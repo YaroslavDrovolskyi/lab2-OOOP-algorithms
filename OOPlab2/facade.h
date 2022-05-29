@@ -20,14 +20,17 @@
   *     Facade manage all classes and helps MainWindow to interact with algos
   *
 */
+
+
+
 class Facade                            //"Builder" - builds result
 {
 public:
     Facade()=default;
-    virtual void runAlgo(const int ind, QString line);                //template method
+    virtual void runAlgo(const int ind);                //template method
    virtual  void setTime(bool b);
     virtual void setNumberOfComparisons(bool b);
-    virtual void setInputLine(QString& l);
+    virtual void setInputLine(const QString& l);
    virtual  void saveResultData(QString str);
     virtual void saveTime(QString& t);
    virtual   void saveName();

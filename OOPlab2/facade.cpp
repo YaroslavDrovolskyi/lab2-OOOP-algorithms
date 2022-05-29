@@ -23,10 +23,10 @@
   *     \param[in] is input line
   *
 */
- void Facade::runAlgo(const int ind, QString line)      //template method
+ void Facade::runAlgo(const int ind)      //template method
  {
      this->counter=0;
-     this->inputLine = line;
+
      this->selectCreator(ind);//creator
 
 
@@ -272,7 +272,7 @@
   *     It used in MainWindow class to pass input line into Facade
   *
 */
-void Facade::setInputLine(QString& l)
+void Facade::setInputLine(const QString& l)
 {
     this->inputLine = l;
 }

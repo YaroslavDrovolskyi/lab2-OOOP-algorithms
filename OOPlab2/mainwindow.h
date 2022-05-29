@@ -99,7 +99,7 @@ private:
 
     algorithm* algorithm_;
 protected:
-    static inline Facade* facade  ;
+    Facade* facade  ;
    // std::unique_ptr<algorithm> algorithm_ = nullptr;
 
 };

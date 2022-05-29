@@ -77,7 +77,7 @@ void MainWindow::on_btnrun_clicked()
 
     // "ilove bee drinkingbee beer"   "beer"
 
-
+        this->facade->setInputLine(this->ui->inputline->text());
     if(ui->radioDescend->isChecked())
         this->facade->setIsAscend(false);
     else
@@ -92,7 +92,7 @@ void MainWindow::on_btnrun_clicked()
          this->facade->setTime(false);
 
       try {
-          this->facade->runAlgo(this->ui->algoselector->currentIndex(), this->ui->inputline->text());
+          this->facade->runAlgo(this->ui->algoselector->currentIndex());
           //Save memento here
           ui->resultTable->insertRow(ui->resultTable->rowCount());
          auto inf = this->facade->getInfo().get();
